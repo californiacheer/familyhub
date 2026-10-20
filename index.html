@@ -1557,6 +1557,12 @@ body.kid-mode .mt-head{background:#fff; border-bottom:3px solid var(--brand); pa
 .mt-chip.mt-plus{flex:0 0 auto; padding:0; width:36px; height:36px; justify-content:center; border-style:dashed; color:var(--accent); font-size:20px}
 .mt-chip.mt-plus .nm{line-height:1}
 .mt-chip.on .av{background:#fff; color:var(--brand)}
+.mt-addcard{margin-bottom:16px}.mt-addcard-t{font:700 17px 'Oswald',sans-serif;margin-bottom:4px}.mt-addcard p{margin:0 0 12px;color:var(--text-muted);font-size:13.5px;line-height:1.5}.mt-addbtns{display:flex;flex-wrap:wrap;gap:8px}.mt-addbtns .mt-ghost,.mt-addbtns .pay-btn{margin:0!important}
+.mt-del{background:none;border:0;color:var(--text-muted);font:600 12.5px inherit;text-decoration:underline;cursor:pointer;padding:6px 0 0}
+.mt-days{display:flex;gap:6px;margin:8px 0 14px}.mt-days label{flex:1}.mt-days input{position:absolute;opacity:0;pointer-events:none}.mt-days span{display:block;text-align:center;padding:9px 0;border:1px solid var(--border);border-radius:10px;font-size:13px;font-weight:600;background:var(--surface);cursor:pointer}.mt-days input:checked+span{background:var(--brand);color:#fff;border-color:var(--brand)}
+.mt-imp-list{display:flex;flex-direction:column;gap:10px;max-height:46vh;overflow:auto;margin:8px 0}.mt-imp{border:1px solid var(--border);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px}.mt-imp.off{opacity:.5}.mt-imp-top{display:flex;align-items:center;gap:10px}.mt-imp-row{display:flex;flex-wrap:wrap;gap:8px}.mt-imp-row .cal-input{flex:1 1 120px;min-width:0;max-width:none!important}.mt-imp .cal-input{margin:0}.mt-imp-row .cal-input[data-f="price"]{flex:0 0 96px!important}
+.mt-pre{white-space:pre-wrap;font-size:12px;background:var(--surface-2);padding:10px;border-radius:10px;max-height:160px;overflow:auto}
+.mt-spin{width:34px;height:34px;border-radius:50%;border:4px solid var(--border);border-top-color:var(--brand);animation:mtspin 1s linear infinite;margin:14px auto}@keyframes mtspin{to{transform:rotate(360deg)}}
 </style>
 
 </head>
@@ -1575,7 +1581,7 @@ body.kid-mode .mt-head{background:#fff; border-bottom:3px solid var(--brand); pa
 <script>
 (function(){
 var BRANDS={all:{B:'#3d6fe0',D:'#0d1535'}};
-var TEAMOPTS=[{key:'y2k',label:'Y2K',tpl:'maya'},{key:'shazam',label:'Shazam',tpl:'eli'},{key:'whitegold',label:'White Gold',tpl:'zoe'},{key:'sugar',label:'Sugar',tpl:'ava'}];
+var TEAMOPTS=[{key:'y2k',label:'Y2K',tpl:'maya'},{key:'shazam',label:'Shazam',tpl:'eli'},{key:'whitegold',label:'White Gold',tpl:'zoe'},{key:'sugar',label:'Sugar',tpl:'ava'},{key:'other',label:'Other activity (soccer, dance, anything)',tpl:null}];
 var EXTRA=[{B:'#7f8aa0',D:'#06241f',n:'Y2K gray'},{B:'#f2591a',D:'#06241f',n:'Shazam orange'},{B:'#b08a1c',D:'#06241f',n:'White Gold'},{B:'#f0509f',D:'#06241f',n:'Sugar pink'}];
 function hex2rgb(h){h=h.replace('#','');return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];}
 function rgb2hex(a){return '#'+a.map(function(v){return Math.max(0,Math.min(255,Math.round(v))).toString(16).padStart(2,'0');}).join('');}
@@ -1594,7 +1600,7 @@ var todayD=dayOffset(0), todayS=iso(todayD);
 function fmt(s,o){return parse(s).toLocaleDateString('en-US',o||{weekday:'short',month:'short',day:'numeric'});}
 function money(n){return '$'+Math.round(n).toLocaleString('en-US');}
 
-var DATA={"kids": [{"id": "maya", "name": "Maya", "team": "Y2K", "gym": "California All Stars", "sport": "All-star cheer", "color": "#7f8aa0", "accent": "#1688f5", "dark": "#07080f", "src": "apps/y2k.html", "practice": [{"d": 2, "t": "4:30 pm", "r": "4:30 – 6:30 PM", "desc": "Black set with white bow · Flyer stretch 6:30–7:00 PM", "start": ""}, {"d": 4, "t": "4:30 pm", "r": "4:30 – 6:30 PM", "desc": "Leaf set with gray-blue bow", "start": ""}, {"d": 5, "t": "6:30 pm", "r": "6:30 – 8:30 PM", "desc": "Black set with pink bow", "start": "2026-09-11"}], "cats": [["Gym fees", 3744, 1494], ["Private lessons", 0, 0], ["Travel", 0, 0], ["Hotels", 0, 0], ["Everything else", 0, 1440]]}, {"id": "eli", "name": "Eli", "team": "Shazam", "gym": "California All Stars", "sport": "All-star cheer", "color": "#f2591a", "accent": "#f2591a", "dark": "#1a0a04", "src": "apps/shazam.html", "practice": [{"d": 1, "t": "4:00 pm", "r": "4:00 – 6:00 PM", "desc": "Black set with blue waistband", "start": ""}, {"d": 3, "t": "4:00 pm", "r": "4:00 – 6:00 PM", "desc": "Leaf set", "start": ""}, {"d": 5, "t": "4:30 pm", "r": "4:30 – 6:30 PM", "desc": "Gray and orange set", "start": ""}], "cats": [["Gym fees", 3744, 1494], ["Private lessons", 0, 0], ["Travel", 0, 0], ["Hotels", 0, 0], ["Everything else", 0, 1320]]}, {"id": "zoe", "name": "Zoe", "team": "White Gold", "gym": "California All Stars", "sport": "All-star cheer", "color": "#b08a1c", "accent": "#96751a", "dark": "#1a1405", "src": "apps/whitegold.html", "practice": [{"d": 2, "t": "6:00 pm", "r": "6:00 – 8:00 PM", "desc": "Black set with white bow", "start": ""}, {"d": 4, "t": "6:00 pm", "r": "6:00 – 8:00 PM", "desc": "Leaf set with white bow", "start": ""}, {"d": 6, "t": "9:00 am", "r": "9:00 – 11:00 AM", "desc": "White and gold set with white bow", "start": ""}], "cats": [["Gym fees", 3744, 1494], ["Private lessons", 0, 0], ["Travel", 0, 0], ["Hotels", 0, 0], ["Everything else", 0, 1140]]}, {"id": "ava", "name": "Ava", "team": "Sugar", "gym": "California All Stars", "sport": "All-star cheer", "color": "#f0509f", "accent": "#fa5fac", "dark": "#2a0a1c", "src": "apps/sugar.html", "practice": [{"d": 2, "t": "5:30 pm", "r": "5:30 – 7:30 PM", "desc": "Sugar practice", "start": ""}, {"d": 4, "t": "5:30 pm", "r": "5:30 – 7:30 PM", "desc": "Sugar practice", "start": ""}, {"d": 0, "t": "8:00 am", "r": "8:00 – 10:00 AM", "desc": "3rd practice day", "start": "2026-09-11"}], "cats": [["Gym fees", 3744, 1494], ["Private lessons", 0, 0], ["Travel", 0, 0], ["Hotels", 0, 0], ["Everything else", 0, 1080]]}], "events": [{"k": "maya", "n": "Showcase", "loc": "Irvine, CA", "start": "2026-11-15", "end": "2026-11-15", "trip": "local", "flight": false, "hotel": false}, {"k": "maya", "n": "TSN", "loc": "San Diego, CA", "start": "2026-11-21", "end": "2026-11-21", "trip": "local", "flight": false, "hotel": false}, {"k": "maya", "n": "ASCS Champs Grand Nationals", "loc": "Aurora, CO", "start": "2026-12-19", "end": "2026-12-20", "trip": "fly", "flight": false, "hotel": false}, {"k": "maya", "n": "TSN Super Six", "loc": "Oceanside, CA", "start": "2027-01-16", "end": "2027-01-17", "trip": "local", "flight": false, "hotel": false}, {"k": "maya", "n": "Spirit Sports", "loc": "Palm Springs, CA", "start": "2027-01-29", "end": "2027-01-31", "trip": "local", "flight": false, "hotel": false}, {"k": "maya", "n": "USA", "loc": "Anaheim, CA", "start": "2027-03-13", "end": "2027-03-14", "trip": "local", "flight": false, "hotel": false}, {"k": "maya", "n": "NCA All-Star Nationals", "loc": "Houston, TX", "start": "2027-03-19", "end": "2027-03-21", "trip": "fly", "flight": false, "hotel": false}, {"k": "maya", "n": "Global Spirit", "loc": "Oceanside, CA", "start": "2027-04-10", "end": "2027-04-11", "trip": "local", "flight": false, "hotel": false}, {"k": "maya", "n": "Summit Championships", "loc": "Orlando, FL", "start": "2027-04-29", "end": "2027-05-02", "trip": "fly", "flight": false, "hotel": false}, {"k": "eli", "n": "Showcase", "loc": "Irvine, CA", "start": "2026-11-15", "end": "2026-11-15", "trip": "local", "flight": false, "hotel": false}, {"k": "eli", "n": "TSN", "loc": "San Diego, CA", "start": "2026-11-21", "end": "2026-11-21", "trip": "local", "flight": false, "hotel": false}, {"k": "eli", "n": "ASCS Champs Grand Nationals", "loc": "Aurora, CO", "start": "2026-12-19", "end": "2026-12-20", "trip": "fly", "flight": false, "hotel": false}, {"k": "eli", "n": "TSN Super Six", "loc": "Oceanside, CA", "start": "2027-01-16", "end": "2027-01-17", "trip": "local", "flight": false, "hotel": false}, {"k": "eli", "n": "Spirit Sports", "loc": "Palm Springs, CA", "start": "2027-01-29", "end": "2027-01-31", "trip": "local", "flight": false, "hotel": false}, {"k": "eli", "n": "Aloha PHX", "loc": "Phoenix, AZ", "start": "2027-03-05", "end": "2027-03-07", "trip": "fly", "flight": false, "hotel": false}, {"k": "eli", "n": "UCA Allstar Nationals", "loc": "Orlando, FL", "start": "2027-03-13", "end": "2027-03-14", "trip": "fly", "flight": false, "hotel": false}, {"k": "eli", "n": "Global Spirit", "loc": "Oceanside, CA", "start": "2027-04-10", "end": "2027-04-11", "trip": "local", "flight": false, "hotel": false}, {"k": "zoe", "n": "Showcase", "loc": "Irvine, CA", "start": "2026-11-15", "end": "2026-11-15", "trip": "local", "flight": false, "hotel": false}, {"k": "zoe", "n": "TSN", "loc": "San Diego, CA", "start": "2026-11-21", "end": "2026-11-21", "trip": "local", "flight": false, "hotel": false}, {"k": "zoe", "n": "ASCS Champs Grand Nationals", "loc": "Aurora, CO", "start": "2026-12-19", "end": "2026-12-20", "trip": "fly", "flight": false, "hotel": false}, {"k": "zoe", "n": "TSN Super Six", "loc": "Oceanside, CA", "start": "2027-01-16", "end": "2027-01-17", "trip": "local", "flight": false, "hotel": false}, {"k": "zoe", "n": "Spirit Sports", "loc": "Palm Springs, CA", "start": "2027-01-29", "end": "2027-01-31", "trip": "local", "flight": false, "hotel": false}, {"k": "zoe", "n": "NCA All-Star Nationals", "loc": "Houston, TX", "start": "2027-03-19", "end": "2027-03-21", "trip": "fly", "flight": false, "hotel": false}, {"k": "zoe", "n": "One Up Grand Nationals", "loc": "Nashville, TN", "start": "2027-04-02", "end": "2027-04-04", "trip": "fly", "flight": false, "hotel": false}, {"k": "zoe", "n": "Global Spirit", "loc": "Oceanside, CA", "start": "2027-04-10", "end": "2027-04-11", "trip": "local", "flight": false, "hotel": false}, {"k": "ava", "n": "Showcase", "loc": "Irvine, CA", "start": "2026-11-15", "end": "2026-11-15", "trip": "local", "flight": false, "hotel": false}, {"k": "ava", "n": "TSN", "loc": "San Diego, CA", "start": "2026-11-21", "end": "2026-11-21", "trip": "local", "flight": false, "hotel": false}, {"k": "ava", "n": "ASCS Champs Grand Nationals", "loc": "Aurora, CO", "start": "2026-12-19", "end": "2026-12-20", "trip": "fly", "flight": false, "hotel": false}, {"k": "ava", "n": "TSN Super Six", "loc": "Oceanside, CA", "start": "2027-01-16", "end": "2027-01-17", "trip": "local", "flight": false, "hotel": false}, {"k": "ava", "n": "Spirit Sports", "loc": "Palm Springs, CA", "start": "2027-01-29", "end": "2027-01-31", "trip": "local", "flight": false, "hotel": false}, {"k": "ava", "n": "Aloha PHX", "loc": "Phoenix, AZ", "start": "2027-03-05", "end": "2027-03-07", "trip": "fly", "flight": false, "hotel": false}, {"k": "ava", "n": "UCA Allstar Nationals", "loc": "Orlando, FL", "start": "2027-03-13", "end": "2027-03-14", "trip": "fly", "flight": false, "hotel": false}, {"k": "ava", "n": "Global Spirit", "loc": "Oceanside, CA", "start": "2027-04-10", "end": "2027-04-11", "trip": "local", "flight": false, "hotel": false}], "fees": [{"k": "maya", "l": "Elite installment", "due": "2026-10-01", "a": 450}, {"k": "maya", "l": "Monthly tuition", "due": "2026-10-01", "a": 249}, {"k": "maya", "l": "Monthly tuition", "due": "2026-11-01", "a": 249}, {"k": "maya", "l": "Monthly tuition", "due": "2026-12-01", "a": 249}, {"k": "maya", "l": "Monthly tuition", "due": "2027-01-01", "a": 249}, {"k": "maya", "l": "Monthly tuition", "due": "2027-02-01", "a": 249}, {"k": "maya", "l": "Monthly tuition", "due": "2027-03-01", "a": 249}, {"k": "maya", "l": "Monthly tuition", "due": "2027-04-01", "a": 249}, {"k": "eli", "l": "Elite installment", "due": "2026-10-01", "a": 450}, {"k": "eli", "l": "Monthly tuition", "due": "2026-10-01", "a": 249}, {"k": "eli", "l": "Monthly tuition", "due": "2026-11-01", "a": 249}, {"k": "eli", "l": "Monthly tuition", "due": "2026-12-01", "a": 249}, {"k": "eli", "l": "Monthly tuition", "due": "2027-01-01", "a": 249}, {"k": "eli", "l": "Monthly tuition", "due": "2027-02-01", "a": 249}, {"k": "eli", "l": "Monthly tuition", "due": "2027-03-01", "a": 249}, {"k": "eli", "l": "Monthly tuition", "due": "2027-04-01", "a": 249}, {"k": "zoe", "l": "Elite installment", "due": "2026-10-01", "a": 450}, {"k": "zoe", "l": "Monthly tuition", "due": "2026-10-01", "a": 249}, {"k": "zoe", "l": "Monthly tuition", "due": "2026-11-01", "a": 249}, {"k": "zoe", "l": "Monthly tuition", "due": "2026-12-01", "a": 249}, {"k": "zoe", "l": "Monthly tuition", "due": "2027-01-01", "a": 249}, {"k": "zoe", "l": "Monthly tuition", "due": "2027-02-01", "a": 249}, {"k": "zoe", "l": "Monthly tuition", "due": "2027-03-01", "a": 249}, {"k": "zoe", "l": "Monthly tuition", "due": "2027-04-01", "a": 249}, {"k": "ava", "l": "Elite installment", "due": "2026-10-01", "a": 450}, {"k": "ava", "l": "Monthly tuition", "due": "2026-10-01", "a": 249}, {"k": "ava", "l": "Monthly tuition", "due": "2026-11-01", "a": 249}, {"k": "ava", "l": "Monthly tuition", "due": "2026-12-01", "a": 249}, {"k": "ava", "l": "Monthly tuition", "due": "2027-01-01", "a": 249}, {"k": "ava", "l": "Monthly tuition", "due": "2027-02-01", "a": 249}, {"k": "ava", "l": "Monthly tuition", "due": "2027-03-01", "a": 249}, {"k": "ava", "l": "Monthly tuition", "due": "2027-04-01", "a": 249}], "teamdata": {"maya": {"events": [{"n": "Rangers Stunt Clinic", "date": "2026-10-24", "meta": "Sat, Oct 24, 2026 · 5:00–7:00 PM · $55/person · Partner stunting, double base stunts, group stunts & flexibility — open to all levels and ages, bases ", "e": "🤸"}, {"n": "Added Practice — Canceled", "date": "2026-10-03", "meta": "Sat, Oct 3, 2026 · Canceled due to extreme heat — originally 3:30–5:30 PM. We will share makeup info in team chat.", "e": "🔥"}, {"n": "Coed Stunt & Tumble Clinic", "date": "2026-10-03", "meta": "Sat, Oct 3, 2026 · 6:00–8:00 PM · $50/person, pizza included · Stunt & tumble with the reigning back-to-back Worlds Champs & NCA Champs (Coed team) CC", "e": "🤸"}, {"n": "Added Practice", "date": "2026-10-10", "meta": "Sat, Oct 10, 2026 · 2:00–4:00 PM — extra practice, on top of the regular weekly schedule.", "e": "🤸‍♀️"}, {"n": "Parent Meeting", "date": "2026-10-13", "meta": "Tue, Oct 13, 2026 · 6:30 PM We'll go over the routine and what needs to be worked on as we prepare for season.", "e": "📣"}, {"n": "GLOW Stunt Clinic", "date": "2026-10-17", "meta": "Sat, Oct 17, 2026 · 6:00–8:30 PM · $50/athlete · Stunt clinic with the reigning NCA & back-to-back World Champs. Includes a special commemorative bow,", "e": "🤸"}, {"n": "In-house Show-Offs", "date": "2026-10-24", "meta": "Sat, Oct 24, 2026 · Y2K reports 8:30 AM · performs 10:25 AM Bring your noisemakers and shakers! Parking: Allen’s Bro’s Mortuary + the space north of t", "e": "🎉"}, {"n": "Dance Choreo", "date": "2026-10-27", "meta": "Tue, Oct 27, 2026 · 4:00–6:30 PM", "e": "💃"}, {"n": "Trunk or Treat", "date": "2026-10-29", "meta": "Thu, Oct 29, 2026 · 6:00 PM Send a bag of candy to your team rep, or volunteer to decorate your vehicle for the trunk-or-treat — if you volunteer a ve", "e": "🎃"}, {"n": "Team Photo Days", "date": "2026-12-01", "meta": "Dec 1–2, 2026 · San Marcos — details to come in team chat.", "e": "📸"}], "pack": [{"cat": "Uniform & Team Wear", "n": 5}, {"cat": "Hair", "n": 7}, {"cat": "Makeup", "n": 2}, {"cat": "Comp Day Essentials", "n": 4}], "faq": [["How do hotel booking links work for the big comps?", "For high-demand venues there's typically a general public booking link plus a separate team block link, and both can fill up fast — be online right when the link goes live."], ["Do we have to book through the required hotel block (\"Stay to Play\")?", "Varsity-run comps (ASCS, Spirit Sports, USA, NCA) require families to book through the official \"Stay Smart\" hotel block when housing shows as required — but Varsity does allow a few exemptions: teams roughly 75 miles or less from the venue (150 miles for one-day events) can commute without booking; families who can cover the full stay with hotel loyalty points, or who qualify for a military/government hotel discount"], ["How much are private lessons?", "Private Lessons30 min Jump Training — $55Jump training for High School/All Star athletes.30 min Tumbling Private — $55One Hour Tumbling Private — $90One Hour Private — $100Stunt PrivatesStretching – 30 mins — $55Stretching privates for flexibility.Stretching – 1 hour — $90One hour of stretching for athletes to work their flexibility.30 min Stunt Private (Flyer) — $75For flyers interested in working on their technique"]]}, "eli": {"events": [{"n": "Rangers Stunt Clinic", "date": "2026-10-24", "meta": "Sat, Oct 24, 2026 · 5:00–7:00 PM · $55/person · Partner stunting, double base stunts, group stunts & flexibility — open to all levels and ages, bases ", "e": "🤸"}, {"n": "GLOW Stunt Clinic", "date": "2026-10-17", "meta": "Sat, Oct 17, 2026 · 6:00–8:30 PM · $50/athlete · Stunt clinic with the reigning NCA & back-to-back World Champs. Includes a special commemorative bow,", "e": "🤸"}, {"n": "Coed Stunt & Tumble Clinic", "date": "2026-10-03", "meta": "Sat, Oct 3, 2026 · 6:00–8:00 PM · $50/person, pizza included · Stunt & tumble with the reigning back-to-back Worlds Champs & NCA Champs (Coed team) CC", "e": "🤸"}, {"n": "In-house Show-Offs", "date": "2026-10-24", "meta": "Sat, Oct 24, 2026 · Shazam reports 8:30 AM · performs 9:55 AM Bring your noisemakers and shakers! Parking: Allen’s Bro’s Mortuary + the space north of", "e": "🎉"}, {"n": "Dance Choreo", "date": "2026-10-29", "meta": "Thu, Oct 29, 2026 · 4:00–6:30 PM", "e": "💃"}, {"n": "Trunk or Treat", "date": "2026-10-28", "meta": "Wed, Oct 28, 2026 · 6:00 PM Send a bag of candy to your team rep, or volunteer to decorate your vehicle for the trunk-or-treat — if you volunteer a ve", "e": "🎃"}, {"n": "Team Photo Days", "date": "2026-12-01", "meta": "Dec 1–2, 2026 · San Marcos — details to come in team chat.", "e": "📸"}], "pack": [{"cat": "Uniform & Team Wear", "n": 6}, {"cat": "Hair", "n": 7}, {"cat": "Makeup", "n": 2}, {"cat": "Comp Day Essentials", "n": 4}], "faq": [["How do hotel booking links work for the big comps?", "For high-demand venues there's typically a general public booking link plus a separate team block link, and both can fill up fast — be online right when the link goes live."], ["How much are private lessons?", "Private Lessons30 min Jump Training — $55Jump training for High School/All Star athletes.30 min Tumbling Private — $55One Hour Tumbling Private — $90One Hour Private — $100Stunt PrivatesStretching – 30 mins — $55Stretching privates for flexibility.Stretching – 1 hour — $90One hour of stretching for athletes to work their flexibility.30 min Stunt Private (Flyer) — $75For flyers interested in working on their technique"]]}, "zoe": {"events": [{"n": "Rangers Stunt Clinic", "date": "2026-10-24", "meta": "Sat, Oct 24, 2026 · 5:00–7:00 PM · $55/person · Partner stunting, double base stunts, group stunts & flexibility — open to all levels and ages, bases ", "e": "🤸"}, {"n": "GLOW Stunt Clinic", "date": "2026-10-17", "meta": "Sat, Oct 17, 2026 · 6:00–8:30 PM · $50/athlete · Stunt clinic with the reigning NCA & back-to-back World Champs. Includes a special commemorative bow,", "e": "🤸"}, {"n": "Coed Stunt & Tumble Clinic", "date": "2026-10-03", "meta": "Sat, Oct 3, 2026 · 6:00–8:00 PM · $50/person, pizza included · Stunt & tumble with the reigning back-to-back Worlds Champs & NCA Champs (Coed team) CC", "e": "🤸"}, {"n": "In-house Show-Offs", "date": "2026-10-24", "meta": "Sat, Oct 24, 2026 · WhiteGold performs at 9:49 AM Bring your noisemakers and shakers! Parking: Allen’s Bro’s Mortuary + the space north of the buildin", "e": "🎉"}, {"n": "Dance Choreo", "date": "2026-10-29", "meta": "Thu, Oct 29, 2026 · 4:00–6:30 PM", "e": "💃"}, {"n": "Trunk or Treat", "date": "2026-10-29", "meta": "Thu, Oct 29, 2026 · 5:30 PM Send a bag of candy to your team rep, or volunteer to decorate your vehicle for the trunk-or-treat — if you volunteer a ve", "e": "🎃"}, {"n": "Team Photo Days", "date": "2026-12-01", "meta": "Dec 1–2, 2026 · San Marcos — details to come in team chat.", "e": "📸"}], "pack": [{"cat": "Uniform & Team Wear", "n": 6}, {"cat": "Hair", "n": 7}, {"cat": "Makeup", "n": 2}, {"cat": "Comp Day Essentials", "n": 4}], "faq": [["How do hotel booking links work for the big comps?", "For high-demand venues there's typically a general public booking link plus a separate team block link, and both can fill up fast — be online right when the link goes live."], ["How much are private lessons?", "Private Lessons30 min Jump Training — $55Jump training for High School/All Star athletes.30 min Tumbling Private — $55One Hour Tumbling Private — $90One Hour Private — $100Stunt PrivatesStretching – 30 mins — $55Stretching privates for flexibility.Stretching – 1 hour — $90One hour of stretching for athletes to work their flexibility.30 min Stunt Private (Flyer) — $75For flyers interested in working on their technique"]]}, "ava": {"events": [{"n": "Rangers Stunt Clinic", "date": "2026-10-24", "meta": "Sat, Oct 24, 2026 · 5:00–7:00 PM · $55/person · Partner stunting, double base stunts, group stunts & flexibility — open ", "e": "🤸"}, {"n": "Coed Stunt & Tumble Clinic", "date": "2026-10-03", "meta": "Sat, Oct 3, 2026 · 6:00–8:00 PM · $50/person, pizza included · Stunt & tumble with the reigning back-to-back Worlds Cham", "e": "🤸"}, {"n": "GLOW Stunt Clinic", "date": "2026-10-17", "meta": "Sat, Oct 17, 2026 · 6:00–8:30 PM · $50/athlete · Stunt clinic with the reigning NCA & back-to-back World Champs. Include", "e": "🤸"}, {"n": "In-House Showcase", "date": "2026-10-24", "meta": "Sat, Oct 24, 2026 · Sugar performs at 10:52 AM · Full hair and makeup. Bring your noisemakers and shakers! Parking: Alle", "e": "🎉"}, {"n": "Dance Choreo", "date": "2026-10-20", "meta": "Tue, Oct 20, 2026 · 4:00–6:30 PM", "e": "💃"}, {"n": "Trunk or Treat", "date": "2026-10-29", "meta": "Thu, Oct 29, 2026 · 5:00 PM · We can use 1 additional volunteer! Send a bag of candy to your team rep, or volunteer to d", "e": "🎃"}, {"n": "Team Photo Days", "date": "2026-12-01", "meta": "Dec 1–2, 2026 · San Marcos — details to come in team chat.", "e": "📸"}], "pack": [{"cat": "Uniform & Team Wear", "n": 8}, {"cat": "Hair", "n": 7}, {"cat": "Makeup", "n": 2}, {"cat": "Comp Day Essentials", "n": 4}], "faq": [["How do hotel booking links work for the big comps?", "For high-demand venues there's typically a general public booking link plus a separate team block link, and both can fill up fast — be online right when the link goes live."], ["Do we have to book through the required hotel block (\"Stay to Play\")?", "Varsity-run comps (ASCS, Spirit Sports, USA, NCA) require families to book through the official \"Stay Smart\" hotel block when housing shows as required — but Varsity does allow a few exemptions: teams roughly 75 miles or less from the venue (150 miles for one-day events) can commute without booking; families who can cover the full stay with hotel loyalty points, or who qualify for a military/government hotel discount, can also apply. Exemption requests go through Team Travel Source and need to be submitted with documentation at least 30 days before the event — they can't be submitted until the event opens for booking. Request an exemption → · Official Stay Smart policy →"], ["How much are private lessons?", "Private Lessons30 min Jump Training — $55Jump training for High School/All Star athletes.30 min Tumbling Private — $55One Hour Tumbling Private — $90One Hour Private — $100Stunt PrivatesStretching – 30 mins — $55Stretching privates for flexibility.Stretching – 1 hour — $90One hour of stretching for athletes to work their flexibility.30 min Stunt Private (Flyer) — $75For flyers interested in working on their technique and progressing their skills. Must be pre-approved with the coach before booking.Stunt Group Private — $55Set up a private lesson for your entire stunt group to work with an instructor."]]}}};
+var DATA={"kids": [{"id": "maya", "name": "Maya", "team": "Y2K", "gym": "", "sport": "All-star cheer", "color": "#7f8aa0", "accent": "#1688f5", "dark": "#07080f", "src": "apps/y2k.html", "practice": [{"d": 2, "t": "4:30 pm", "r": "4:30 – 6:30 PM", "desc": "Black set with white bow · Flyer stretch 6:30–7:00 PM", "start": ""}, {"d": 4, "t": "4:30 pm", "r": "4:30 – 6:30 PM", "desc": "Leaf set with gray-blue bow", "start": ""}, {"d": 5, "t": "6:30 pm", "r": "6:30 – 8:30 PM", "desc": "Black set with pink bow", "start": "2026-09-11"}], "cats": [["Gym fees", 3744, 1494], ["Private lessons", 0, 0], ["Travel", 0, 0], ["Hotels", 0, 0], ["Everything else", 0, 1440]]}, {"id": "eli", "name": "Eli", "team": "Shazam", "gym": "", "sport": "All-star cheer", "color": "#f2591a", "accent": "#f2591a", "dark": "#1a0a04", "src": "apps/shazam.html", "practice": [{"d": 1, "t": "4:00 pm", "r": "4:00 – 6:00 PM", "desc": "Black set with blue waistband", "start": ""}, {"d": 3, "t": "4:00 pm", "r": "4:00 – 6:00 PM", "desc": "Leaf set", "start": ""}, {"d": 5, "t": "4:30 pm", "r": "4:30 – 6:30 PM", "desc": "Gray and orange set", "start": ""}], "cats": [["Gym fees", 3744, 1494], ["Private lessons", 0, 0], ["Travel", 0, 0], ["Hotels", 0, 0], ["Everything else", 0, 1320]]}, {"id": "zoe", "name": "Zoe", "team": "White Gold", "gym": "", "sport": "All-star cheer", "color": "#b08a1c", "accent": "#96751a", "dark": "#1a1405", "src": "apps/whitegold.html", "practice": [{"d": 2, "t": "6:00 pm", "r": "6:00 – 8:00 PM", "desc": "Black set with white bow", "start": ""}, {"d": 4, "t": "6:00 pm", "r": "6:00 – 8:00 PM", "desc": "Leaf set with white bow", "start": ""}, {"d": 6, "t": "9:00 am", "r": "9:00 – 11:00 AM", "desc": "White and gold set with white bow", "start": ""}], "cats": [["Gym fees", 3744, 1494], ["Private lessons", 0, 0], ["Travel", 0, 0], ["Hotels", 0, 0], ["Everything else", 0, 1140]]}, {"id": "ava", "name": "Ava", "team": "Sugar", "gym": "", "sport": "All-star cheer", "color": "#f0509f", "accent": "#fa5fac", "dark": "#2a0a1c", "src": "apps/sugar.html", "practice": [{"d": 2, "t": "5:30 pm", "r": "5:30 – 7:30 PM", "desc": "Sugar practice", "start": ""}, {"d": 4, "t": "5:30 pm", "r": "5:30 – 7:30 PM", "desc": "Sugar practice", "start": ""}, {"d": 0, "t": "8:00 am", "r": "8:00 – 10:00 AM", "desc": "3rd practice day", "start": "2026-09-11"}], "cats": [["Gym fees", 3744, 1494], ["Private lessons", 0, 0], ["Travel", 0, 0], ["Hotels", 0, 0], ["Everything else", 0, 1080]]}], "events": [{"k": "maya", "n": "Showcase", "loc": "Irvine, CA", "start": "2026-11-15", "end": "2026-11-15", "trip": "local", "flight": false, "hotel": false}, {"k": "maya", "n": "TSN", "loc": "San Diego, CA", "start": "2026-11-21", "end": "2026-11-21", "trip": "local", "flight": false, "hotel": false}, {"k": "maya", "n": "ASCS Champs Grand Nationals", "loc": "Aurora, CO", "start": "2026-12-19", "end": "2026-12-20", "trip": "fly", "flight": false, "hotel": false}, {"k": "maya", "n": "TSN Super Six", "loc": "Oceanside, CA", "start": "2027-01-16", "end": "2027-01-17", "trip": "local", "flight": false, "hotel": false}, {"k": "maya", "n": "Spirit Sports", "loc": "Palm Springs, CA", "start": "2027-01-29", "end": "2027-01-31", "trip": "local", "flight": false, "hotel": false}, {"k": "maya", "n": "USA", "loc": "Anaheim, CA", "start": "2027-03-13", "end": "2027-03-14", "trip": "local", "flight": false, "hotel": false}, {"k": "maya", "n": "NCA All-Star Nationals", "loc": "Houston, TX", "start": "2027-03-19", "end": "2027-03-21", "trip": "fly", "flight": false, "hotel": false}, {"k": "maya", "n": "Global Spirit", "loc": "Oceanside, CA", "start": "2027-04-10", "end": "2027-04-11", "trip": "local", "flight": false, "hotel": false}, {"k": "maya", "n": "Summit Championships", "loc": "Orlando, FL", "start": "2027-04-29", "end": "2027-05-02", "trip": "fly", "flight": false, "hotel": false}, {"k": "eli", "n": "Showcase", "loc": "Irvine, CA", "start": "2026-11-15", "end": "2026-11-15", "trip": "local", "flight": false, "hotel": false}, {"k": "eli", "n": "TSN", "loc": "San Diego, CA", "start": "2026-11-21", "end": "2026-11-21", "trip": "local", "flight": false, "hotel": false}, {"k": "eli", "n": "ASCS Champs Grand Nationals", "loc": "Aurora, CO", "start": "2026-12-19", "end": "2026-12-20", "trip": "fly", "flight": false, "hotel": false}, {"k": "eli", "n": "TSN Super Six", "loc": "Oceanside, CA", "start": "2027-01-16", "end": "2027-01-17", "trip": "local", "flight": false, "hotel": false}, {"k": "eli", "n": "Spirit Sports", "loc": "Palm Springs, CA", "start": "2027-01-29", "end": "2027-01-31", "trip": "local", "flight": false, "hotel": false}, {"k": "eli", "n": "Aloha PHX", "loc": "Phoenix, AZ", "start": "2027-03-05", "end": "2027-03-07", "trip": "fly", "flight": false, "hotel": false}, {"k": "eli", "n": "UCA Allstar Nationals", "loc": "Orlando, FL", "start": "2027-03-13", "end": "2027-03-14", "trip": "fly", "flight": false, "hotel": false}, {"k": "eli", "n": "Global Spirit", "loc": "Oceanside, CA", "start": "2027-04-10", "end": "2027-04-11", "trip": "local", "flight": false, "hotel": false}, {"k": "zoe", "n": "Showcase", "loc": "Irvine, CA", "start": "2026-11-15", "end": "2026-11-15", "trip": "local", "flight": false, "hotel": false}, {"k": "zoe", "n": "TSN", "loc": "San Diego, CA", "start": "2026-11-21", "end": "2026-11-21", "trip": "local", "flight": false, "hotel": false}, {"k": "zoe", "n": "ASCS Champs Grand Nationals", "loc": "Aurora, CO", "start": "2026-12-19", "end": "2026-12-20", "trip": "fly", "flight": false, "hotel": false}, {"k": "zoe", "n": "TSN Super Six", "loc": "Oceanside, CA", "start": "2027-01-16", "end": "2027-01-17", "trip": "local", "flight": false, "hotel": false}, {"k": "zoe", "n": "Spirit Sports", "loc": "Palm Springs, CA", "start": "2027-01-29", "end": "2027-01-31", "trip": "local", "flight": false, "hotel": false}, {"k": "zoe", "n": "NCA All-Star Nationals", "loc": "Houston, TX", "start": "2027-03-19", "end": "2027-03-21", "trip": "fly", "flight": false, "hotel": false}, {"k": "zoe", "n": "One Up Grand Nationals", "loc": "Nashville, TN", "start": "2027-04-02", "end": "2027-04-04", "trip": "fly", "flight": false, "hotel": false}, {"k": "zoe", "n": "Global Spirit", "loc": "Oceanside, CA", "start": "2027-04-10", "end": "2027-04-11", "trip": "local", "flight": false, "hotel": false}, {"k": "ava", "n": "Showcase", "loc": "Irvine, CA", "start": "2026-11-15", "end": "2026-11-15", "trip": "local", "flight": false, "hotel": false}, {"k": "ava", "n": "TSN", "loc": "San Diego, CA", "start": "2026-11-21", "end": "2026-11-21", "trip": "local", "flight": false, "hotel": false}, {"k": "ava", "n": "ASCS Champs Grand Nationals", "loc": "Aurora, CO", "start": "2026-12-19", "end": "2026-12-20", "trip": "fly", "flight": false, "hotel": false}, {"k": "ava", "n": "TSN Super Six", "loc": "Oceanside, CA", "start": "2027-01-16", "end": "2027-01-17", "trip": "local", "flight": false, "hotel": false}, {"k": "ava", "n": "Spirit Sports", "loc": "Palm Springs, CA", "start": "2027-01-29", "end": "2027-01-31", "trip": "local", "flight": false, "hotel": false}, {"k": "ava", "n": "Aloha PHX", "loc": "Phoenix, AZ", "start": "2027-03-05", "end": "2027-03-07", "trip": "fly", "flight": false, "hotel": false}, {"k": "ava", "n": "UCA Allstar Nationals", "loc": "Orlando, FL", "start": "2027-03-13", "end": "2027-03-14", "trip": "fly", "flight": false, "hotel": false}, {"k": "ava", "n": "Global Spirit", "loc": "Oceanside, CA", "start": "2027-04-10", "end": "2027-04-11", "trip": "local", "flight": false, "hotel": false}], "fees": [{"k": "maya", "l": "Elite installment", "due": "2026-10-01", "a": 450}, {"k": "maya", "l": "Monthly tuition", "due": "2026-10-01", "a": 249}, {"k": "maya", "l": "Monthly tuition", "due": "2026-11-01", "a": 249}, {"k": "maya", "l": "Monthly tuition", "due": "2026-12-01", "a": 249}, {"k": "maya", "l": "Monthly tuition", "due": "2027-01-01", "a": 249}, {"k": "maya", "l": "Monthly tuition", "due": "2027-02-01", "a": 249}, {"k": "maya", "l": "Monthly tuition", "due": "2027-03-01", "a": 249}, {"k": "maya", "l": "Monthly tuition", "due": "2027-04-01", "a": 249}, {"k": "eli", "l": "Elite installment", "due": "2026-10-01", "a": 450}, {"k": "eli", "l": "Monthly tuition", "due": "2026-10-01", "a": 249}, {"k": "eli", "l": "Monthly tuition", "due": "2026-11-01", "a": 249}, {"k": "eli", "l": "Monthly tuition", "due": "2026-12-01", "a": 249}, {"k": "eli", "l": "Monthly tuition", "due": "2027-01-01", "a": 249}, {"k": "eli", "l": "Monthly tuition", "due": "2027-02-01", "a": 249}, {"k": "eli", "l": "Monthly tuition", "due": "2027-03-01", "a": 249}, {"k": "eli", "l": "Monthly tuition", "due": "2027-04-01", "a": 249}, {"k": "zoe", "l": "Elite installment", "due": "2026-10-01", "a": 450}, {"k": "zoe", "l": "Monthly tuition", "due": "2026-10-01", "a": 249}, {"k": "zoe", "l": "Monthly tuition", "due": "2026-11-01", "a": 249}, {"k": "zoe", "l": "Monthly tuition", "due": "2026-12-01", "a": 249}, {"k": "zoe", "l": "Monthly tuition", "due": "2027-01-01", "a": 249}, {"k": "zoe", "l": "Monthly tuition", "due": "2027-02-01", "a": 249}, {"k": "zoe", "l": "Monthly tuition", "due": "2027-03-01", "a": 249}, {"k": "zoe", "l": "Monthly tuition", "due": "2027-04-01", "a": 249}, {"k": "ava", "l": "Elite installment", "due": "2026-10-01", "a": 450}, {"k": "ava", "l": "Monthly tuition", "due": "2026-10-01", "a": 249}, {"k": "ava", "l": "Monthly tuition", "due": "2026-11-01", "a": 249}, {"k": "ava", "l": "Monthly tuition", "due": "2026-12-01", "a": 249}, {"k": "ava", "l": "Monthly tuition", "due": "2027-01-01", "a": 249}, {"k": "ava", "l": "Monthly tuition", "due": "2027-02-01", "a": 249}, {"k": "ava", "l": "Monthly tuition", "due": "2027-03-01", "a": 249}, {"k": "ava", "l": "Monthly tuition", "due": "2027-04-01", "a": 249}], "teamdata": {"maya": {"events": [{"n": "Rangers Stunt Clinic", "date": "2026-10-24", "meta": "Sat, Oct 24, 2026 · 5:00–7:00 PM · $55/person · Partner stunting, double base stunts, group stunts & flexibility — open to all levels and ages, bases ", "e": "🤸"}, {"n": "Added Practice — Canceled", "date": "2026-10-03", "meta": "Sat, Oct 3, 2026 · Canceled due to extreme heat — originally 3:30–5:30 PM. We will share makeup info in team chat.", "e": "🔥"}, {"n": "Coed Stunt & Tumble Clinic", "date": "2026-10-03", "meta": "Sat, Oct 3, 2026 · 6:00–8:00 PM · $50/person, pizza included · Stunt & tumble with the reigning back-to-back Worlds Champs & NCA Champs (Coed team) CC", "e": "🤸"}, {"n": "Added Practice", "date": "2026-10-10", "meta": "Sat, Oct 10, 2026 · 2:00–4:00 PM — extra practice, on top of the regular weekly schedule.", "e": "🤸‍♀️"}, {"n": "Parent Meeting", "date": "2026-10-13", "meta": "Tue, Oct 13, 2026 · 6:30 PM We'll go over the routine and what needs to be worked on as we prepare for season.", "e": "📣"}, {"n": "GLOW Stunt Clinic", "date": "2026-10-17", "meta": "Sat, Oct 17, 2026 · 6:00–8:30 PM · $50/athlete · Stunt clinic with the reigning NCA & back-to-back World Champs. Includes a special commemorative bow,", "e": "🤸"}, {"n": "In-house Show-Offs", "date": "2026-10-24", "meta": "Sat, Oct 24, 2026 · Y2K reports 8:30 AM · performs 10:25 AM Bring your noisemakers and shakers! Parking: Allen’s Bro’s Mortuary + the space north of t", "e": "🎉"}, {"n": "Dance Choreo", "date": "2026-10-27", "meta": "Tue, Oct 27, 2026 · 4:00–6:30 PM", "e": "💃"}, {"n": "Trunk or Treat", "date": "2026-10-29", "meta": "Thu, Oct 29, 2026 · 6:00 PM Send a bag of candy to your team rep, or volunteer to decorate your vehicle for the trunk-or-treat — if you volunteer a ve", "e": "🎃"}, {"n": "Team Photo Days", "date": "2026-12-01", "meta": "Dec 1–2, 2026 · San Marcos — details to come in team chat.", "e": "📸"}], "pack": [{"cat": "Uniform & Team Wear", "n": 5}, {"cat": "Hair", "n": 7}, {"cat": "Makeup", "n": 2}, {"cat": "Comp Day Essentials", "n": 4}], "faq": [["How do hotel booking links work for the big comps?", "For high-demand venues there's typically a general public booking link plus a separate team block link, and both can fill up fast — be online right when the link goes live."], ["Do we have to book through the required hotel block (\"Stay to Play\")?", "Varsity-run comps (ASCS, Spirit Sports, USA, NCA) require families to book through the official \"Stay Smart\" hotel block when housing shows as required — but Varsity does allow a few exemptions: teams roughly 75 miles or less from the venue (150 miles for one-day events) can commute without booking; families who can cover the full stay with hotel loyalty points, or who qualify for a military/government hotel discount"], ["How much are private lessons?", "Private Lessons30 min Jump Training — $55Jump training for High School/All Star athletes.30 min Tumbling Private — $55One Hour Tumbling Private — $90One Hour Private — $100Stunt PrivatesStretching – 30 mins — $55Stretching privates for flexibility.Stretching – 1 hour — $90One hour of stretching for athletes to work their flexibility.30 min Stunt Private (Flyer) — $75For flyers interested in working on their technique"]]}, "eli": {"events": [{"n": "Rangers Stunt Clinic", "date": "2026-10-24", "meta": "Sat, Oct 24, 2026 · 5:00–7:00 PM · $55/person · Partner stunting, double base stunts, group stunts & flexibility — open to all levels and ages, bases ", "e": "🤸"}, {"n": "GLOW Stunt Clinic", "date": "2026-10-17", "meta": "Sat, Oct 17, 2026 · 6:00–8:30 PM · $50/athlete · Stunt clinic with the reigning NCA & back-to-back World Champs. Includes a special commemorative bow,", "e": "🤸"}, {"n": "Coed Stunt & Tumble Clinic", "date": "2026-10-03", "meta": "Sat, Oct 3, 2026 · 6:00–8:00 PM · $50/person, pizza included · Stunt & tumble with the reigning back-to-back Worlds Champs & NCA Champs (Coed team) CC", "e": "🤸"}, {"n": "In-house Show-Offs", "date": "2026-10-24", "meta": "Sat, Oct 24, 2026 · Shazam reports 8:30 AM · performs 9:55 AM Bring your noisemakers and shakers! Parking: Allen’s Bro’s Mortuary + the space north of", "e": "🎉"}, {"n": "Dance Choreo", "date": "2026-10-29", "meta": "Thu, Oct 29, 2026 · 4:00–6:30 PM", "e": "💃"}, {"n": "Trunk or Treat", "date": "2026-10-28", "meta": "Wed, Oct 28, 2026 · 6:00 PM Send a bag of candy to your team rep, or volunteer to decorate your vehicle for the trunk-or-treat — if you volunteer a ve", "e": "🎃"}, {"n": "Team Photo Days", "date": "2026-12-01", "meta": "Dec 1–2, 2026 · San Marcos — details to come in team chat.", "e": "📸"}], "pack": [{"cat": "Uniform & Team Wear", "n": 6}, {"cat": "Hair", "n": 7}, {"cat": "Makeup", "n": 2}, {"cat": "Comp Day Essentials", "n": 4}], "faq": [["How do hotel booking links work for the big comps?", "For high-demand venues there's typically a general public booking link plus a separate team block link, and both can fill up fast — be online right when the link goes live."], ["How much are private lessons?", "Private Lessons30 min Jump Training — $55Jump training for High School/All Star athletes.30 min Tumbling Private — $55One Hour Tumbling Private — $90One Hour Private — $100Stunt PrivatesStretching – 30 mins — $55Stretching privates for flexibility.Stretching – 1 hour — $90One hour of stretching for athletes to work their flexibility.30 min Stunt Private (Flyer) — $75For flyers interested in working on their technique"]]}, "zoe": {"events": [{"n": "Rangers Stunt Clinic", "date": "2026-10-24", "meta": "Sat, Oct 24, 2026 · 5:00–7:00 PM · $55/person · Partner stunting, double base stunts, group stunts & flexibility — open to all levels and ages, bases ", "e": "🤸"}, {"n": "GLOW Stunt Clinic", "date": "2026-10-17", "meta": "Sat, Oct 17, 2026 · 6:00–8:30 PM · $50/athlete · Stunt clinic with the reigning NCA & back-to-back World Champs. Includes a special commemorative bow,", "e": "🤸"}, {"n": "Coed Stunt & Tumble Clinic", "date": "2026-10-03", "meta": "Sat, Oct 3, 2026 · 6:00–8:00 PM · $50/person, pizza included · Stunt & tumble with the reigning back-to-back Worlds Champs & NCA Champs (Coed team) CC", "e": "🤸"}, {"n": "In-house Show-Offs", "date": "2026-10-24", "meta": "Sat, Oct 24, 2026 · WhiteGold performs at 9:49 AM Bring your noisemakers and shakers! Parking: Allen’s Bro’s Mortuary + the space north of the buildin", "e": "🎉"}, {"n": "Dance Choreo", "date": "2026-10-29", "meta": "Thu, Oct 29, 2026 · 4:00–6:30 PM", "e": "💃"}, {"n": "Trunk or Treat", "date": "2026-10-29", "meta": "Thu, Oct 29, 2026 · 5:30 PM Send a bag of candy to your team rep, or volunteer to decorate your vehicle for the trunk-or-treat — if you volunteer a ve", "e": "🎃"}, {"n": "Team Photo Days", "date": "2026-12-01", "meta": "Dec 1–2, 2026 · San Marcos — details to come in team chat.", "e": "📸"}], "pack": [{"cat": "Uniform & Team Wear", "n": 6}, {"cat": "Hair", "n": 7}, {"cat": "Makeup", "n": 2}, {"cat": "Comp Day Essentials", "n": 4}], "faq": [["How do hotel booking links work for the big comps?", "For high-demand venues there's typically a general public booking link plus a separate team block link, and both can fill up fast — be online right when the link goes live."], ["How much are private lessons?", "Private Lessons30 min Jump Training — $55Jump training for High School/All Star athletes.30 min Tumbling Private — $55One Hour Tumbling Private — $90One Hour Private — $100Stunt PrivatesStretching – 30 mins — $55Stretching privates for flexibility.Stretching – 1 hour — $90One hour of stretching for athletes to work their flexibility.30 min Stunt Private (Flyer) — $75For flyers interested in working on their technique"]]}, "ava": {"events": [{"n": "Rangers Stunt Clinic", "date": "2026-10-24", "meta": "Sat, Oct 24, 2026 · 5:00–7:00 PM · $55/person · Partner stunting, double base stunts, group stunts & flexibility — open ", "e": "🤸"}, {"n": "Coed Stunt & Tumble Clinic", "date": "2026-10-03", "meta": "Sat, Oct 3, 2026 · 6:00–8:00 PM · $50/person, pizza included · Stunt & tumble with the reigning back-to-back Worlds Cham", "e": "🤸"}, {"n": "GLOW Stunt Clinic", "date": "2026-10-17", "meta": "Sat, Oct 17, 2026 · 6:00–8:30 PM · $50/athlete · Stunt clinic with the reigning NCA & back-to-back World Champs. Include", "e": "🤸"}, {"n": "In-House Showcase", "date": "2026-10-24", "meta": "Sat, Oct 24, 2026 · Sugar performs at 10:52 AM · Full hair and makeup. Bring your noisemakers and shakers! Parking: Alle", "e": "🎉"}, {"n": "Dance Choreo", "date": "2026-10-20", "meta": "Tue, Oct 20, 2026 · 4:00–6:30 PM", "e": "💃"}, {"n": "Trunk or Treat", "date": "2026-10-29", "meta": "Thu, Oct 29, 2026 · 5:00 PM · We can use 1 additional volunteer! Send a bag of candy to your team rep, or volunteer to d", "e": "🎃"}, {"n": "Team Photo Days", "date": "2026-12-01", "meta": "Dec 1–2, 2026 · San Marcos — details to come in team chat.", "e": "📸"}], "pack": [{"cat": "Uniform & Team Wear", "n": 8}, {"cat": "Hair", "n": 7}, {"cat": "Makeup", "n": 2}, {"cat": "Comp Day Essentials", "n": 4}], "faq": [["How do hotel booking links work for the big comps?", "For high-demand venues there's typically a general public booking link plus a separate team block link, and both can fill up fast — be online right when the link goes live."], ["Do we have to book through the required hotel block (\"Stay to Play\")?", "Varsity-run comps (ASCS, Spirit Sports, USA, NCA) require families to book through the official \"Stay Smart\" hotel block when housing shows as required — but Varsity does allow a few exemptions: teams roughly 75 miles or less from the venue (150 miles for one-day events) can commute without booking; families who can cover the full stay with hotel loyalty points, or who qualify for a military/government hotel discount, can also apply. Exemption requests go through Team Travel Source and need to be submitted with documentation at least 30 days before the event — they can't be submitted until the event opens for booking. Request an exemption → · Official Stay Smart policy →"], ["How much are private lessons?", "Private Lessons30 min Jump Training — $55Jump training for High School/All Star athletes.30 min Tumbling Private — $55One Hour Tumbling Private — $90One Hour Private — $100Stunt PrivatesStretching – 30 mins — $55Stretching privates for flexibility.Stretching – 1 hour — $90One hour of stretching for athletes to work their flexibility.30 min Stunt Private (Flyer) — $75For flyers interested in working on their technique and progressing their skills. Must be pre-approved with the coach before booking.Stunt Group Private — $55Set up a private lesson for your entire stunt group to work with an instructor."]]}}};
 var TPLK=DATA.kids, kids=[];
 var TPLE=DATA.events, events=[];
 var TPLP=DATA.fees, pays=[];
@@ -1612,9 +1618,9 @@ var IC={cal:'<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" r
 function heroHtml(){
   var n=nextEvent(); if(!n) return '';
   var days=Math.round((parse(n.start)-todayD)/864e5), k=kidBy(n.k);
-  return '<div class="hero-grid"><div class="hero-card primary"><div class="hero-main"><div class="stat-label">Next Competition</div><div class="stat-value">'+n.n+'</div>'+
+  return '<div class="hero-grid"><div class="hero-card primary"><div class="hero-main"><div class="stat-label">'+(n.oid?'Next Event':'Next Competition')+'</div><div class="stat-value">'+n.n+'</div>'+
     (S.kid==='all'?'<span class="hero-who" style="--c:'+k.color+'"><span class="av">'+k.name[0]+'</span>'+k.name+' · '+k.team+'</span>':'')+
-    '<div class="hero-facts"><div class="hero-fact">'+IC.cal+fmt(n.start,{month:'short',day:'numeric',year:'numeric'})+(n.end!==n.start?' – '+fmt(n.end,{day:'numeric'}):'')+'</div><div class="hero-fact">'+IC.pin+n.loc+'</div><div class="hero-fact">'+IC.plane+(n.trip==='fly'?'Flying'+(n.flight?' · flight booked':' · flight not booked'):'Driving, local')+'</div></div></div>'+
+    '<div class="hero-facts"><div class="hero-fact">'+IC.cal+fmt(n.start,{month:'short',day:'numeric',year:'numeric'})+(n.end!==n.start?' – '+fmt(n.end,{day:'numeric'}):'')+'</div>'+(n.loc?'<div class="hero-fact">'+IC.pin+n.loc+'</div>':'')+(n.oid?(n.time?'<div class="hero-fact">'+IC.cal+n.time+'</div>':''):'<div class="hero-fact">'+IC.plane+(n.trip==='fly'?'Flying'+(n.flight?' · flight booked':' · flight not booked'):'Driving, local')+'</div>')+'</div></div>'+
     '<div class="hero-countdown"><div class="countdown">'+days+'</div><div class="countdown-label">DAY'+(days===1?'':'S')+'</div></div></div></div>';
 }
 function conflictHtml(){
@@ -1627,7 +1633,7 @@ function conflictHtml(){
   });
   return comps.filter(function(c){return S.kid==='all'||c.ev.some(function(e){return e.k===S.kid;});}).map(function(c){
     var s=c.ev.map(function(e){return e.start;}).sort()[0], en=c.ev.map(function(e){return e.end;}).sort().pop();
-    var rows=grp(c.ev,function(e){return e.n+'|'+e.loc;}).map(function(g){return '<div class="who" '+cvm(g.ks)+'><i></i>'+whoList(g.ks)+': '+g.e.n+', '+g.e.loc+'</div>';}).join('');
+    var rows=grp(c.ev,function(e){return e.n+'|'+e.loc;}).map(function(g){return '<div class="who" '+cvm(g.ks)+'><i></i>'+whoList(g.ks)+': '+g.e.n+(g.e.loc?', '+g.e.loc:'')+'</div>';}).join('');
     return '<div class="mt-alert"><b>Two places, one weekend</b><p>'+fmt(s,{month:'short',day:'numeric'})+(en!==s?'–'+fmt(en,{day:'numeric'}):'')+'. Someone needs a plan for who goes where.</p>'+rows+(planGet(s+'|'+en)?'<div class="mt-note-box">'+planGet(s+'|'+en).replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</div>':'')+'<button class="mt-ghost" type="button" data-act="plan" data-pk="'+s+'|'+en+'">'+(planGet(s+'|'+en)?'Edit plan':'Note who is going with whom')+'</button></div>';
   }).join('');
 }
@@ -1637,7 +1643,7 @@ function cvm(ks){return ks.length>1?'style="--c:#3d6fe0"':cv(ks[0]);}
 function weekHtml(){
   var items=[]; for(var i=0;i<7;i++){var d=dayOffset(i),ds=iso(d);
     kids.forEach(function(k){if(!inKid({k:k.id}))return;k.practice.forEach(function(p){if(p.d===d.getDay())items.push({date:ds,k:k.id,t:p.t,n:'Practice',sub:k.team});});});
-    events.forEach(function(e){if(inKid(e)&&e.start<=ds&&ds<=e.end)items.push({date:ds,k:e.k,t:'All day',n:e.n,sub:e.loc});});}
+    events.forEach(function(e){if(inKid(e)&&e.start<=ds&&ds<=e.end)items.push({date:ds,k:e.k,t:e.time||'All day',n:e.n,sub:e.loc});});}
   if(!items.length) return '<p class="bud-empty">Nothing on this week.</p>';
   var g=grp(items,function(i){return i.date+'|'+i.n+'|'+i.t+'|'+(i.n==='Practice'?i.k:'')}).map(function(x){x.e.ks=x.ks;return x.e;});
   var by={};g.forEach(function(i){(by[i.date]=by[i.date]||[]).push(i);});
@@ -1655,9 +1661,10 @@ function tripsHtml(){
 }
 function home(){
   var c=conflictHtml();
-  return heroHtml()+(c?c:'')+'<div class="section-title">This week</div><div class="card">'+weekHtml()+'</div>'+tripsHtml()+'<div class="section-title">Payments due</div>'+paysHtml();
+  return (isCust()?addBar(['event','practice','fee']):'')+heroHtml()+(c?c:'')+'<div class="section-title">This week</div><div class="card">'+weekHtml()+'</div>'+tripsHtml()+'<div class="section-title">Payments due</div>'+paysHtml();
 }
 function schedule(){
+  var pre=isCust()?addBar(['event']):'';
   var list=grp(events.filter(inKid).filter(function(e){return e.end>=todayS;}).sort(function(a,b){return a.start<b.start?-1:1;}),function(e){return e.n+'|'+e.start;}), out='', last='';
   list.forEach(function(g){
     var e=g.e, ks=g.ks;
@@ -1665,9 +1672,9 @@ function schedule(){
     if(mon!==last){ if(last) out+='</div>'; out+='<div class="section-title">'+mon+'</div><div class="card">'; last=mon; }
     var cf=ks.length===1?conflictFor(e):null, o=cf?(cf[0]===e?cf[1]:cf[0]):null, d=parse(e.start);
     out+='<div class="mt-row" '+cvm(ks)+'><div class="mt-date"><b>'+d.getDate()+'</b><span>'+d.toLocaleDateString('en-US',{month:'short'})+'</span></div><div class="main"><div class="t">'+e.n+'</div><div class="s">'+(S.kid==='all'?whoList(ks)+' · ':'')+e.loc+(e.end!==e.start?' · '+fmt(e.start,{month:'short',day:'numeric'})+'–'+fmt(e.end,{day:'numeric'}):'')+'</div><div class="mt-pills">'+
-      (e.trip==='fly'?'<span class="mt-pill '+(e.flight?'ok':'todo')+'">'+(e.flight?'Flight booked':'Flight needed')+'</span><span class="mt-pill '+(e.hotel?'ok':'todo')+'">'+(e.hotel?'Hotel booked':'Hotel needed')+'</span>':'<span class="mt-pill">Local</span>')+(o?'<span class="mt-pill warn">Same weekend as '+kidBy(o.k).name+'</span>':'')+'</div></div></div>';
+      (e.oid?(e.time?'<span class="mt-pill">'+e.time+'</span>':''):e.trip==='fly'?'<span class="mt-pill '+(e.flight?'ok':'todo')+'">'+(e.flight?'Flight booked':'Flight needed')+'</span><span class="mt-pill '+(e.hotel?'ok':'todo')+'">'+(e.hotel?'Hotel booked':'Hotel needed')+'</span>':'<span class="mt-pill">Local</span>')+(o?'<span class="mt-pill warn">Same weekend as '+kidBy(o.k).name+'</span>':'')+'</div>'+(e.oid&&S.kid!=='all'?delBtn('event',e.oid):'')+'</div></div>';
   });
-  return (last?out+'</div>':'<div class="card"><p class="bud-empty">No upcoming events.</p></div>');
+  return pre+(last?out+'</div>':'<div class="card"><p class="bud-empty">No upcoming events.</p></div>');
 }
 
 function expSum(k){try{var b=JSON.parse(localStorage.getItem(k.id+':'+k.teamKey+'_budget')||'{}')||{};return (b.expenses||[]).reduce(function(s,x){return s+(+x.amt||0);},0);}catch(e){return 0;}}
@@ -1683,9 +1690,10 @@ function moneyScreen(){
     var bar='<div class="mt-stack" role="img" aria-label="Spending by kid">'+all.map(function(x){return '<i style="width:'+(x.s/T*100)+'%;--c:'+x.k.color+'"></i>';}).join('')+all.map(function(x){return '<i class="p" style="width:'+(x.p/T*100)+'%;--c:'+x.k.color+'"></i>';}).join('')+'</div>';
     var leg='<div class="bud-legend">'+all.map(function(x){return '<span><i class="cal-dot" style="background:'+x.k.color+';margin-right:6px"></i>'+x.k.name+'</span>';}).join('')+'<span style="opacity:.8">Lighter = still to come</span></div>';
     return summary(s1,p1,'Family season estimate',{bar:bar,legend:leg})+'<div class="section-title">Where it goes</div><div class="card" style="padding-top:4px;padding-bottom:4px">'+all.map(function(x){
-      var t=x.s+x.p; return '<button class="mt-by" type="button" data-kid="'+x.k.id+'" data-from="money" '+cv(x.k.id)+'><span class="av">'+x.k.name[0]+'</span><span class="main"><b>'+x.k.name+' · '+x.k.team+'</b><span>'+money(x.p)+' left</span><span class="bud-minibar" style="margin:6px 0 0"><span class="bud-bar-spent" style="width:'+(x.s/t*100)+'%"></span><span class="bud-bar-plan" style="width:'+(x.p/t*100)+'%"></span></span></span><span class="bud-cat-tot">'+money(x.s)+'<small class="bud-cat-of">of '+money(t)+' est.</small></span><span class="bud-chev" aria-hidden="true">›</span></button>';}).join('')+'</div>'+
+      var t=(x.s+x.p)||1; return '<button class="mt-by" type="button" data-kid="'+x.k.id+'" data-from="money" '+cv(x.k.id)+'><span class="av">'+x.k.name[0]+'</span><span class="main"><b>'+x.k.name+' · '+x.k.team+'</b><span>'+money(x.p)+' left</span><span class="bud-minibar" style="margin:6px 0 0"><span class="bud-bar-spent" style="width:'+(x.s/t*100)+'%"></span><span class="bud-bar-plan" style="width:'+(x.p/t*100)+'%"></span></span></span><span class="bud-cat-tot">'+money(x.s)+'<small class="bud-cat-of">of '+money(t)+' est.</small></span><span class="bud-chev" aria-hidden="true">›</span></button>';}).join('')+'</div>'+
       '<p class="mt-note" style="padding:12px 4px 0">Gym fees come from each team\'s fee schedule. Expenses you log in a child\'s own Budget tab are counted here too.</p>';
   }
+  if(isCust())return customMoney(kidBy(S.kid));
   var k=kidBy(S.kid), t=totals(k), T=t.s+t.p;
   var bar='<div class="bud-bar"><span class="bud-bar-spent" style="width:'+(t.s/T*100)+'%"></span><span class="bud-bar-plan" style="width:'+(t.p/T*100)+'%"></span></div>';
   return summary(t.s,t.p,'Season budget · auto',{bar:bar})+'<div class="section-title">Where it goes</div><div class="card bud-cats">'+k.cats.map(function(c){
@@ -1697,11 +1705,11 @@ function moneyScreen(){
 var TPLD=DATA.teamdata, TEAMDATA={};
 Object.keys(TPLD).forEach(function(id){TPLD[id].events.forEach(function(e){e.d=Math.round((parse(e.date)-todayD)/864e5);});TPLD[id].events=TPLD[id].events.filter(function(e){return e.d>=0;});});
 S.cal=0; S.sel=todayS; S.faq={}; S.frames={}; S.planKey='';
-function teamTitle(k){return '<div class="mt-team" '+cv(k.id)+'><span class="who"><i></i>'+k.name+'</span><span>'+k.gym+' · '+k.team+'</span></div>';}
-function eachKid(fn){return kids.filter(function(k){return S.kid==='all'||k.id===S.kid;}).map(function(k){return (S.kid==='all'?teamTitle(k):'')+fn(k);}).join('');}
+function teamTitle(k){return '<div class="mt-team" '+cv(k.id)+'><span class="who"><i></i>'+k.name+'</span><span>'+(k.gym?k.gym+' · ':'')+k.team+'</span></div>';}
+function eachKid(fn,skipC){return kids.filter(function(k){return (S.kid==='all'||k.id===S.kid)&&!(skipC&&k.custom);}).map(function(k){return (S.kid==='all'?teamTitle(k):'')+fn(k);}).join('');}
 var DAYS=['SUN','MON','TUE','WED','THU','FRI','SAT'];
 function practiceTab(){
-  return eachKid(function(k){return '<div class="practice-grid" style="margin-bottom:16px">'+k.practice.slice().sort(function(a,b){return a.d-b.d;}).map(function(p){return '<div class="practice-card" '+cv(k.id)+'><div class="practice-head"><span class="day-pill" style="background:color-mix(in srgb,var(--c) 18%,var(--surface));color:var(--text)">'+DAYS[p.d]+'</span><span class="mt-time" style="width:auto">'+p.r+'</span></div><div class="s" style="font-size:13px;color:var(--text-muted);margin-top:6px">'+p.desc+'</div></div>';}).join('')+'</div>';});
+  return (isCust()?addBar(['practice']):'')+eachKid(function(k){return '<div class="practice-grid" style="margin-bottom:16px">'+k.practice.slice().sort(function(a,b){return a.d-b.d;}).map(function(p){return '<div class="practice-card" '+cv(k.id)+'><div class="practice-head"><span class="day-pill" style="background:color-mix(in srgb,var(--c) 18%,var(--surface));color:var(--text)">'+DAYS[p.d]+'</span><span class="mt-time" style="width:auto">'+p.r+'</span></div><div class="s" style="font-size:13px;color:var(--text-muted);margin-top:6px">'+p.desc+(p.oid&&S.kid!=='all'?delBtn('practice',p.oid):'')+'</div></div>';}).join('')+'</div>'+(k.custom&&!k.practice.length?'<p class="bud-empty" style="margin:-6px 0 14px">No practice times yet.</p>':'');});
 }
 function eventsTab(){
   var list=[]; kids.forEach(function(k){if(S.kid!=='all'&&k.id!==S.kid)return;TEAMDATA[k.id].events.forEach(function(e){list.push({k:k.id,e:e,date:e.date});});});
@@ -1735,10 +1743,10 @@ function packingTab(){
   return '<div class="section-title">Pack for a travel comp</div>'+eachKid(function(k){
     var cats=TEAMDATA[k.id].pack, n=cats.reduce(function(s,c){return s+c.n;},0);
     return '<div class="card" style="margin-bottom:16px" '+cv(k.id)+'><div class="mt-prog"><span>'+n+' things to pack</span><span>'+cats.length+' lists</span></div>'+cats.map(function(c){return '<div class="mt-row"><span class="mt-bar"></span><div class="main"><div class="t">'+c.cat+'</div></div><span class="mt-amt" style="color:var(--text-muted)">'+c.n+'</span></div>';}).join('')+
-      '<div class="exp-actions" style="margin:10px 0 2px"><button class="pay-btn" type="button" data-open="'+k.id+':checklist">Open '+k.team+' packing list</button></div></div>';});
+      '<div class="exp-actions" style="margin:10px 0 2px"><button class="pay-btn" type="button" data-open="'+k.id+':checklist">Open '+k.team+' packing list</button></div></div>';},true);
 }
 function faqTab(){
-  return '<div class="section-title">Frequently asked</div>'+eachKid(function(k){return '<div class="card" style="margin-bottom:16px">'+TEAMDATA[k.id].faq.map(function(q,i){var id=k.id+i;return '<div class="faq-item'+(S.faq[id]?' open':'')+'"><button class="faq-q" type="button" data-faq="'+id+'"><span>'+q[0]+'</span><span class="plus">+</span></button><div class="faq-a"><div class="faq-a-inner">'+q[1]+'</div></div></div>';}).join('')+'</div>';});
+  return '<div class="section-title">Frequently asked</div>'+eachKid(function(k){return '<div class="card" style="margin-bottom:16px">'+TEAMDATA[k.id].faq.map(function(q,i){var id=k.id+i;return '<div class="faq-item'+(S.faq[id]?' open':'')+'"><button class="faq-q" type="button" data-faq="'+id+'"><span>'+q[0]+'</span><span class="plus">+</span></button><div class="faq-a"><div class="faq-a-inner">'+q[1]+'</div></div></div>';}).join('')+'</div>';},true);
 }
 var TABS=[['home','Home','<path d="M3 11l9-8 9 8"></path><path d="M5 10v10h5v-6h4v6h5V10"></path>'],['schedule','Comp Schedule','<circle cx="12" cy="8.5" r="5"></circle><path d="M9 12.8L7 21l5-3 5 3-2-8.2"></path>'],['practice','Practice','<circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path>'],['fundraisers','Events','<path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 16.9 6.4 20.1l1.4-6.3-4.8-4.3 6.4-.6z"></path>'],['calendar','Calendar','<rect x="3.5" y="5" width="17" height="15" rx="2.5"></rect><path d="M3.5 9.5h17"></path><path d="M8 3v4"></path><path d="M16 3v4"></path>'],['checklist','Comp Packing','<rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="M8 12.5l2.4 2.4L16 9.3"></path>'],['faq','FAQ','<circle cx="12" cy="12" r="9"></circle><path d="M9.3 9.4a2.7 2.7 0 1 1 3.9 2.4c-1 .5-1.2 1.1-1.2 2.1"></path><path d="M12 17.3v.01"></path>'],['budget','Budget','<path d="M3 7.5A2.5 2.5 0 0 1 5.5 5H18a1 1 0 0 1 1 1v2"></path><path d="M3 7.5V17a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1H5.5A2.5 2.5 0 0 1 3 7.5z"></path><path d="M16.5 13.5h.01"></path>']];
 function frameFor(k){
@@ -1754,7 +1762,7 @@ function sizeFrames(){
 }
 function showFrames(){
   var fr=document.getElementById('frames');
-  if(S.kid==='all'){fr.hidden=true;}
+  if(S.kid==='all'||kidBy(S.kid).custom){fr.hidden=true;}
   else{fr.hidden=false;frameFor(kidBy(S.kid));Object.keys(S.frames).forEach(function(id){S.frames[id].hidden=(id!==S.kid);});sizeFrames();}
 }
 window.addEventListener('resize',function(){if(S.kid!=='all')sizeFrames();});
@@ -1765,9 +1773,10 @@ function openChildTab(id,tab){
   if(f.contentDocument&&f.contentDocument.readyState==='complete'&&f.contentDocument.querySelector('#tabs')) go(); else f.addEventListener('load',function(){setTimeout(go,150);},{once:true});
 }
 function render(){
+  if(isCust()&&TABSX().map(function(x){return x[0];}).indexOf(S.tab)<0)S.tab='home';
   theme(S.kid);
   var k=S.kid==='all'?null:kidBy(S.kid);
-  document.body.classList.toggle('kid-mode',!!k);
+  document.body.classList.toggle('kid-mode',!!k&&!k.custom);
   document.getElementById('mtSub').textContent=kids.length?'Family hub · '+kids.length+(kids.length===1?' team':' teams'):'Family hub';
   document.body.classList.toggle('no-kids',!kids.length);
   var sw=!kids.length?'':'<button class="mt-chip'+(S.kid==='all'?' on':'')+'" role="tab" aria-selected="'+(S.kid==='all')+'" data-kid="all"><span class="stack">'+kids.slice(0,3).map(function(x,i){return '<i style="left:'+(i*6)+'px;--c:'+x.color+'"></i>';}).join('')+'</span><span class="nm">All</span></button>';
@@ -1775,9 +1784,9 @@ function render(){
   sw+='<button class="mt-chip mt-plus" type="button" id="addTeamBtn" aria-label="Add a team"><span class="nm">+</span></button>';
   document.getElementById('sw').innerHTML=sw;
   showFrames();
-  document.getElementById('tabs').innerHTML=TABS.map(function(t){return '<button type="button" data-tab="'+t[0]+'" class="'+(S.tab===t[0]?'active':'')+'"><svg viewBox="0 0 24 24">'+t[2]+'</svg>'+t[1]+'</button>';}).join('');
+  document.getElementById('tabs').innerHTML=TABSX().map(function(t){return '<button type="button" data-tab="'+t[0]+'" class="'+(S.tab===t[0]?'active':'')+'"><svg viewBox="0 0 24 24">'+t[2]+'</svg>'+t[1]+'</button>';}).join('');
   if(!kids.length){document.getElementById('mtMain').innerHTML=welcome();}
-  else if(!k) document.getElementById('mtMain').innerHTML=({home:home,schedule:schedule,practice:practiceTab,fundraisers:eventsTab,calendar:calendarTab,checklist:packingTab,faq:faqTab,budget:moneyScreen})[S.tab]();
+  else if(!k||k.custom) document.getElementById('mtMain').innerHTML=({home:home,schedule:schedule,practice:practiceTab,fundraisers:eventsTab,calendar:calendarTab,checklist:packingTab,faq:faqTab,budget:moneyScreen})[S.tab]();
   var act=document.querySelector('#tabs button.active'); if(act&&act.scrollIntoView) { try{ act.parentElement.scrollLeft=act.offsetLeft-20; }catch(e){} }
   renderSheet();
 }
@@ -1788,8 +1797,10 @@ function renderSheet(){
   var close='<button class="mt-x" type="button" data-act="close">Close</button>';
   var cols=EXTRA.map(function(e){return e.B;});
   if(S.sheet==='team'){
-    b.innerHTML=close+'<h2>Add a family member</h2><p>Choose the team they are on. Each team keeps its own hub up to date, so nothing is copied over.</p><div class="exp-grid"><label>Team<select class="cal-input" style="margin-top:0" id="teamPick">'+TEAMOPTS.map(function(o){return '<option value="'+o.key+'"'+(S.newTeam===o.key?' selected':'')+'>'+o.label+'</option>';}).join('')+'</select></label><label>Their first name<input class="cal-input" style="margin-top:0" id="kidName" maxlength="20" placeholder="First name" value="'+S.newName+'" autocomplete="off"></label></div><div class="exp-actions" style="margin-top:16px"><button class="pay-btn" type="button" data-act="addkid">Add to The App</button></div>'+
+    b.innerHTML=close+'<h2>Add a family member</h2><p>Choose the team they are on. Each team keeps its own hub up to date, so nothing is copied over.</p><div class="exp-grid"><label>Team<select class="cal-input" style="margin-top:0" id="teamPick">'+TEAMOPTS.map(function(o){return '<option value="'+o.key+'"'+(S.newTeam===o.key?' selected':'')+'>'+o.label+'</option>';}).join('')+'</select></label>'+(S.newTeam==='other'?'<label>Activity<input class="cal-input" style="margin-top:0" id="actName" maxlength="20" placeholder="e.g. Soccer" value="'+(S.newAct||'')+'" autocomplete="off"></label>':'')+'<label>Their first name<input class="cal-input" style="margin-top:0" id="kidName" maxlength="20" placeholder="First name" value="'+S.newName+'" autocomplete="off"></label></div><div class="exp-actions" style="margin-top:16px"><button class="pay-btn" type="button" data-act="addkid">Add to The App</button></div>'+
       (kids.length?'<div style="margin-top:22px;font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted)">Your family</div>'+kids.map(function(x){return '<div class="mt-fam" '+cv(x.id)+'><span class="av">'+x.name[0]+'</span><span class="nm">'+x.name+'<span>'+x.team+'</span></span><button type="button" data-act="rmkid" data-id="'+x.id+'">Remove</button></div>';}).join(''):'');
+  } else if(S.sheet==='oform'){b.innerHTML=oFormHtml(S.oKind);
+  } else if(S.sheet==='oimport'){b.innerHTML=impSheet();
   } else if(S.sheet==='expense'){
     b.innerHTML=close+'<h2>Add an expense</h2><div class="exp-grid">'+(S.kid==='all'?'<div style="font-weight:700;font-size:13px">For which kid?</div><div class="mt-sw" style="margin:0">'+kids.map(function(x){return '<button class="mt-chip'+(S.expKid===x.id?' on':'')+'" style="--c:'+x.color+';color:var(--text);background:var(--surface-2);border-color:var(--border)'+(S.expKid===x.id?';background:var(--text);color:var(--surface)':'')+'" type="button" data-expkid="'+x.id+'"><span class="av">'+x.name[0]+'</span>'+x.name+'</button>';}).join('')+'</div>':'')+
       '<label>What was it?<input class="cal-input" style="margin-top:0" id="expNote" placeholder="e.g. Team bow, snacks, parking"></label><label>Amount<input class="cal-input" style="margin-top:0" id="expAmt" inputmode="decimal" placeholder="$0.00"></label></div><div class="exp-actions" style="margin-top:16px"><button class="pay-btn" type="button" data-act="saveexp">Save</button></div>';
@@ -1813,13 +1824,358 @@ function addMember(teamKey,name,id){
 function removeMember(id){
   kids=kids.filter(function(k){return k.id!==id;}); events=events.filter(function(e){return e.k!==id;}); pays=pays.filter(function(p){return p.k!==id;}); delete TEAMDATA[id];
   if(S.frames[id]){S.frames[id].remove();delete S.frames[id];}
-  try{Object.keys(localStorage).forEach(function(k){if(k.indexOf(id+':')===0)localStorage.removeItem(k);});}catch(e){}
+  try{Object.keys(localStorage).forEach(function(k){if(k.indexOf(id+':')===0)localStorage.removeItem(k);});var oa=oAll();delete oa[id];localStorage.setItem(OKEY,JSON.stringify(oa));}catch(e){}
 }
-function saveFamily(){try{localStorage.setItem(FAMKEY,JSON.stringify(kids.map(function(k){return {id:k.id,name:k.name,team:k.teamKey};})));}catch(e){}}
-function loadFamily(){var l=[];try{l=JSON.parse(localStorage.getItem(FAMKEY)||'[]')||[];}catch(e){}l.forEach(function(x){if(x&&x.id&&/^[a-z0-9]+$/.test(x.id))addMember(x.team,cleanName(x.name)||'Child',x.id);});}
+function saveFamily(){try{localStorage.setItem(FAMKEY,JSON.stringify(kids.map(function(k){return k.custom?{id:k.id,name:k.name,team:'other',activity:k.sport,color:k.color}:{id:k.id,name:k.name,team:k.teamKey};})));}catch(e){}}
+function loadFamily(){var l=[];try{l=JSON.parse(localStorage.getItem(FAMKEY)||'[]')||[];}catch(e){}l.forEach(function(x){if(x&&x.id&&/^[a-z0-9]+$/.test(x.id)){if(x.team==='other')addOther(x.id,cleanName(x.name)||'Child',cleanName(x.activity),/^#[0-9a-f]{6}$/i.test(x.color||'')?x.color:'');else addMember(x.team,cleanName(x.name)||'Child',x.id);}});}
 function planAll(){try{return JSON.parse(localStorage.getItem('thehub_plans_v1')||'{}')||{};}catch(e){return {};}}
 function planGet(k){return planAll()[k]||'';}
-function welcome(){return '<div class="card mt-welcome"><h2>Welcome to The App</h2><p>One place for every child\'s team. Pick a team and add your child to see their schedule, practice wear, packing list and budget. Add more kids any time and switch between them at the top.</p><button class="pay-btn" type="button" data-act="openadd">Add a family member</button></div>';}
+function welcome(){return '<div class="card mt-welcome"><h2>Welcome to The App</h2><p>One place for every child\'s team. Pick a team and add your child to see their schedule, practice wear, packing list and budget. Other sport or activity? Add that too and fill it in from a photo or by hand. Switch between kids at the top.</p><button class="pay-btn" type="button" data-act="openadd">Add a family member</button></div>';}
+/* ---- read dates, times and prices out of text found in a photo ---- */
+var P_MON={jan:0,january:0,feb:1,february:1,mar:2,march:2,apr:3,april:3,may:4,jun:5,june:5,jul:6,july:6,aug:7,august:7,sep:8,sept:8,september:8,oct:9,october:9,nov:10,november:10,dec:11,december:11};
+var P_MONRE='(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|june?|july?|aug(?:ust)?|sept?(?:ember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)';
+var P_DOWRE='(sun(?:day)?|mon(?:day)?|tue(?:s(?:day)?)?|wed(?:nesday)?|thu(?:r(?:s(?:day)?)?)?|fri(?:day)?|sat(?:urday)?)';
+var P_DOWN={sun:0,mon:1,tue:2,wed:3,thu:4,fri:5,sat:6};
+function pPad(n){return (n<10?'0':'')+n;}
+function pIso(y,m,d){return y+'-'+pPad(m+1)+'-'+pPad(d);}
+function pYear(m,d,today){var y=today.getFullYear(),c=new Date(y,m,d);if(c<new Date(today.getTime()-45*864e5))y++;return y;}
+function pOkDate(m,d){return m>=0&&m<12&&d>=1&&d<=31;}
+function pFindDate(line,today){
+  var m,re,y;
+  re=new RegExp('\\b'+P_DOWRE+'?\\.?,?\\s*'+P_MONRE+'\\.?\\s+(\\d{1,2})(?:st|nd|rd|th)?(?:\\s*[-–—]\\s*(\\d{1,2})(?![\\d:])(?:st|nd|rd|th)?)?(?:,?\\s*(20\\d\\d))?\\b','i');
+  if((m=re.exec(line))){var mo=P_MON[m[2].toLowerCase()],d=+m[3];if(pOkDate(mo,d)){y=m[5]?+m[5]:pYear(mo,d,today);var e=m[4]&&+m[4]>=d&&+m[4]<=31?pIso(y,mo,+m[4]):'';return {date:pIso(y,mo,d),end:e,text:m[0]};}}
+  re=new RegExp('\\b(\\d{1,2})(?:st|nd|rd|th)?\\s+'+P_MONRE+'\\.?(?:,?\\s*(20\\d\\d))?\\b','i');
+  if((m=re.exec(line))){var mo2=P_MON[m[2].toLowerCase()],d2=+m[1];if(pOkDate(mo2,d2)){y=m[3]?+m[3]:pYear(mo2,d2,today);return {date:pIso(y,mo2,d2),end:'',text:m[0]};}}
+  re=/\b(20\d\d)-(\d{2})-(\d{2})\b/;
+  if((m=re.exec(line))&&pOkDate(+m[2]-1,+m[3]))return {date:m[0],end:'',text:m[0]};
+  re=/\b(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?\b/;
+  if((m=re.exec(line))){var mo3=+m[1]-1,d3=+m[2];if(pOkDate(mo3,d3)){y=m[3]?(+m[3]<100?2000+ +m[3]:+m[3]):pYear(mo3,d3,today);return {date:pIso(y,mo3,d3),end:'',text:m[0]};}}
+  return null;
+}
+function pTo24(h,mi,ap){h=+h;mi=mi?+mi:0;if(ap){ap=ap.toLowerCase().charAt(0);if(ap==='p'&&h<12)h+=12;if(ap==='a'&&h===12)h=0;}return pPad(h)+':'+pPad(mi);}
+function pFindTime(line){
+  var m,re=/\b(\d{1,2})(?::(\d{2}))?\s*([ap]\.?m\.?)?\s*(?:-|–|—|to)\s*(\d{1,2})(?::(\d{2}))?\s*([ap]\.?m\.?)\b/i;
+  if((m=re.exec(line))){var ap2=m[6],ap1=m[3]||ap2;if(+m[1]>=1&&+m[1]<=12&&+m[4]>=1&&+m[4]<=12){var s=pTo24(m[1],m[2],ap1),e=pTo24(m[4],m[5],ap2);if(!m[3]&&s>e){s=pTo24(m[1],m[2],ap2==='pm'||/^p/i.test(ap2)?'am':'pm');}return {start:s,end:e,text:m[0]};}}
+  re=/\b(\d{1,2}):(\d{2})\s*([ap]\.?m\.?)?/i;
+  if((m=re.exec(line))&&+m[1]<=23&&+m[2]<60)return {start:pTo24(m[1],m[2],m[3]),end:'',text:m[0]};
+  re=/\b(\d{1,2})\s*([ap]\.?m\.?)\b/i;
+  if((m=re.exec(line))&&+m[1]>=1&&+m[1]<=12)return {start:pTo24(m[1],0,m[2]),end:'',text:m[0]};
+  re=/\b(\d{1,2})(?::(\d{2}))?([ap])\b(?![\w.])/i;
+  if((m=re.exec(line))&&+m[1]>=1&&+m[1]<=12)return {start:pTo24(m[1],m[2],m[3]),end:'',text:m[0]};
+  return null;
+}
+function pFindPrice(line){var m=/\$\s?(\d{1,4}(?:,\d{3})*(?:\.\d{1,2})?)/.exec(line);return m?{amt:parseFloat(m[1].replace(/,/g,'')),text:m[0]}:null;}
+function pFindDows(line){
+  var out=[],re=new RegExp('\\b'+P_DOWRE+'s?\\b','ig'),m;
+  while((m=re.exec(line))){var d=P_DOWN[m[1].toLowerCase().slice(0,3)];if(out.indexOf(d)<0)out.push(d);}
+  return out;
+}
+function pClean(s,remove){
+  (remove||[]).forEach(function(r){if(r)s=s.replace(r,' ');});
+  var pr=pFindPrice(s);while(pr){s=s.replace(pr.text,' ');pr=pFindPrice(s);}
+  var tm=pFindTime(s);if(tm)s=s.replace(tm.text,' ');
+  s=s.replace(new RegExp('\\b'+P_DOWRE+'s?\\b\\.?,?','ig'),' ').replace(/\b\d{1,3}\s*(?:min|mins|minutes)\b/ig,' ')
+   .replace(/[·|•,;:()\[\]&\/]+/g,' ').replace(/\b(and|every|each|at|on|from|starting|until|thru|through|due)\b/ig,' ')
+   .replace(/\s+[–—-]+\s+/g,' - ').replace(/(?:\s-)+\s/g,' - ').replace(/\s+/g,' ').replace(/^[\s.\-–—]+|[\s.\-–—]+$/g,'');
+  return s;
+}
+var P_FEE=/\b(fee|fees|tuition|payment|pay|dues|invoice|balance|deposit|registration|uniform|equipment|due)\b/i;
+function pTitleLike(l,today){return !!l&&!pFindDate(l,today)&&!pFindPrice(l)&&pClean(l).length>=3&&!/^\W*\d/.test(l);}
+function parseText(text,today){
+  today=today||new Date();
+  var lines=String(text||'').split(/\r?\n/).map(function(l){return l.replace(/[|_~]+/g,' ').replace(/\s+/g,' ').trim();}).filter(function(l){return l.length>1;});
+  var items=[],dateIdx=[];
+  lines.forEach(function(l,ix){if(pFindDate(l,today))dateIdx.push(ix);});
+  // layout: is the title on the line BEFORE the date, or AFTER it?
+  var before=0,total=0;
+  dateIdx.forEach(function(ix,n){if(n===0)return;total++;if(dateIdx[n-1]<ix-1&&pTitleLike(lines[ix-1],today)&&!pFindDate(pClean(lines[ix]).length>=3?'':lines[ix],today))before++;});
+  var beforeMode=total?before>total/2:(dateIdx.length===1&&dateIdx[0]>0&&pTitleLike(lines[dateIdx[0]-1],today)&&pClean(lines[dateIdx[0]].replace((pFindDate(lines[dateIdx[0]],today)||{}).text||'',' ')).length<3&&!(dateIdx[0]+1<lines.length&&pTitleLike(lines[dateIdx[0]+1],today)));
+  dateIdx.forEach(function(ix,n){
+    var stop=n+1<dateIdx.length?dateIdx[n+1]:lines.length, end=Math.min(stop,ix+4);
+    if(beforeMode&&n+1<dateIdx.length&&stop-1>ix)end=Math.min(end,stop-1);
+    var block=lines.slice(ix,end), dt=pFindDate(lines[ix],today), blockText=block.join(' ');
+    var noDate=block[0].replace(dt.text,' '), tm=pFindTime(noDate)||pFindTime(block.slice(1).join(' ')), pr=pFindPrice(block[0])||pFindPrice(blockText);
+    var title=pClean(block[0],[dt.text]);
+    if(title.length<3){
+      if(beforeMode){if(ix>0&&pTitleLike(lines[ix-1],today))title=pClean(lines[ix-1]);}
+      else{for(var j=1;j<block.length&&title.length<3;j++){if(pTitleLike(block[j],today))title=pClean(block[j]);}}
+    }
+    var feeish=pr&&P_FEE.test(blockText)&&!/lesson|class|clinic|game|match|practice|camp/i.test(title);
+    items.push({kind:feeish?'fee':'event',title:(title||(feeish?'Payment':'Event')).slice(0,60),date:dt.date,end:dt.end,time:tm?tm.start:'',endT:tm?tm.end:'',price:pr?pr.amt:'',day:'',on:true});
+  });
+  lines.forEach(function(l){
+    if(pFindDate(l,today))return;
+    var dows=pFindDows(l),tm=pFindTime(l); if(!dows.length||!tm)return;
+    var title=pClean(l); if(title.length<3)title='Practice';
+    dows.forEach(function(d){items.push({kind:'practice',title:title.slice(0,60),date:'',end:'',time:tm.start,endT:tm.end,price:'',day:d,on:true});});
+  });
+  return items;
+}
+
+/* ---- month-grid calendars: use where each word sits on the page ---- */
+function pWords(data){
+  var w=data&&data.words;
+  if(!w||!w.length){w=[];((data&&data.blocks)||[]).forEach(function(b){(b.paragraphs||[]).forEach(function(p){(p.lines||[]).forEach(function(l){(l.words||[]).forEach(function(x){w.push(x);});});});});}
+  return w.map(function(x){var b=x.bbox||{};return {t:String(x.text||'').trim(),x0:b.x0,y0:b.y0,x1:b.x1,y1:b.y1,c:x.confidence==null?100:x.confidence};}).filter(function(x){return x.t&&isFinite(x.x0)&&isFinite(x.y1);});
+}
+function pCluster(vals,tol){
+  var s=vals.slice().sort(function(a,b){return a.v-b.v;}),out=[];
+  s.forEach(function(o){var l=out[out.length-1];if(l&&o.v-l.c<=tol){l.items.push(o);l.c=l.items.reduce(function(a,b){return a+b.v;},0)/l.items.length;}else out.push({c:o.v,items:[o]});});
+  return out;
+}
+function pMedian(a){if(!a.length)return 0;var s=a.slice().sort(function(x,y){return x-y;});return s[Math.floor(s.length/2)];}
+function pFillGaps(cl,spacing){
+  var out=[];cl.forEach(function(c,i){out.push(c);var n=cl[i+1];if(n){var k=Math.round((n.c-c.c)/spacing)-1;for(var j=1;j<=k;j++)out.push({c:c.c+j*(n.c-c.c)/(k+1),items:[],filled:true});}});
+  return out;
+}
+function pNearest(arr,v){var b=-1,bd=1e9;arr.forEach(function(c,i){var d=Math.abs(c.c-v);if(d<bd){bd=d;b=i;}});return {i:b,d:bd};}
+function pLineStartsTime(s){return /^\s*\d{1,2}(:\d{2})?\s*([ap]\.?m?\.?)?\b/i.test(s)&&!!pFindTime(s.split(/\s+/).slice(0,3).join(' '));}
+function pOpenEnd(s){return /(?:[-,&:\/]|\b(?:vs|at|and|of|the|with|for|to|a|an|in|on))\s*$/i.test(s);}
+function parseCalendarGrid(words,W,H,today,monthHint){
+  today=today||new Date();
+  var nums=words.filter(function(w){return /^\d{1,2}$/.test(w.t)&&+w.t>=1&&+w.t<=31;}).map(function(w){return {w:w,n:+w.t,cx:(w.x0+w.x1)/2,cy:(w.y0+w.y1)/2,h:w.y1-w.y0};});
+  if(nums.length<8)return null;
+  var cols=pCluster(nums.map(function(o){return {v:o.cx,o:o};}),W*0.035).filter(function(c){return c.items.length>=3;});
+  if(cols.length<5)return null;
+  while(cols.length>7){var mi=0;cols.forEach(function(c,i){if(c.items.length<cols[mi].items.length)mi=i;});cols.splice(mi,1);}
+  if(cols.length<7){
+    var diffs=[];for(var i=1;i<cols.length;i++)diffs.push(cols[i].c-cols[i-1].c);
+    var sp=Math.min.apply(null,diffs); cols=pFillGaps(cols,sp);
+  }
+  if(cols.length!==7)return null;
+  var colSp=(cols[6].c-cols[0].c)/6;
+  var inGrid=[];nums.forEach(function(o){var q=pNearest(cols,o.cx);if(q.d<=colSp*0.3){o.col=q.i;inGrid.push(o);}});
+  var hMed=pMedian(inGrid.map(function(o){return o.h;}))||20;
+  var rowsCl=pCluster(inGrid.map(function(o){return {v:o.cy,o:o};}),Math.max(hMed*1.2,H*0.012)).filter(function(c){return c.items.length>=2;});
+  if(rowsCl.length<3)return null;
+  var rdiffs=[];for(var r=1;r<rowsCl.length;r++)rdiffs.push(rowsCl[r].c-rowsCl[r-1].c);
+  var rowSp=Math.min.apply(null,rdiffs);
+  if(rowSp<hMed*2.2)return null;
+  var rows=pFillGaps(rowsCl,rowSp);
+  if(rows.length<4||rows.length>6){
+    if(rows.length>6)return null;
+    if(rows.length===3)return null;
+  }
+  // which cell holds the 1st? vote with the numbers that agree on idx - n
+  var votes={},tok=[];
+  inGrid.forEach(function(o){var q=pNearest(rows,o.cy);if(q.d>Math.max(hMed*1.5,rowSp*0.25))return;o.row=q.i;o.idx=o.row*7+o.col;tok.push(o);var k=o.idx-o.n;votes[k]=(votes[k]||0)+1;});
+  var best=null;Object.keys(votes).forEach(function(k){if(best===null||votes[k]>votes[best])best=k;});
+  if(best===null||votes[best]<3)return null;
+  var day1=+best+1;
+  // month / year
+  var topY=rows[0].c-rowSp*0.6, headWords=words.filter(function(w){return w.y1<topY;}), head=headWords.map(function(w){return w.t;}).join(' ');
+  var mm=new RegExp('\\b'+P_MONRE+'\\b\\.?\\s*,?\\s*(20\\d\\d)?','i').exec(head), found=false, year=today.getFullYear(), month=today.getMonth();
+  if(monthHint){var p=monthHint.split('-');year=+p[0];month=+p[1]-1;found=true;}
+  else if(mm&&P_MON[mm[1].toLowerCase()]!==undefined){month=P_MON[mm[1].toLowerCase()];year=mm[2]?+mm[2]:pYear(month,15,today);found=true;}
+  else{var full=words.map(function(w){return w.t;}).join(' '),m2=new RegExp('\\b'+P_MONRE+'\\b\\.?\\s*,?\\s*(20\\d\\d)\\b','i').exec(full);if(m2){month=P_MON[m2[1].toLowerCase()];year=+m2[2];found=true;}}
+  // cell geometry
+  var pad=hMed*1.1, top=rows.map(function(r){return r.c-pad;});
+  // numbers can sit top-left, top-right or centered in a cell: find which is steadier, then place the cell edges
+  var real=cols.filter(function(c){return c.items.length;});
+  function spread(key){var t=0,n=0;real.forEach(function(c){var vs=c.items.map(function(it){var w=it.o.w;return key==='l'?w.x0:key==='r'?w.x1:(w.x0+w.x1)/2;}),m=pMedian(vs);vs.forEach(function(v){t+=Math.abs(v-m);n++;});});return t/Math.max(1,n);}
+  var sL=spread('l'),sR=spread('r'),sC=spread('c'),align=sC<=sL&&sC<=sR?'c':(sL<=sR?'l':'r'), padX=Math.max(colSp*0.04,4);
+  var offs=real.map(function(c){var vs=c.items.map(function(it){var w=it.o.w;return align==='l'?w.x0:align==='r'?w.x1:(w.x0+w.x1)/2;});var m=pMedian(vs);return (align==='l'?m-padX:align==='r'?m+padX-colSp:m-colSp/2)-c.c;});
+  var offX=pMedian(offs), colLeft=cols.map(function(c){return c.c+offX;});
+  var bottomLast=rows[rows.length-1].c-pad+rowSp, used={};
+  tok.forEach(function(o){used[o.w.x0+'|'+o.w.y0]=1;});
+  var cells={};
+  words.forEach(function(w){
+    if(used[w.x0+'|'+w.y0])return;
+    if(w.t.length<=4&&w.c<55)return; if(!/[A-Za-z0-9$]/.test(w.t))return; if(w.t.length<=3&&/[)\]}|]/.test(w.t))return;
+    var cx=(w.x0+w.x1)/2,cy=(w.y0+w.y1)/2; if(cx<colLeft[0]||cx>=colLeft[6]+colSp||cy<top[0]||cy>=bottomLast)return;
+    var r=0;for(var i=0;i<rows.length;i++)if(cy>=top[i])r=i; var c=-1;for(var j=0;j<7;j++)if(cx>=colLeft[j]&&cx<colLeft[j]+colSp)c=j; if(c<0)return;
+    (cells[r*7+c]=cells[r*7+c]||[]).push(w);
+  });
+  var items=[];
+  Object.keys(cells).map(Number).sort(function(a,b){return a-b;}).forEach(function(idx){
+    var ws=cells[idx].sort(function(a,b){return ((a.y0+a.y1)/2)-((b.y0+b.y1)/2);}), wh=pMedian(ws.map(function(w){return w.y1-w.y0;}))||hMed, lines=[];
+    ws.forEach(function(w){var cy=(w.y0+w.y1)/2,l=lines[lines.length-1];if(l&&Math.abs(cy-l.cy)<=wh*0.6){l.w.push(w);l.cy=(l.cy*(l.w.length-1)+cy)/l.w.length;}else lines.push({cy:cy,w:[w]});});
+    lines.forEach(function(l){l.w.sort(function(a,b){return a.x0-b.x0;});l.t=l.w.map(function(w){return w.t;}).join(' ');l.x1=Math.max.apply(null,l.w.map(function(w){return w.x1;}));l.y0=Math.min.apply(null,l.w.map(function(w){return w.y0;}));l.y1=Math.max.apply(null,l.w.map(function(w){return w.y1;}));});
+    var cellRight=colLeft[idx%7]+colSp, ev=[];
+    lines.forEach(function(l,i){
+      var prev=lines[i-1], cont=false;
+      if(prev){
+        var tmo=pFindTime(l.t), onlyTime=tmo&&l.t.replace(tmo.text,'').replace(/[\s\-\u2013\u2014]/g,'').length<2;
+        var pw=prev.x1-prev.w[0].x0, fw=l.w[0].x1-l.w[0].x0, wouldFit=pw+wh*0.35+fw<=(colSp-2*padX)*0.8;
+        var prevEnd=/(\$\s?\d[\d,.]*|\d{1,2}:\d{2}\s*(?:[ap]\.?m\.?)?|\b[ap]\.?m\.?)\s*$/i.test(prev.t);
+        var bigGap=(l.y0-prev.y1)>wh*0.85;
+        cont=onlyTime||/^(am|pm|a\.m\.|p\.m\.)$/i.test(l.t)||(!prevEnd&&!bigGap&&!pLineStartsTime(l.t)&&(/^[a-z]/.test(l.t)||pOpenEnd(prev.t)||!wouldFit));
+      }
+      if(cont)ev[ev.length-1]+=' '+l.t; else ev.push(l.t);
+    });
+    ev.forEach(function(text){
+      text=text.replace(/\s+/g,' ').trim(); if(text.length<2)return;
+      var tm=pFindTime(text), pr=pFindPrice(text), title=text;
+      if(tm)title=title.replace(tm.text,' '); if(pr)title=title.replace(pr.text,' ');
+      title=title.replace(/\s+/g,' ').replace(/^[\s\-–—,.:;]+|[\s\-–—,.:;]+$/g,'');
+      if(title.length<2)title=text;
+      var feeish=pr&&P_FEE.test(text)&&!/lesson|class|clinic|game|match|practice|camp/i.test(text);
+      items.push({kind:feeish?'fee':'event',title:title.slice(0,80),date:'',end:'',time:tm?tm.start:'',endT:tm?tm.end:'',price:pr?pr.amt:'',day:'',on:true,idx:idx});
+    });
+  });
+  var grid={month:year+'-'+pPad(month+1),found:found,day1:day1,rows:rows.length};
+  pApplyGrid(items,grid,grid.month);
+  return {items:items,grid:grid};
+}
+function pApplyGrid(items,grid,monthStr){
+  var p=monthStr.split('-'),y=+p[0],m=+p[1]-1; grid.month=monthStr;
+  items.forEach(function(it){if(it.idx===undefined)return;var d=new Date(y,m,1+it.idx-grid.day1);it.date=d.getFullYear()+'-'+pPad(d.getMonth()+1)+'-'+pPad(d.getDate());});
+}
+
+/* ---- "Other activity" family members: their own events, practices and payments ---- */
+var OKEY='thehub_other_v1', OCOLORS=['#139a74','#3d6fe0','#8b6cf6','#d97706'];
+function oAll(){try{return JSON.parse(localStorage.getItem(OKEY)||'{}')||{};}catch(e){return {};}}
+function oData(id){var d=oAll()[id]||{};return {events:d.events||[],practice:d.practice||[],fees:d.fees||[]};}
+function oPut(id,d){var a=oAll();a[id]=d;try{localStorage.setItem(OKEY,JSON.stringify(a));}catch(e){}}
+function oUid(){return 'o'+Date.now().toString(36)+Math.floor(Math.random()*1296).toString(36);}
+function fmtT(hhmm){if(!hhmm)return '';var p=hhmm.split(':'),h=+p[0],m=p[1],ap=h>=12?'PM':'AM';h=h%12||12;return h+':'+m+' '+ap;}
+function oRebuild(id){
+  var k=kidBy(id); if(!k)return; var d=oData(id);
+  events=events.filter(function(e){return e.k!==id;}); pays=pays.filter(function(p){return p.k!==id;});
+  d.events.forEach(function(e){
+    events.push({k:id,n:e.n,loc:e.loc||'',start:e.date,end:e.end&&e.end>=e.date?e.end:e.date,time:fmtT(e.time),trip:'local',flight:false,hotel:false,oid:e.id});
+    if(+e.cost>0)pays.push({k:id,l:e.n,due:e.date,a:+e.cost,oid:e.id});
+  });
+  d.fees.forEach(function(f){pays.push({k:id,l:f.l,due:f.due,a:+f.a,oid:f.id});});
+  k.practice=d.practice.map(function(p){return {d:p.d,t:fmtT(p.start).toLowerCase(),r:fmtT(p.start)+(p.end?' – '+fmtT(p.end):''),desc:p.desc||'',oid:p.id};});
+}
+function addOther(id,name,activity,color){
+  var n=kids.filter(function(k){return k.custom;}).length, c=color||OCOLORS[n%OCOLORS.length];
+  var nk={id:id,name:name,team:activity||'Activity',teamKey:'other',custom:true,gym:'',sport:activity||'',color:c,accent:c,dark:mix(c,'#000000',.82),src:'',practice:[],cats:[]};
+  kids.push(nk); BRANDS[id]={B:c,D:nk.dark}; TEAMDATA[id]={events:[],pack:[],faq:[]}; oRebuild(id); return nk;
+}
+function delBtn(kind,id){return '<button class="mt-del" type="button" data-act="odel" data-kind="'+kind+'" data-id="'+id+'">Remove</button>';}
+function TABSX(){return isCust()?TABS.filter(function(x){return ['home','schedule','practice','calendar','budget'].indexOf(x[0])>=0;}).map(function(x){return x[0]==='schedule'?[x[0],'Schedule',x[2]]:x;}):TABS;}
+function isCust(){return S.kid!=='all'&&!!kidBy(S.kid)&&!!kidBy(S.kid).custom;}
+function addBar(kinds){
+  var k=kidBy(S.kid), b={event:'Add an event',practice:'Add practice times',fee:'Add a payment'};
+  return '<div class="card mt-addcard"><div class="mt-addcard-t">Add to '+k.name+'\'s plan</div><p>Photograph or upload a flyer, schedule or booking screen and we will read the dates for you. Or type things in.</p><div class="mt-addbtns"><button class="pay-btn" type="button" data-act="oimport">Photo or screenshot</button>'+kinds.map(function(x){return '<button class="mt-ghost" type="button" data-act="onew" data-kind="'+x+'">'+b[x]+'</button>';}).join('')+'</div></div>';
+}
+function customMoney(k){
+  var t=totals(k), T=(t.s+t.p)||1, list=pays.filter(function(p){return p.k===k.id;}).sort(function(a,b){return a.due<b.due?-1:1;});
+  return summary(t.s,t.p,'Season total',{bar:'<div class="bud-bar"><span class="bud-bar-spent" style="width:'+(t.s/T*100)+'%"></span><span class="bud-bar-plan" style="width:'+(t.p/T*100)+'%"></span></div>'})+
+    '<div class="section-title">Payments</div><div class="card">'+(list.length?list.map(function(p){return '<div class="mt-row" '+cv(p.k)+'><span class="mt-bar"></span><div class="main"><div class="t">'+p.l+'</div><div class="s">'+(p.due<=todayS?'Paid · ':'Due ')+fmt(p.due,{month:'short',day:'numeric'})+'</div>'+(p.oid?delBtn('pay',p.oid):'')+'</div><b class="mt-amt">'+money(p.a)+'</b></div>';}).join(''):'<p class="bud-empty">No payments yet.</p>')+'</div>'+addBar(['fee']);
+}
+/* forms */
+function oFormHtml(kind){
+  var k=kidBy(S.kid), close='<button class="mt-x" type="button" data-act="close">Close</button>', err='<div id="oErr" style="color:#b42318;font-size:13px;min-height:18px;margin-top:8px"></div>', sv='<div class="exp-actions" style="margin-top:6px"><button class="pay-btn" type="button" data-act="osave" data-kind="'+kind+'">Save</button></div>';
+  if(kind==='event') return close+'<h2>Add an event</h2><div class="exp-grid"><label>What is it?<input class="cal-input" style="margin-top:0" id="oTitle" maxlength="60" placeholder="e.g. Game vs. Lightning, Private lesson"></label><label>Date<input class="cal-input" style="margin-top:0" id="oDate" type="date"></label><label>Last day (only if it runs more than one day)<input class="cal-input" style="margin-top:0" id="oEnd" type="date"></label><label>Start time (optional)<input class="cal-input" style="margin-top:0" id="oTime" type="time"></label><label>Where (optional)<input class="cal-input" style="margin-top:0" id="oLoc" maxlength="60" placeholder="Field, gym or address"></label><label>Cost (optional)<input class="cal-input" style="margin-top:0" id="oCost" inputmode="decimal" placeholder="$0.00"></label></div>'+err+sv;
+  if(kind==='practice') return close+'<h2>Add practice times</h2><p>Pick the days it repeats every week.</p><div class="mt-days">'+DAYS.map(function(d,i){return '<label><input type="checkbox" class="oDay" value="'+i+'"><span>'+d[0]+d[1].toLowerCase()+'</span></label>';}).join('')+'</div><div class="exp-grid"><label>Starts<input class="cal-input" style="margin-top:0" id="oStart" type="time"></label><label>Ends (optional)<input class="cal-input" style="margin-top:0" id="oEndT" type="time"></label><label>Note (optional)<input class="cal-input" style="margin-top:0" id="oNote" maxlength="60" placeholder="e.g. Field 2, bring cleats"></label></div>'+err+sv;
+  return close+'<h2>Add a payment</h2><div class="exp-grid"><label>What is it for?<input class="cal-input" style="margin-top:0" id="oTitle" maxlength="60" placeholder="e.g. Season registration, Uniform"></label><label>Due date<input class="cal-input" style="margin-top:0" id="oDate" type="date"></label><label>Amount<input class="cal-input" style="margin-top:0" id="oCost" inputmode="decimal" placeholder="$0.00"></label></div>'+err+sv;
+}
+function oVal(id){var e=document.getElementById(id);return e?String(e.value||'').trim():'';}
+function oMoney(v){return Math.round((parseFloat(String(v).replace(/[^0-9.]/g,''))||0)*100)/100;}
+function oSaveForm(kind){
+  var id=S.kid, d=oData(id), err=document.getElementById('oErr');
+  function bad(m){if(err)err.textContent=m;}
+  if(kind==='event'){
+    var t=oVal('oTitle').replace(/[<>]/g,''), dt=oVal('oDate'); if(!t)return bad('Give it a name.'); if(!dt)return bad('Pick a date.');
+    d.events.push({id:oUid(),n:t,date:dt,end:oVal('oEnd'),time:oVal('oTime'),loc:oVal('oLoc').replace(/[<>]/g,''),cost:oMoney(oVal('oCost'))});
+  } else if(kind==='practice'){
+    var days=[].slice.call(document.querySelectorAll('.oDay:checked')).map(function(x){return +x.value;}), st=oVal('oStart');
+    if(!days.length)return bad('Pick at least one day.'); if(!st)return bad('Pick a start time.');
+    days.forEach(function(x){d.practice.push({id:oUid(),d:x,start:st,end:oVal('oEndT'),desc:oVal('oNote').replace(/[<>]/g,'')});});
+  } else {
+    var l=oVal('oTitle').replace(/[<>]/g,''), du=oVal('oDate'), am=oMoney(oVal('oCost')); if(!l)return bad('Say what it is for.'); if(!du)return bad('Pick a due date.'); if(!(am>0))return bad('Enter an amount.');
+    d.fees.push({id:oUid(),l:l,due:du,a:am});
+  }
+  oPut(id,d); oRebuild(id); S.sheet=null; render();
+}
+function oDelete(kind,oid){
+  var id=S.kid, d=oData(id);
+  if(kind==='event')d.events=d.events.filter(function(x){return x.id!==oid;}); else if(kind==='practice')d.practice=d.practice.filter(function(x){return x.id!==oid;}); else { d.fees=d.fees.filter(function(x){return x.id!==oid;}); d.events.forEach(function(x){if(x.id===oid)x.cost=0;}); }
+  oPut(id,d); oRebuild(id); render();
+}
+/* photo / screenshot import (reads the text on this phone; nothing is uploaded) */
+function loadTess(){
+  if(window.Tesseract) return Promise.resolve();
+  return new Promise(function(res,rej){var sc=document.createElement('script');sc.src='https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';sc.onload=res;sc.onerror=function(){rej(new Error('offline'));};document.head.appendChild(sc);});
+}
+function imgToCanvas(file){
+  return (window.createImageBitmap?createImageBitmap(file,{imageOrientation:'from-image'}):Promise.reject()).catch(function(){
+    return new Promise(function(res,rej){var u=URL.createObjectURL(file),im=new Image();im.onload=function(){res(im);};im.onerror=rej;im.src=u;});
+  }).then(function(im){
+    var w=im.width||im.naturalWidth,h=im.height||im.naturalHeight,sc=Math.min(2200/Math.max(w,h),Math.max(1,1400/w));
+    var c=document.createElement('canvas'); c.width=Math.round(w*sc); c.height=Math.round(h*sc); var x=c.getContext('2d'); x.drawImage(im,0,0,c.width,c.height);
+    var d=x.getImageData(0,0,c.width,c.height), p=d.data, sum=0, n=0, i;
+    for(i=0;i<p.length;i+=16){sum+=(p[i]*0.3+p[i+1]*0.59+p[i+2]*0.11);n++;}
+    var dark=sum/n<110;
+    for(i=0;i<p.length;i+=4){var g=p[i]*0.3+p[i+1]*0.59+p[i+2]*0.11; if(dark)g=255-g; g=Math.max(0,Math.min(255,(g-128)*1.25+128)); p[i]=p[i+1]=p[i+2]=g;}
+    x.putImageData(d,0,0); return c;
+  });
+}
+function impMsg(m){var e=document.getElementById('impMsg');if(e)e.textContent=m;}
+function ocrRun(c,logger){
+  var langPath='https://cdn.jsdelivr.net/npm/@tesseract.js-data/eng/4.0.0_best_int';
+  if(!Tesseract.createWorker)return Tesseract.recognize(c,'eng',{logger:logger});
+  return Tesseract.createWorker('eng',1,{logger:logger,langPath:langPath}).catch(function(){return Tesseract.createWorker('eng',1,{logger:logger});}).then(function(w){
+    return w.setParameters({tessedit_pageseg_mode:'6'}).then(function(){return w.recognize(c);}).then(function(r){return Promise.resolve(w.terminate()).then(function(){return r;},function(){return r;});});
+  });
+}
+function impRun(file){
+  S.imp={stage:'busy',msg:'Loading the reader. The first photo can take a minute.',items:[],text:''}; renderSheet();
+  var cw=0,ch=0;
+  imgToCanvas(file).then(function(c){cw=c.width;ch=c.height;return loadTess().then(function(){impMsg('Reading the photo…');
+    var logger=function(m){if(m&&m.status==='recognizing text')impMsg('Reading the photo… '+Math.round((m.progress||0)*100)+'%');};
+    return ocrRun(c,logger);
+  });}).then(function(r){
+    var text=(r&&r.data&&r.data.text)||'', g=null;
+    try{g=parseCalendarGrid(pWords(r.data),cw,ch,new Date());}catch(e){g=null;}
+    if(g){S.imp={stage:'review',msg:'',items:impDedupe(g.items),text:text,grid:g.grid,gridEmpty:!g.items.length};}
+    else S.imp={stage:'review',msg:'',items:impDedupe(parseText(text,new Date())),text:text};
+    renderSheet();
+  }).catch(function(e){
+    S.imp={stage:'pick',msg:(e&&e.message==='offline')?'The photo reader needs a connection the first time. Check your internet and try again, or type it in.':'We could not read that photo. Try a sharper one, or type it in.',items:[],text:''}; renderSheet();
+  });
+}
+function impDedupe(items){
+  var d=oData(S.kid), have={};
+  d.events.forEach(function(e){have['e|'+e.n.toLowerCase()+'|'+e.date]=1;}); d.fees.forEach(function(f){have['f|'+f.l.toLowerCase()+'|'+f.due]=1;}); d.practice.forEach(function(p){have['p|'+p.d+'|'+p.start]=1;});
+  return items.filter(function(i){return !(i.kind==='event'&&have['e|'+i.title.toLowerCase()+'|'+i.date]||i.kind==='fee'&&have['f|'+i.title.toLowerCase()+'|'+i.date]||i.kind==='practice'&&have['p|'+i.day+'|'+i.time]);});
+}
+function impSync(){
+  (S.imp&&S.imp.items||[]).forEach(function(it,i){
+    var q=function(s){return document.querySelector('[data-ix="'+i+'"][data-f="'+s+'"]');}, v;
+    if((v=q('on')))it.on=v.checked; if((v=q('kind')))it.kind=v.value; if((v=q('title')))it.title=v.value.replace(/[<>]/g,'').slice(0,80);
+    if((v=q('date')))it.date=v.value; if((v=q('day')))it.day=+v.value; if((v=q('time')))it.time=v.value; if((v=q('price')))it.price=v.value;
+  });
+}
+function impSheet(){
+  var close='<button class="mt-x" type="button" data-act="close">Close</button>', I=S.imp||{stage:'pick',msg:'',items:[]};
+  if(I.stage==='busy') return close+'<h2>Reading your photo</h2><p id="impMsg">'+I.msg+'</p><div class="mt-spin"></div>';
+  if(I.stage==='review'){
+    var rows=I.items.map(function(it,i){
+      var a=' data-ix="'+i+'"';
+      return '<div class="mt-imp'+(it.on?'':' off')+'"><label class="mt-imp-top"><input type="checkbox"'+a+' data-f="on"'+(it.on?' checked':'')+'><select class="cal-input"'+a+' data-f="kind" style="margin:0;width:auto"><option value="event"'+(it.kind==='event'?' selected':'')+'>Event</option><option value="practice"'+(it.kind==='practice'?' selected':'')+'>Weekly practice</option><option value="fee"'+(it.kind==='fee'?' selected':'')+'>Payment</option></select></label>'+
+        '<input class="cal-input"'+a+' data-f="title" value="'+it.title.replace(/"/g,'&quot;')+'" maxlength="80">'+
+        '<div class="mt-imp-row">'+(it.kind==='practice'?'<select class="cal-input"'+a+' data-f="day" style="margin:0">'+DAYS.map(function(d,n){return '<option value="'+n+'"'+(it.day===n?' selected':'')+'>'+d[0]+d[1].toLowerCase()+'</option>';}).join('')+'</select>':'<input class="cal-input"'+a+' data-f="date" type="date" value="'+it.date+'" style="margin:0">')+
+        '<input class="cal-input"'+a+' data-f="time" type="time" value="'+(it.time||'')+'" style="margin:0">'+(it.kind==='practice'?'':'<input class="cal-input"'+a+' data-f="price" inputmode="decimal" placeholder="$" value="'+(it.price===''?'':it.price)+'" style="margin:0;max-width:90px">')+'</div></div>';}).join('');
+    var gh=I.grid?'<label class="mt-gridmonth">Calendar month<input class="cal-input" type="month" id="impMonth" value="'+I.grid.month+'" style="margin:4px 0 0"></label>'+(I.grid.found?'':'<p style="color:#b42318;font-size:13px">We could not find the month name on the calendar, so please check this one.</p>'):'';
+    return close+'<h2>'+(I.items.length?(I.grid?'Found '+I.items.length+' on the calendar':'Here is what we found'):(I.gridEmpty?'We found the calendar but not the text':'We did not find any dates'))+'</h2>'+gh+(I.items.length?'<p>Each item is one event from a day on the calendar. Check each one, fix anything that is off, untick what you do not want, then add them.</p><div class="mt-imp-list">'+rows+'</div><div class="exp-actions" style="margin-top:14px"><button class="pay-btn" type="button" data-act="impadd">Add selected</button></div>':(I.gridEmpty?'<p>The days were too small to read the writing inside them. Try a wider screenshot (a computer or tablet view, or turn your phone sideways) or an agenda or list view.</p>':'<p>The photo may be blurry or in a layout we cannot read. A list of dates works best (a schedule, a flyer or a booking page). You can try another photo or type things in.</p>'))+
+      '<details style="margin-top:14px"><summary style="cursor:pointer;font-weight:600">Show the text we read</summary><pre class="mt-pre">'+String(I.text||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</pre></details><div class="exp-actions" style="margin-top:10px"><button class="mt-ghost" type="button" data-act="oimport">Try another photo</button></div>';
+  }
+  return close+'<h2>Add from a photo</h2><p>Take a photo or upload a screenshot of a flyer, a team schedule or a booking page. We read the dates on this phone and show you what we found before anything is added. The photo is never uploaded.</p>'+(I.msg?'<p style="color:#b42318">'+I.msg+'</p>':'')+
+    '<div class="exp-actions" style="display:flex;gap:10px;flex-wrap:wrap"><label class="pay-btn" style="cursor:pointer">Take a photo<input type="file" accept="image/*" capture="environment" id="impCam" hidden></label><label class="mt-ghost" style="cursor:pointer">Choose a photo or screenshot<input type="file" accept="image/*" id="impFile" hidden></label></div><p style="font-size:12.5px;color:var(--text-muted);margin-top:12px">Works best with lists. Month-grid calendars are hard to read, so type those in.</p>';
+}
+function impAdd(){
+  impSync(); var id=S.kid, d=oData(id), n=0;
+  S.imp.items.forEach(function(it){
+    if(!it.on)return;
+    if(it.kind==='practice'){if(it.day===''||!it.time)return; d.practice.push({id:oUid(),d:+it.day,start:it.time,end:it.endT||'',desc:it.title&&!/^practices?$/i.test(it.title)?it.title:''});n++;}
+    else if(!it.date)return;
+    else if(it.kind==='fee'){var am=oMoney(it.price); if(!(am>0))return; d.fees.push({id:oUid(),l:it.title||'Payment',due:it.date,a:am});n++;}
+    else {d.events.push({id:oUid(),n:it.title||'Event',date:it.date,end:it.end||'',time:it.time||'',loc:'',cost:oMoney(it.price)});n++;}
+  });
+  oPut(id,d); oRebuild(id); S.sheet=null; S.imp=null; render();
+}
+document.addEventListener('change',function(e){
+  var t=e.target;
+  if(t.id==='impCam'||t.id==='impFile'){if(t.files&&t.files[0])impRun(t.files[0]);return;}
+  if(t.getAttribute&&t.getAttribute('data-f')==='kind'||t.getAttribute&&t.getAttribute('data-f')==='on'){impSync();renderSheet();return;}
+  if(t.id==='impMonth'&&S.imp&&S.imp.grid&&t.value){impSync();pApplyGrid(S.imp.items,S.imp.grid,t.value);renderSheet();return;}
+  if(t.id==='teamPick'){var n=document.getElementById('kidName'),a=document.getElementById('actName');S.newName=n?n.value:S.newName;S.newAct=a?a.value:S.newAct;S.newTeam=t.value;renderSheet();}
+});
+
 loadFamily();
 document.addEventListener('click',function(e){
   if(e.target.closest('#addTeamBtn')){S.sheet='team';S.found=false;render();return;}
@@ -1839,7 +2195,7 @@ document.addEventListener('click',function(e){
   if(a==='find'){S.found=true;render();}
   else if(a==='addkid'){
     var nm=cleanName(document.getElementById('kidName').value)||'Child', key=document.getElementById('teamPick').value, id='f'+Date.now().toString(36)+Math.floor(Math.random()*36).toString(36);
-    if(addMember(key,nm,id)){saveFamily();}
+    if(key==='other'){addOther(id,nm,cleanName(document.getElementById('actName').value)||'Activity');saveFamily();}else if(addMember(key,nm,id)){saveFamily();}
     S.sheet=null;S.newName='';S.kid=id;S.tab='home';render();window.scrollTo(0,0);
   }
   else if(a==='rmkid'){
@@ -1847,6 +2203,11 @@ document.addEventListener('click',function(e){
     if(rk&&confirm('Remove '+rk.name+' from The App? Their saved checklist, calendar items and budget on this device will be erased.')){removeMember(rid);saveFamily();if(S.kid===rid)S.kid='all';render();}
   }
   else if(a==='openadd'){S.sheet='team';render();}
+  else if(a==='onew'){S.sheet='oform';S.oKind=t.dataset.kind;render();}
+  else if(a==='osave'){oSaveForm(t.dataset.kind);}
+  else if(a==='odel'){oDelete(t.dataset.kind,t.dataset.id);}
+  else if(a==='oimport'){S.imp={stage:'pick',msg:'',items:[]};S.sheet='oimport';render();}
+  else if(a==='impadd'){impAdd();}
   else if(a==='saveplan'){var pp=planAll();pp[S.planKey]=(document.getElementById('planTxt').value||'').slice(0,300);try{localStorage.setItem('thehub_plans_v1',JSON.stringify(pp));}catch(e){}S.sheet=null;render();}
   else if(a==='expense'){S.sheet='expense';S.expKid=S.kid==='all'?kids[0].id:S.kid;render();}
   else if(a==='saveexp'){var amt=parseFloat((document.getElementById('expAmt').value||'').replace(/[^0-9.]/g,''))||0,kk=kidBy(S.kid==='all'?S.expKid:S.kid),cat=kk.cats.filter(function(c){return c[0]==='Everything else';})[0];if(amt>0&&cat)cat[1]+=amt;S.sheet=null;S.tab='budget';render();}
@@ -1901,7 +2262,7 @@ function initDisclaimer(d){
   modal.addEventListener('click', e=>{ if(e.target === modal) close(); });
   document.addEventListener('keydown', e=>{ if(e.key==='Escape' && !modal.hidden) close(); });
 }
-initDisclaimer({"show": true, "type": "independent", "entity": "California All Stars (the “Gym”) or any other gym, club, event producer, league or governing body", "shortEntity": "California All Stars", "about": "This app is a personal passion project, built and maintained on a volunteer basis by a cheer parent and shared by direct link with a small group of team families and friends. It is not a commissioned work, product or service of the Gym, and the creator is not acting as an employee, contractor, agent or representative of the Gym.", "shortAbout": "A passion project by a cheer parent.", "contact": "the person who shared this link with you", "updated": "October 2026", "budget": true});
+initDisclaimer({"show": true, "type": "independent", "entity": "the team’s gym or any other gym, club, event producer, league or governing body", "shortEntity": "the team’s gym", "about": "This app is a personal passion project, built and maintained on a volunteer basis by a cheer parent and shared by direct link with a small group of team families and friends. It is not a commissioned work, product or service of the Gym, and the creator is not acting as an employee, contractor, agent or representative of the Gym.", "shortAbout": "A passion project by a cheer parent.", "contact": "the person who shared this link with you", "updated": "October 2026", "budget": true});
 </script>
 <script>
 if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('./service-worker.js').catch(function(){});});}
