@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Shazam Hub">
 <meta name="description" content="Shazam team hub — schedule, calendar, packing lists, and updates for team parents.">
-<style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}.cm-body a.vid{font-size:12px;font-weight:700;text-decoration:none}</style>
 <title>Shazam Team Hub</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap');
@@ -650,6 +650,45 @@ main{max-width:980px; margin:0 auto; padding:20px 20px 60px;}
 /* student standouts */
 .standout-pill{grid-column:1/-1; justify-content:flex-start;}
 .standout-pill b{font-weight:700;}
+
+/* student standout spotlight */
+.so-spot{display:flex;align-items:center;gap:14px;padding:6px 2px;}
+.so-star{flex:0 0 auto;width:48px;height:48px;border-radius:50%;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:24px;}
+.so-label{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);}
+.so-name{font-size:22px;font-weight:800;line-height:1.15;color:var(--accent-ink);}
+.so-past{margin-top:12px;padding-top:2px;border-top:1px solid var(--border);}
+.so-past .team-times{margin-top:10px;}
+.so-row{display:flex;justify-content:space-between;gap:12px;padding:7px 0;font-size:14px;border-bottom:1px solid var(--border);}
+.so-row:last-child{border-bottom:0;}
+
+/* showcase details modal */
+
+/* schedule lists: time on the left, one row per item */
+.team-times .tt-grid,.cm-body .tt-grid{display:block;margin-top:6px;font-size:14px;color:var(--text);}
+.team-times .tt-grid>span,.cm-body .tt-grid>span{display:flex;align-items:baseline;justify-content:flex-start;gap:14px;padding:10px 6px;border-bottom:1px solid var(--border);min-width:0;}
+.team-times .tt-grid>span:last-child,.cm-body .tt-grid>span:last-child{border-bottom:0;}
+.team-times .tt-grid>span>span:first-child,.cm-body .tt-grid>span>span:first-child{flex:1 1 auto;min-width:0;color:var(--text);}
+.team-times .tt-grid>span>span:last-child,.cm-body .tt-grid>span>span:last-child{order:-1;flex:0 0 78px;white-space:nowrap;font-weight:700;font-variant-numeric:tabular-nums;color:var(--text);}
+.team-times .tt-grid>span.me,.cm-body .tt-grid>span.me{font-weight:800;}
+.team-times .tt-grid>span.me>span:last-child,.cm-body .tt-grid>span.me>span:last-child{color:var(--accent);}
+.team-times .tt-grid:has(>span:not(.me)) > span.me,.cm-body .tt-grid:has(>span:not(.me)) > span.me{background:var(--accent-soft);border-radius:10px;border-bottom-color:transparent;}
+.team-times .tt-grid>span.tt-break,.cm-body .tt-grid>span.tt-break{display:block;text-align:center;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);padding:7px 0;margin:6px 0;background:var(--surface-2);border:0;border-radius:8px;}
+.cm-back{position:fixed;inset:0;z-index:9999;background:rgba(8,12,24,.62);display:none;align-items:flex-end;justify-content:center;}
+.cm-back.open{display:flex;}
+.cm-sheet{width:100%;max-width:560px;max-height:90vh;background:var(--surface);color:var(--text);border-radius:20px 20px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.28);display:flex;flex-direction:column;overflow:hidden;}
+.cm-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:16px 18px 12px;border-bottom:1px solid var(--border);}
+.cm-title{font-size:18px;font-weight:800;line-height:1.2;}
+.cm-sub{font-size:13px;color:var(--text-muted);margin-top:3px;}
+.cm-x{flex:0 0 auto;width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:var(--surface-2);color:var(--text);font-size:16px;line-height:1;cursor:pointer;}
+.cm-body{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:6px 18px 24px;}
+.cm-body .tt-label{margin-top:18px;}
+.cm-body .tt-grid{font-size:13px;}
+.cm-body .sk{margin-top:8px;}
+.cm-body a{color:var(--accent);font-weight:600;}
+.gc-btn{cursor:pointer;}
+@media (min-width:700px){ .cm-back{align-items:center;} .cm-sheet{border-radius:20px;} }
+.so-row span{color:var(--text-muted);}
+.so-row b{font-weight:700;}
 
 /* faq accordion */
 .faq-item{border-bottom:1px solid var(--border);}
@@ -1460,11 +1499,10 @@ html.page-navy .app-disclaimer button.disc-link{color:rgba(255,255,255,.92);}
       <div class="linkrow">
         <a class="linkbtn wide" href="https://youtube.com/shorts/50x2ohYJ7U4?feature=shared" target="_blank"><span class="ico">▶️</span> Watch the Comp Makeup Tutorial</a>
         <a class="linkbtn" href="https://portal.iclasspro.com/calisanmarcos" target="_blank"><span class="ico">📅</span> iClass Portal</a>
+        <a class="linkbtn" href="https://app.iclasspro.com/portal/calisanmarcos/classes" target="_blank"><span class="ico">❄️</span> Winter Classes Sign-Up</a>
         <a class="linkbtn" href="https://caliproshop.com" target="_blank"><span class="ico">🛍️</span> Pro Shop</a>
         <a class="linkbtn" href="https://californiaallstarsproshop.com" target="_blank"><span class="ico" id="icoRebel">👕</span> Rebel Uniform Shop</a>
         <a class="linkbtn" href="https://calisanmarcos.fullslate.com" target="_blank"><span class="ico">🤸</span> Book Private Lesson</a>
-        <a class="linkbtn" href="https://presto.eventpipe.com/event/1525a7d2-eb0c-4823-8240-3e4895689ee5" target="_blank"><span class="ico">🏨</span> ASCS Housing Block</a>
-        <a class="linkbtn" href="https://gallery.instant.evoto.ai/public/504TEzcSbsV" target="_blank" rel="noopener"><span class="ico">📸</span> In House Show Offs</a>
         <a class="linkbtn" href="makeup-list.html"><span class="ico">💄</span> Makeup Shopping List</a>
       </div>
     </div>
@@ -1539,6 +1577,12 @@ html.page-navy .app-disclaimer button.disc-link{color:rgba(255,255,255,.92);}
     <button type="button" class="pay-btn" id="calAddBtn" style="margin-top:12px;">+ Add a personal event</button>
     <div class="card" id="calAddForm" style="display:none; margin-top:12px;">
       <div style="display:flex; flex-direction:column; gap:12px;">
+        <div id="calFormHead" style="display:none; font-size:16px; font-weight:800;"></div>
+        <div id="calEditScope" style="display:none; flex-direction:column; gap:8px; padding:12px 14px; border:1px solid var(--border); border-radius:12px; background:var(--surface-2);">
+          <div style="font-size:13px; font-weight:700;">This repeats. Change…</div>
+          <label class="cal-also"><input type="radio" name="calEditScope" value="all" checked> All of them, including past ones</label>
+          <label class="cal-also"><input type="radio" name="calEditScope" value="from"> From a date on (earlier ones stay as they are)</label>
+        </div>
         <label style="font-size:13px; font-weight:600; display:none;" id="calFormKindWrap">What are you adding?
           <select id="calFormKind" class="cal-input">
             <option value="">A personal event</option>
@@ -1557,7 +1601,7 @@ html.page-navy .app-disclaimer button.disc-link{color:rgba(255,255,255,.92);}
         <label style="font-size:13px; font-weight:600;">Title
           <input type="text" id="calFormTitle" placeholder="e.g. Private lesson with Coach J" class="cal-input">
         </label>
-        <label style="font-size:13px; font-weight:600;">Date (first occurrence)
+        <label style="font-size:13px; font-weight:600;"><span id="calDateLbl">Date (first occurrence)</span>
           <input type="date" id="calFormDate" class="cal-input">
         </label>
         <label style="font-size:13px; font-weight:600;">Repeats
@@ -1571,9 +1615,13 @@ html.page-navy .app-disclaimer button.disc-link{color:rgba(255,255,255,.92);}
         <label style="font-size:13px; font-weight:600; display:none;" id="calFormUntilWrap">Repeat until (optional)
           <input type="date" id="calFormUntil" class="cal-input">
         </label>
+        <label style="font-size:13px; font-weight:600;">Time (optional)
+          <input type="time" id="calFormTime" class="cal-input">
+        </label>
         <label style="font-size:13px; font-weight:600;">Note (optional)
           <input type="text" id="calFormNote" placeholder="e.g. 5:00 PM at the gym" class="cal-input">
         </label>
+        <label class="cal-also"><input type="checkbox" id="calFormAlso" checked> Also add it to my phone calendar</label>
         <div style="display:flex; gap:10px;">
           <button type="button" class="pay-btn" id="calFormSave">Save</button>
           <button type="button" class="linkbtn" id="calFormCancel" style="cursor:pointer;">Cancel</button>
@@ -1755,14 +1803,16 @@ function outlookLink(c, bk){
 }
 
 const competitions = [
+  {name:"In-House Show-Offs", loc:"San Marcos, CA", address:"San Marcos, CA", start:"2026-10-24", end:"2026-10-24", hideTravelTag:true, showoff:true, photosLink:"https://gallery.instant.evoto.ai/public/504TEzcSbsV"},
   {name:"Showcase", loc:"Irvine, CA · Bren Event Center", address:"Bren Events Center, Irvine, CA", start:"2026-11-15", end:"2026-11-15", travel:"local",
-    housing:"optional", rosterLink:"https://docs.google.com/spreadsheets/d/1_MpWAbs6NeyRTwq9JyjikT3i5iQB1LpuvhHiUT9jFYM/edit?gid=498534653#gid=498534653", rosterLabel:"Draft schedule", ticketLink:"https://ucirvinetickets.evenue.net/events/SPEC", heroLinks:[{label:"Draft schedule ›", url:"https://docs.google.com/spreadsheets/d/1_MpWAbs6NeyRTwq9JyjikT3i5iQB1LpuvhHiUT9jFYM/edit?gid=498534653#gid=498534653"}, {label:"Buy tickets ›", url:"https://ucirvinetickets.evenue.net/events/SPEC"}]},
+    housing:"optional", rosterLink:"https://docs.google.com/spreadsheets/d/1_MpWAbs6NeyRTwq9JyjikT3i5iQB1LpuvhHiUT9jFYM/edit?gid=498534653#gid=498534653", rosterLabel:"Event schedule", ticketLink:"https://ucirvinetickets.evenue.net/events/SPEC", heroLinks:[{label:"Event schedule ›", url:"https://docs.google.com/spreadsheets/d/1_MpWAbs6NeyRTwq9JyjikT3i5iQB1LpuvhHiUT9jFYM/edit?gid=498534653#gid=498534653"}, {label:"Buy tickets ›", url:"https://ucirvinetickets.evenue.net/events/SPEC"}, {label:"Day plan ›", js:"openShowcaseDetails()"}], details:true},
   {name:"TSN", loc:"San Diego, CA", address:"San Diego, CA", start:"2026-11-21", end:"2026-11-21", travel:"local",
-    housing:"optional", rosterLink:"https://www.thespiritnetwork.net/sd-tsc", rosterLabel:"Event page (roster posts closer to date)",
-    dateChanged:true, note:"Date changed — moved from Sun 11/22 to Sat 11/21."},
+    housing:"optional", rosterLink:"https://apps.ideal-logic.com/embed_preview?id=il_93a91551fea394b9&url=https%3A%2F%2Fapps.ideal-logic.com", rosterLabel:"Event schedule",
+    heroLinks:[{label:"Event schedule ›", url:"https://apps.ideal-logic.com/embed_preview?id=il_93a91551fea394b9&url=https%3A%2F%2Fapps.ideal-logic.com"}, {label:"Day plan ›", js:"openTsnDetails()"}], details:true, detailsFn:"openTsnDetails()", detailsLabel:"Day plan",
+    dateChanged:true, note:"Date changed — moved from Sun 11/22 to Sat 11/21. <a href=\"https://www.thespiritnetwork.net/sd-tsc\" target=\"_blank\" rel=\"noopener\">Event page →</a>"},
   {name:"ASCS Champs Grand Nationals", loc:"Aurora, CO · Gaylord Rockies Resort &amp; Convention Center", address:"Gaylord Rockies Resort & Convention Center, Aurora, CO", start:"2026-12-19", end:"2026-12-20", travel:"required",
-    detail:"Team showoffs Wed 12/16. Fly in Thursday 12/17, fly out Monday 12/21. Recommended: stay on-site at the Gaylord Rockies Resort.", housing:"required", bookingDate:"2026-09-10", travelStart:"2026-12-17", travelEnd:"2026-12-21",
-    bookingLinks:[{label:"ASCS housing block (book here)", url:"https://presto.eventpipe.com/event/1525a7d2-eb0c-4823-8240-3e4895689ee5"}, {label:"Group block booking info (PDF)", url:"https://6q39gws4.r.us-east-1.awstrack.me/L0/https:%2F%2Ffiles.iclasspro.com%2F32838%2Fstudents%2F1789007956.California_All_Stars_ATHLETES_-_Champs_-_Group_Block_Preview-compressed.pdf/1/010001a0893458f4-ce3ddfa0-60d9-49fd-982b-bd23d340dc62-000000/k0NB4BkE02Kl9kEYYv5ArnHOvho=473"}],
+    housing:"required", bookingDate:"2026-09-10", travelStart:"2026-12-17", travelEnd:"2026-12-21",
+    bookingLinks:[{label:"ASCS housing block (book here)", url:"https://presto.eventpipe.com/event/1525a7d2-eb0c-4823-8240-3e4895689ee5"}],
     flightSearch:"Flights to Denver from San Diego, departing 2026-12-17, returning 2026-12-21",
     rosterLink:"https://www.varsity.com/download-event-app/", rosterLabel:"Team roster via Varsity Spirit Event App"},
   {name:"The Majors", loc:"Indianapolis, IN · Indiana Convention Center", address:"Indiana Convention Center, Indianapolis, IN", start:"2027-01-15", end:"2027-01-15", dateLabel:"January 2027", attending:false, teams:"Lady Bullets"},
@@ -1801,7 +1851,7 @@ const practice = [
 
 const closures = [
   {name:"Thanksgiving Break", end:"2026-11-29", dates:"Nov 25 – 29, 2026"},
-  {name:"Winter Break", end:"2027-01-02", dates:"Dec 21, 2026 – Jan 2, 2027"}
+  {name:"Winter Break", end:"2027-01-03", dates:"Dec 21, 2026 – Jan 3, 2027"}
 ];
 
 const openGymDates = ["2026-09-11","2026-09-18","2026-09-25","2026-10-02","2026-10-09","2026-10-16","2026-10-23","2026-10-30","2026-11-06","2026-11-13","2026-11-20","2026-12-04","2026-12-11","2026-12-18"];
@@ -1828,26 +1878,31 @@ const programFees = [
 
 const marlonLogo = "data:image/jpeg;base64,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";
 const feed = [
+  {date:"2026-11-15", dateLabel:"Nov 15", postedDate:"2026-11-09", expires:"2026-11-15", tag:"event", hideFromComingUp:true, title:"Showcase · Shazam meet time is 11:45 AM", body:'Parking permits are required for every vehicle. <a href="#" onclick="openShowcaseDetails();return false">See the Day plan →</a>'},
+  {date:"2026-11-18", dateLabel:"Nov 4–19", postedDate:"2026-11-04", expires:"2026-11-19", tag:"info", title:"Practices closed to viewers", body:"Viewing room closed Nov 4 until Nov 18–19. Minis, Tinys and private lessons are the exception."},
+  {date:"2026-11-18", dateLabel:"Nov 18", postedDate:"2026-11-04", expires:"2026-11-18", tag:"event", title:"Friendsgiving 🦃", body:"After practice. A sign-up/donation sheet is coming soon."},
+  {date:"2026-11-16", dateLabel:"Due Nov 16", postedDate:"2026-11-04", expires:"2026-11-16", tag:"deadline", title:"Team blankets (optional)", body:'Plush blanket · due midnight · arrives in 3–4 weeks. <a href="https://caliproshop.com/products/cali-blanket" target="_blank">Order blanket →</a>'},
+  {date:"2026-11-04", dateLabel:"Nov 4", postedDate:"2026-11-04", expires:"2026-11-08", tag:"info", title:"Team swag arriving", body:"August swag orders arrive this week."},
+  {date:"2026-12-05", postedDate:"2026-11-10", tag:"event", title:"New: Rangers Stunt Clinic — Dec 5", body:"5:00–7:00 PM · $55/person · all levels and ages — see the Events tab for details."},
+  {date:"2026-11-29", dateLabel:"Nov 29 & Dec 28–29", postedDate:"2026-11-10", tag:"event", title:"New: Holiday Tumbling Clinics", body:'9 AM–1 PM · levels 1–6 · Coach Jay Watson. $80 on Nov 29, $150 on Dec 28–29. <a href="https://portal.iclasspro.com/calisanmarcos" target="_blank" rel="noopener">Enroll →</a>'},
   {date:"2026-11-07", postedDate:"2026-10-22", tag:"event", title:"New: Coed Stunt & Tumble Clinic — Nov 7", body:"6:00–8:00 PM · $50/athlete · pizza included · optional coed bow $10. Venmo @MiaMG with athlete's name &amp; current team — see the Events tab for full details."},
-  {date:"2026-10-25", dateLabel:"Due Oct 25", postedDate:"2026-10-17", expires:"2026-10-25", tag:"deadline", title:"Team T-shirts are open for order", body:"<b>Optional extras</b> — your athlete’s shirt is provided.<span class=\"sk\"><span class=\"sk-r\"><span class=\"sk-i\">🎁</span><span class=\"sk-t\">Athlete’s shirt is <b>free</b> — only order for family &amp; friends</span></span><span class=\"sk-r\"><span class=\"sk-i\">📅</span><span class=\"sk-t\">Order by <b>Oct 25</b> · ships free to the gym</span></span><span class=\"sk-r\"><span class=\"sk-i\">⚠️</span><span class=\"sk-t\"><b>Final sale</b> — no refunds or exchanges, so double-check size &amp; spelling</span></span></span><a href=\"https://caliproshop.com/products/team-t-shirt-2627-san-marcos?variant=67994521960672\" target=\"_blank\" class=\"sk-btn\">Order your team shirt →</a>"},
+  {date:"2026-10-25", dateLabel:"Due Oct 25", postedDate:"2026-10-17", expires:"2026-10-25", tag:"deadline", title:"Team T-shirts are open for order", body:"<b>Optional extras</b> — your athlete’s shirt is provided.<span class=\"sk\"><span class=\"sk-r\"><span class=\"sk-i\">🎁</span><span class=\"sk-t\">Athlete’s shirt is <b>free</b> — only order for family &amp; friends</span></span><span class=\"sk-r\"><span class=\"sk-i\">📅</span><span class=\"sk-t\">Order by <b>Oct 25</b> · ships free to the gym</span></span><span class=\"sk-r\"><span class=\"sk-i\">⚠️</span><span class=\"sk-t\"><b>Final sale</b> — no refunds or exchanges, so double-check size &amp; spelling</span></span></span><span class=\"sk\"><span class=\"sk-r\"><span class=\"sk-i\">🛍️</span><span class=\"sk-t\"><a href=\"https://caliproshop.com/products/team-t-shirt-2627-san-marcos?variant=67994521960672\" target=\"_blank\">Order your team shirt →</a></span></span></span>"},
   {date:"2026-10-09", dateLabel:"Due Oct 9", postedDate:"2026-10-07", expires:"2026-10-09", tag:"deadline", title:"Practice gear remake form", body:'Issue with your practice gear — blue shorts or bra straps bunched together? Fill out the form by Friday, Oct 9 and Varsity will remake any item with issues. Try swapping gear with your team rep first. <a href="https://forms.cloud.microsoft/pages/responsepage.aspx?id=Dy5MyVsFTU2ATChthztwzk1zkpuwpm9IgqBpQcaRug1UNTk0OUxBSkpERTk5SVpSRzNVNTdQNDdTNy4u&route=shorturl" target="_blank">Open the form →</a>'},
   {date:"2026-10-07", postedDate:"2026-10-07", tag:"info", title:"Fall classes are live 🎉", body:'50% off for team families! <a href="https://app.iclasspro.com/portal/calisanmarcos/classes" target="_blank">Sign up in iClass →</a>'},
   {date:"2026-10-24", postedDate:"2026-10-07", tag:"event", title:"In-House Showcase · Shazam performs 9:55 AM", body:'Sat, Oct 24 · Report at 8:30 AM. <span class="sk"><span class="sk-r"><span class="sk-i">📣</span><span class="sk-t"><b>Bring noisemakers &amp; shakers!</b></span></span><span class="sk-r"><span class="sk-i">🅿️</span><span class="sk-t"><b>Where to park</b> <span class="sk-note" style="margin:0">· gym lot is closed</span><span class="sk-park"><span>Allen’s Bro’s</span><span>North of the gym (not Southern Contracting)</span><span>7/11 lot</span><span>Pizza Nova plaza lot</span></span></span></span><span class="sk-r"><span class="sk-i">🎟️</span><span class="sk-t"><b>Free entry:</b> wrapped clothing item or canned good (Casa De Amparo)</span></span><span class="sk-r"><span class="sk-i">💺</span><span class="sk-t"><b>Parents &amp; siblings only</b> · free to leave after your team performs</span></span><span class="sk-r"><span class="sk-i">👕</span><span class="sk-t"><b>What to wear:</b> coaches will message</span></span></span><span class="sk-note" style="display:block;margin:8px 0 0">Every team’s time is on the Events tab.</span>'},
-  {date:"2026-11-15", dateLabel:"Nov 15", postedDate:"2026-10-15", expires:"2026-11-15", tag:"event", hideFromComingUp:true, title:"Showcase tickets 🎟️", body:'Tickets for Showcase at UCI’s Bren Events Center go on sale Oct 15 — $25 online, $35 same day. Athletes don’t need a ticket; parents, siblings and friends do. <a href="https://ucirvinetickets.evenue.net/events/SPEC" target="_blank">Buy tickets →</a> · <a href="https://docs.google.com/spreadsheets/d/1_MpWAbs6NeyRTwq9JyjikT3i5iQB1LpuvhHiUT9jFYM/edit?gid=498534653#gid=498534653" target="_blank">Draft schedule →</a>'},
   {date:"2026-09-16", expires:"2026-09-16", tag:"deadline", title:"\"Fight for the Cure\" shirt pre-order", body:'The gym\'s breast cancer awareness tee — 100% of proceeds go to UCSD Moore\'s Cancer Center. Pre-order only, closes at midnight, delivered first week of October. <a href="https://caliproshop.com/collections/pre-orders" target="_blank">Order now →</a>'},
   {date:"2026-09-28", dateLabel:"Ends Sep 28", expires:"2026-09-28", tag:"deadline", title:"Cookie Dough Fundraiser", body:'Online fundraiser, ships direct to the buyer — profit is 50% on sales, 80% on donations, credited straight to the athlete\'s iClass account. Sales end at midnight. <a href="https://brandnamefundraising.com/signup/868515110" target="_blank">Sign up →</a> &nbsp;·&nbsp; <a href="https://6q39gws4.r.us-east-1.awstrack.me/L0/https:%2F%2Ffiles.iclasspro.com%2F32838%2Fstudents%2F1789628624.REGISTRATION_INSTRUCTIONS_for_California_All_Stars_ALL_GROUPS.pdf/1/010001a0b01a92a0-f7f4ce2b-f83f-4d66-977b-4b973593f0f9-000000/_6wWomUBcYKu1RjakRj-0fwabjU=473" target="_blank">Registration info (PDF) →</a>'},
-  {date:"2026-10-25", dateLabel:"Due Oct 25", expires:"2026-10-25", tag:"deadline", title:"Create your MyVarsity account", body:"<b>Required to compete</b> in Varsity comps (ASCS, Spirit Sports). Links expire <b>Oct 25</b>.<span class=\"sk\"><span class=\"sk-r\"><span class=\"sk-n\">1</span><span class=\"sk-t\">Create your account as the <b>parent/guardian</b></span></span><span class=\"sk-r\"><span class=\"sk-n\">2</span><span class=\"sk-t\">Add your athlete</span></span><span class=\"sk-r\"><span class=\"sk-n\">3</span><span class=\"sk-t\">Sign the <b>waiver</b> we email you — covers every Varsity event this season (except Disney property)</span></span><span class=\"sk-r\"><span class=\"sk-i\">🔁</span><span class=\"sk-t\">Already have a MyVarsity account? <b>Sign in</b> from the link instead of making a new one</span></span></span><a href=\"https://events.myvarsity.com/account/invitation?token=67522fc33a664a259d2f533f9c0d66b8\" target=\"_blank\" class=\"sk-btn\">Create account →</a>", actionRequired:true, dueDate:"2026-10-25"},
+  {date:"2026-10-25", dateLabel:"Due Oct 25", expires:"2026-10-25", tag:"deadline", title:"Create your MyVarsity account", body:"<b>Required to compete</b> in Varsity comps (ASCS, Spirit Sports). Links expire <b>Oct 25</b>.<span class=\"sk\"><span class=\"sk-r\"><span class=\"sk-n\">1</span><span class=\"sk-t\">Create your account as the <b>parent/guardian</b></span></span><span class=\"sk-r\"><span class=\"sk-n\">2</span><span class=\"sk-t\">Add your athlete</span></span><span class=\"sk-r\"><span class=\"sk-n\">3</span><span class=\"sk-t\">Sign the <b>waiver</b> we email you — covers every Varsity event this season (except Disney property)</span></span><span class=\"sk-r\"><span class=\"sk-i\">🔁</span><span class=\"sk-t\">Already have a MyVarsity account? <b>Sign in</b> from the link instead of making a new one</span></span></span><span class=\"sk\"><span class=\"sk-r\"><span class=\"sk-i\">🔑</span><span class=\"sk-t\"><a href=\"https://events.myvarsity.com/account/invitation?token=67522fc33a664a259d2f533f9c0d66b8\" target=\"_blank\">Create account →</a></span></span></span>", actionRequired:true, dueDate:"2026-10-25"},
   {date:"2026-09-19", postedDate:"2026-09-14", tag:"event", title:"Rangers Stunt Clinic", body:"5:00–7:00 PM · $55/person · partner stunting, double base stunts, group stunts &amp; flexibility — open to all levels and ages, bases and flyers. <a href='mailto:didi@californiaallstars.com'>Email the clinic contact</a> to sign up — see the Events tab for full details."},
   {date:"2026-10-24", postedDate:"2026-10-06", tag:"event", title:"Rangers Stunt Clinic", body:"5:00–7:00 PM · $55/person · partner stunting, double base stunts, group stunts &amp; flexibility — open to all levels and ages, bases and flyers. <a href='mailto:didi@californiaallstars.com'>Email the clinic contact</a> to sign up — see the Events tab for full details."},
   {date:"2026-10-17", postedDate:"2026-09-15", tag:"event", title:"GLOW Stunt Clinic", body:"6:00–8:30 PM · $50/athlete (+$10 for a commemorative tee) · stunt clinic with the reigning NCA &amp; back-to-back World Champs. Venmo $50 to @GLOWLAG (include athlete's name &amp; age) — see the Events tab for full details."},
   {date:"2026-10-29", postedDate:"2026-09-21", tag:"event", title:"Dance Choreo", body:"4:00–6:30 PM"},
   {date:"2026-11-21", postedDate:"2026-09-21", tag:"event", title:"TSN date change", body:"TSN was moved from Sunday, 11/22 — updated on the Comp Schedule tab."},
   {date:"2026-09-25", postedDate:"2026-09-21", tag:"event", title:"College Gameday", body:"Wear your favorite college team's shirt or colors! The gym's Game Day theme was 9/26–9/27, but since Shazam doesn't practice those days, we're doing it instead."},
-  {date:"2026-09-21", postedDate:"2026-09-21", tag:"event", title:"Support Coach Marlon", body:"Longtime coach/choreographer Marlon Biete is in the ICU after a medical emergency in England. His gym and Unity All Stars are asking the cheer community to help cover medical, travel, and recovery costs. <a href=\"https://u888spyab.cc.rs6.net/tn.jsp?f=001IMIA87EXLHJQ7WT2m8oX0EJ-029YRypBtQolAXW5NGNz7HIob9VUtn0Izv3vzpk8V83ybPvZpoes-6T-pMb9_aDDz3tdZ7XcEZ4nWAixyMkBwd0o7pnbgNyeOw67ch2D3OhyxAbMx9glSllrSprvw2KyteE4oe9C&c=ZhSapUrGW5M09_103-zFGMNeJxZWWJFRLOpMRaDdthw-aeEQ9rxYYQ==&ch=bPwDEj4y0b5qmsYFLv65mxgznZ5KGRHdWok29GGDKDaqIfDk8yniZA==\" target=\"_blank\">Donate on GoFundMe →</a>"}
 ];
 
 const fundraisers = [
-  {emoji:"💙", title:"Support Coach Marlon", last:true, date:"2026-09-21", logo:true, badgeType:"fundraiser", badgeLabel:"Fundraiser", meta:'Longtime coach/choreographer Marlon Biete is in the ICU after a medical emergency in England. His gym and Unity All Stars are asking the cheer community to help cover medical, travel, and recovery costs. <a href="https://u888spyab.cc.rs6.net/tn.jsp?f=001IMIA87EXLHJQ7WT2m8oX0EJ-029YRypBtQolAXW5NGNz7HIob9VUtn0Izv3vzpk8V83ybPvZpoes-6T-pMb9_aDDz3tdZ7XcEZ4nWAixyMkBwd0o7pnbgNyeOw67ch2D3OhyxAbMx9glSllrSprvw2KyteE4oe9C&c=ZhSapUrGW5M09_103-zFGMNeJxZWWJFRLOpMRaDdthw-aeEQ9rxYYQ==&ch=bPwDEj4y0b5qmsYFLv65mxgznZ5KGRHdWok29GGDKDaqIfDk8yniZA==" target="_blank">Donate on GoFundMe →</a>'},
+  {emoji:"🦃", title:"Friendsgiving", date:"2026-11-18", end:"2026-11-18", meta:"Wed, Nov 18, 2026 · after practice", when:"After practice", extra:"A sign-up/donation sheet is coming soon."},
   {emoji:"🏨", title:"ASCS Housing Opens 9/10", date:"2026-09-10", end:"2026-09-10", cat:"duedate", meta:'Required Stay-to-Play hotel block for ASCS Champs Grand Nationals (Aurora, CO) opens Sept 10. <a href="https://6q39gws4.r.us-east-1.awstrack.me/L0/https:%2F%2Ffiles.iclasspro.com%2F32838%2Fstudents%2F1789007956.California_All_Stars_ATHLETES_-_Champs_-_Group_Block_Preview-compressed.pdf/1/010001a0893458f4-ce3ddfa0-60d9-49fd-982b-bd23d340dc62-000000/k0NB4BkE02Kl9kEYYv5ArnHOvho=473" target="_blank">View group block booking info (PDF) →</a> · <a href="https://presto.eventpipe.com/event/1525a7d2-eb0c-4823-8240-3e4895689ee5" target="_blank">Book your room →</a> Then mark it booked on the Comp Schedule tab.'},
   {emoji:"🎬", title:"Sparkle Movie Night", date:"2026-09-12", end:"2026-09-12", meta:"Sat, Sep 12, 2026 · doors 7:00p, movie 7:45p, pickup 9:30p · $10/person (incl. popcorn), concessions $1–2 · Gym parking lot", extra:"Showing: Bring It On",
     pay:["Cash at the door","Zelle: 562-240-3450 (Karin)","Venmo: search \"Karin\" — confirm exact @handle in team chat"]},
@@ -1857,19 +1912,23 @@ const fundraisers = [
     pay:["Venmo $50 to @GLOWLAG — include athlete's name and age"], icon:"glow_bow"},
   {emoji:"🤸", title:"Coed Stunt & Tumble Clinic", date:"2026-10-03", end:"2026-10-03", meta:"Sat, Oct 3, 2026 · 6:00–8:00 PM · $50/person, pizza included · Stunt & tumble with the reigning back-to-back Worlds Champs & NCA Champs (Coed team)", extra:"CCOD bow +$10 — note it in your Venmo comment if you'd like one",
     pay:["Venmo: @MiaMG — include athlete's name and current team"], icon:"cali_coed_bow"},
+  {emoji:"🤸", title:"Rangers Stunt Clinic", date:"2026-12-05", end:"2026-12-05", meta:"Sat, Dec 5, 2026 · 5:00–7:00 PM", extra:'<span class="sk"><span class="sk-r"><span class="sk-i">💵</span><span class="sk-t"><b>$55 per person</b></span></span><span class="sk-r"><span class="sk-i">🤸</span><span class="sk-t"><b>Partner, double base &amp; group stunting</b> plus flexibility</span></span><span class="sk-r"><span class="sk-i">🙌</span><span class="sk-t"><b>All levels and ages</b> · bases and flyers</span></span><span class="sk-r"><span class="sk-i">📍</span><span class="sk-t">501 N Twin Oaks Valley, San Marcos, CA</span></span><span class="sk-r"><span class="sk-i">✉️</span><span class="sk-t"><a href="mailto:didi@californiaallstars.com">Email to sign up →</a></span></span></span>'},
+  {emoji:"🤸", title:"Holiday Tumbling Clinic", date:"2026-11-29", end:"2026-11-29", meta:"Sun, Nov 29, 2026 · 9:00 AM–1:00 PM", extra:'<span class="sk"><span class="sk-r"><span class="sk-i">🏆</span><span class="sk-t">With World Champ <b>Coach Jay Watson</b></span></span><span class="sk-r"><span class="sk-i">🎯</span><span class="sk-t"><b>Levels 1–6</b> · tumbling &amp; jumps</span></span><span class="sk-r"><span class="sk-i">💵</span><span class="sk-t"><b>$80</b></span></span><span class="sk-r"><span class="sk-i">📝</span><span class="sk-t"><a href="https://portal.iclasspro.com/calisanmarcos" target="_blank" rel="noopener">Enroll in iClass →</a></span></span></span>'},
+  {emoji:"🤸", title:"Holiday Tumbling Clinic", date:"2026-12-28", end:"2026-12-29", meta:"Mon, Dec 28 &amp; Tue, Dec 29, 2026 · 9:00 AM–1:00 PM", extra:'<span class="sk"><span class="sk-r"><span class="sk-i">🏆</span><span class="sk-t">With World Champ <b>Coach Jay Watson</b></span></span><span class="sk-r"><span class="sk-i">🎯</span><span class="sk-t"><b>Levels 1–6</b> · tumbling &amp; jumps</span></span><span class="sk-r"><span class="sk-i">💵</span><span class="sk-t"><b>$150</b></span></span><span class="sk-r"><span class="sk-i">📝</span><span class="sk-t"><a href="https://portal.iclasspro.com/calisanmarcos" target="_blank" rel="noopener">Enroll in iClass →</a></span></span></span>'},
   {emoji:"🤸", title:"Coed Stunt & Tumble Clinic", date:"2026-11-07", end:"2026-11-07", meta:"Sat, Nov 7, 2026 · 6:00–8:00 PM", extra:'<span class="sk"><span class="sk-r"><span class="sk-i">🏁</span><span class="sk-t"><b>Final clinic</b> — still time to sign up</span></span><span class="sk-r"><span class="sk-i">💵</span><span class="sk-t"><b>$50 per athlete</b> · 🍕 pizza included</span></span><span class="sk-r"><span class="sk-i">🎀</span><span class="sk-t"><b>Optional coed bow:</b> $10 each</span></span></span>',
     pay:["Venmo: @MiaMG (last 4: 1176) — include athlete's name and current team"], icon:"cali_coed_bow"},
   {emoji:"🏈", title:"College Gameday", date:"2026-09-25", end:"2026-09-25", badgeType:"practice", badgeLabel:"Theme Practice", meta:"", extra:"Wear your favorite college team's shirt or colors — moved from the gym's 9/26–9/27 dates since Shazam doesn't practice those days."},
-  {emoji:"🎉", title:"In-house Show-Offs", date:"2026-10-24", end:"2026-10-24", meta:"Sat, Oct 24, 2026 · Shazam reports 8:30 AM · performs 9:55 AM", extra:'<span class="sk"><span class="sk-r"><span class="sk-i">📣</span><span class="sk-t"><b>Bring noisemakers &amp; shakers!</b></span></span><span class="sk-r"><span class="sk-i">🅿️</span><span class="sk-t"><b>Where to park</b> <span class="sk-note" style="margin:0">· gym lot is closed</span><span class="sk-park"><span>Allen’s Bro’s</span><span>North of the gym (not Southern Contracting)</span><span>7/11 lot</span><span>Pizza Nova plaza lot</span></span></span></span><span class="sk-r"><span class="sk-i">🎟️</span><span class="sk-t"><b>Free entry</b> — bring a wrapped, gently used clothing item <i>or</i> a canned good (donated to Casa De Amparo)</span></span><span class="sk-r"><span class="sk-i">💺</span><span class="sk-t"><b>Parents &amp; siblings only</b> — seating is very limited</span></span><span class="sk-r"><span class="sk-i">👋</span><span class="sk-t"><b>Free to leave</b> once your team has performed</span></span><span class="sk-r"><span class="sk-i">💵</span><span class="sk-t"><b>Bring cash</b> for the vendor tents</span></span><span class="sk-r"><span class="sk-i">👕</span><span class="sk-t"><b>What to wear:</b> coaches will message once uniforms arrive</span></span></span><details class="team-times"><summary>See the schedule (Shazam and all teams)</summary><div class="tt-label">Shazam\'s day</div><div class="tt-grid"><span class="me"><span>Report</span><span>8:30 AM</span></span><span class="me"><span>Check-in</span><span>9:00 AM</span></span><span class="me"><span>Mat 1</span><span>9:05 AM</span></span><span class="me"><span>Mat 2</span><span>9:17 AM</span></span><span class="me"><span>Full floor</span><span>9:29 AM</span></span><span class="me"><span>On deck</span><span>9:41 AM</span></span><span class="me"><span>Perform</span><span>9:55 AM</span></span></div><div class="tt-label">Every team\'s performance time</div><div class="tt-grid"><span class=""><span>Tiny\'s</span><span>9:05 AM</span></span><span class=""><span>Bliss</span><span>9:15 AM</span></span><span class=""><span>Mints</span><span>9:25 AM</span></span><span class=""><span>Jr Gold</span><span>9:35 AM</span></span><span class=""><span>Surge</span><span>9:45 AM</span></span><span class="me"><span>Shazam</span><span>9:55 AM</span></span><span class=""><span>C3</span><span>10:05 AM</span></span><span class=""><span>WhiteGold</span><span>10:15 AM</span></span><span class=""><span>Y2K</span><span>10:25 AM</span></span><span class=""><span>OPEN</span><span>10:35 AM</span></span><span style="grid-column:1/-1;justify-content:center;font-weight:700;border-top:1px dashed var(--border);border-bottom:1px dashed var(--border);padding:2px 0">Break</span><span class=""><span>J3</span><span>11:05 AM</span></span><span class=""><span>Jslay</span><span>11:15 AM</span></span><span class=""><span>Blush</span><span>11:25 AM</span></span><span class=""><span>Onyx</span><span>11:35 AM</span></span><span class=""><span>Rapture</span><span>11:45 AM</span></span><span class=""><span>Sugar</span><span>11:55 AM</span></span><span class=""><span>Spice</span><span>12:05 PM</span></span><span class=""><span>Glow</span><span>12:15 PM</span></span><span class=""><span>Sparkle</span><span>12:25 PM</span></span><span class=""><span>COED</span><span>12:35 PM</span></span><span class=""><span>Lady Bullets</span><span>12:45 PM</span></span><span class=""><span>Reign</span><span>12:55 PM</span></span></div><div class="tt-note">Report times: Tiny\'s, Bliss, Mints, Jr Gold, Surge 8:00 AM · Shazam, C3, WhiteGold, Y2K, OPEN 8:30 AM · J3, Jslay, Blush, Onyx, Rapture, Sugar, Spice 9:00 AM · Glow, Sparkle, COED, Lady Bullets, Reign 9:30 AM.</div></details>'},
+  {emoji:"🎉", title:"In-house Show-Offs", date:"2026-10-24", end:"2026-10-24", meta:"Sat, Oct 24, 2026 · Shazam reports 8:30 AM · performs 9:55 AM", extra:'<span class="sk"><span class="sk-r"><span class="sk-i">📣</span><span class="sk-t"><b>Bring noisemakers &amp; shakers!</b></span></span><span class="sk-r"><span class="sk-i">🅿️</span><span class="sk-t"><b>Where to park</b> <span class="sk-note" style="margin:0">· gym lot is closed</span><span class="sk-park"><span>Allen’s Bro’s</span><span>North of the gym (not Southern Contracting)</span><span>7/11 lot</span><span>Pizza Nova plaza lot</span></span></span></span><span class="sk-r"><span class="sk-i">🎟️</span><span class="sk-t"><b>Free entry</b> — bring a wrapped, gently used clothing item <i>or</i> a canned good (donated to Casa De Amparo)</span></span><span class="sk-r"><span class="sk-i">💺</span><span class="sk-t"><b>Parents &amp; siblings only</b> — seating is very limited</span></span><span class="sk-r"><span class="sk-i">👋</span><span class="sk-t"><b>Free to leave</b> once your team has performed</span></span><span class="sk-r"><span class="sk-i">💵</span><span class="sk-t"><b>Bring cash</b> for the vendor tents</span></span><span class="sk-r"><span class="sk-i">👕</span><span class="sk-t"><b>What to wear:</b> coaches will message once uniforms arrive</span></span></span><details class="team-times"><summary>See the schedule (Shazam and all teams)</summary><div class="tt-label">Shazam\'s day</div><div class="tt-grid"><span class="me"><span>Report</span><span>8:30 AM</span></span><span class="me"><span>Check-in</span><span>9:00 AM</span></span><span class="me"><span>Mat 1</span><span>9:05 AM</span></span><span class="me"><span>Mat 2</span><span>9:17 AM</span></span><span class="me"><span>Full floor</span><span>9:29 AM</span></span><span class="me"><span>On deck</span><span>9:41 AM</span></span><span class="me"><span>Perform</span><span>9:55 AM</span></span></div><div class="tt-label">Every team\'s performance time</div><div class="tt-grid"><span class=""><span>Tiny\'s</span><span>9:05 AM</span></span><span class=""><span>Bliss</span><span>9:15 AM</span></span><span class=""><span>Mints</span><span>9:25 AM</span></span><span class=""><span>Jr Gold</span><span>9:35 AM</span></span><span class=""><span>Surge</span><span>9:45 AM</span></span><span class="me"><span>Shazam</span><span>9:55 AM</span></span><span class=""><span>C3</span><span>10:05 AM</span></span><span class=""><span>WhiteGold</span><span>10:15 AM</span></span><span class=""><span>Y2K</span><span>10:25 AM</span></span><span class=""><span>OPEN</span><span>10:35 AM</span></span><span class="tt-break">Break</span><span class=""><span>J3</span><span>11:05 AM</span></span><span class=""><span>Jslay</span><span>11:15 AM</span></span><span class=""><span>Blush</span><span>11:25 AM</span></span><span class=""><span>Onyx</span><span>11:35 AM</span></span><span class=""><span>Rapture</span><span>11:45 AM</span></span><span class=""><span>Sugar</span><span>11:55 AM</span></span><span class=""><span>Spice</span><span>12:05 PM</span></span><span class=""><span>Glow</span><span>12:15 PM</span></span><span class=""><span>Sparkle</span><span>12:25 PM</span></span><span class=""><span>COED</span><span>12:35 PM</span></span><span class=""><span>Lady Bullets</span><span>12:45 PM</span></span><span class=""><span>Reign</span><span>12:55 PM</span></span></div><div class="tt-note">Report times: Tiny\'s, Bliss, Mints, Jr Gold, Surge 8:00 AM · Shazam, C3, WhiteGold, Y2K, OPEN 8:30 AM · J3, Jslay, Blush, Onyx, Rapture, Sugar, Spice 9:00 AM · Glow, Sparkle, COED, Lady Bullets, Reign 9:30 AM.</div></details>'},
   {emoji:"💃", title:"Dance Choreo", date:"2026-10-29", end:"2026-10-29", meta:"Thu, Oct 29, 2026 · 4:00–6:30 PM"},
   {emoji:"🎃", title:"Trunk or Treat", date:"2026-10-28", end:"2026-10-28", meta:"Wed, Oct 28, 2026 · 6:00 PM", extra:"Send a bag of candy to your team rep, or volunteer to decorate your vehicle for the trunk-or-treat — if you volunteer a vehicle, please stay for all teams that evening. Athletes come to practice in costume (optional) over their practice gear and still need to be able to tumble and stunt."},
-  {emoji:"📸", title:"Team Photo Days", date:"2026-12-01", end:"2026-12-02", meta:"Dec 1–2, 2026 · San Marcos — details to come in team chat."}
+  {emoji:"📸", title:"Team Photo Days", date:"2026-12-01", end:"2026-12-02", meta:"Dec 1–2, 2026 · San Marcos — each team gets a one-hour slot. Times will be announced closer to the date."}
 ];
 
 const standouts = [
-  {month:"September", name:"Ella S"},
-  {month:"August", name:"Skylin D"},
-  {month:"July", name:"Laurel M"}
+  {month:"November", name:"Elle B"},
+  {month:"October", name:"Ella S"},
+  {month:"September", name:"Skylin D"},
+  {month:"August", name:"Laurel M"}
 ];
 
 const contacts = [
@@ -1977,7 +2036,7 @@ function renderHero(){
           <div class="hero-fact"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>${fmtRange(nextComp.start,nextComp.end)}</div>
           <div class="hero-fact"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>${nextComp.loc.split(' · ')[nextComp.loc.includes(' · ')?1:0]}</div>
           <div class="hero-fact"><svg viewBox="0 0 24 24"><path d="M3 13l7-2 5-9 1.5.6-3 8.9 6 1.7-1 2-6.3-1-3.6 5.4-2 .5.6-3.6z"/></svg>${nextComp.loc.split(' · ')[0]}</div>
-          ${nextComp.heroLinks ? `<div class="hero-fact"><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><span style="display:flex;flex-wrap:wrap;gap:4px 14px;">${nextComp.heroLinks.map(l=>`<a href="${l.url}" target="_blank" style="color:inherit;font-weight:700;text-decoration:underline;">${l.label}</a>`).join('')}</span></div>` : ''}
+          ${nextComp.heroLinks ? `<div class="hero-fact"><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><span style="display:flex;flex-wrap:wrap;gap:4px 14px;">${nextComp.heroLinks.map(l=>`${l.js ? `<a href="#" onclick="${l.js};return false;" style="color:inherit;font-weight:700;text-decoration:underline;">${l.label}</a>` : `<a href="${l.url}" target="_blank" style="color:inherit;font-weight:700;text-decoration:underline;">${l.label}</a>`}`).join('')}</span></div>` : ''}
         </div>` : ''}
       </div>
       ${nextComp ? (
@@ -2011,7 +2070,6 @@ function renderHero(){
           ${upcomingFees.map(f=>`<div class="fee-row"><span>${fmtDate(f.date)} — ${f.label}</span><b>$${f.amount}</b></div>`).join('')}
         </div>
       ` : `<div class="pay-amount" style="font-size:16px;">Paid in full for the season 🎉</div>`}
-      ${budgetToggleHtml()}
     </div>
   `;
   document.getElementById('heroGrid').innerHTML = heroHtml;
@@ -2054,6 +2112,15 @@ function isEventInCurrentWeek(f, monday, sunday){
   return d>=monday && d<=sunday;
 }
 
+function lkRows(h){
+  h=String(h==null?'':h);
+  if(h.indexOf('class="sk')>-1) return h;
+  var links=[];
+  var t=h.replace(/<a\b[^>]*>[^<]*(?:\u2192|&rarr;)\s*<\/a>/g,function(m){ links.push(m); return '\u0001'; });
+  if(!links.length) return h;
+  t=t.replace(/(?:\s*[\u00B7\u2022]\s*)?\u0001/g,'').replace(/[\s\u00B7\u2022\u2014-]+$/,'').trim();
+  return t+'<span class="lk-row">'+links.join('')+'</span>';
+}
 function renderFeed(){
   const now = new Date(); now.setHours(0,0,0,0);
   const {monday, sunday} = currentWeekRange();
@@ -2087,7 +2154,7 @@ function renderFeed(){
       <div class="feed-date">${dateLabel}</div>
       <div class="feed-body">
         <b>${isNew?'<span class="badge new">New</span>':''}${f.title}</b>
-        <p>${f.body}</p>
+        <p>${lkRows(f.body)}</p>
       </div>
     </div>
   `;
@@ -2105,7 +2172,7 @@ function renderUpcomingEvents(){
     const d = new Date((f.date||f.end)+"T00:00:00");
     return d>=now && d>=monday && d<=sunday;
   });
-  const upcoming = [...weekFundraisers, ...promotedFeed]
+  const upcoming = [...weekFundraisers, ...promotedFeed, ...(typeof personalComingUp==='function' ? personalComingUp(now, monday, sunday) : [])]
     .sort((a,b)=>new Date(a.date||a.end)-new Date(b.date||b.end));
   const card = document.getElementById('upcomingEventsCard');
   const title = document.getElementById('comingUpTitle');
@@ -2134,8 +2201,8 @@ function renderUpcomingEvents(){
           <div class="coming-row-top"><span class="badge ${isToday?'today':(f.badgeType||(f.isDeadline?'deadline':'event'))}">${isToday?'Today':(f.badgeLabel||(f.isDeadline?'Deadline':'Event'))}</span><span class="coming-row-icon">${(f.icon && customIcons[f.icon]) ? '<img class="coming-icon-img" src="'+customIcons[f.icon]+'" alt="">' : (f.emoji||'🎪')}</span></div>
           <div class="coming-row-title">${f.title}</div>
           <div class="coming-row-meta">${meta}</div>
-          ${f.meta && !timeBit ? `<div class="coming-row-desc">${f.meta}</div>` : ''}
-          ${f.extra ? `<div class="coming-row-desc" style="margin-top:4px;">${f.extra}</div>` : ''}
+          ${f.meta && !timeBit ? `<div class="coming-row-desc">${lkRows(f.meta)}</div>` : ''}
+          ${f.extra ? `<div class="coming-row-desc" style="margin-top:4px;">${lkRows(f.extra)}</div>` : ''}
         </div>
       </div>`;
   }).join('') + `</div>`;
@@ -2160,6 +2227,30 @@ const ICON_CAMERA='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" s
 const ICON_CAL='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>';
 const ICON_CHECK='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h11"/></svg>';
 const ICON_CHEVRON='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+
+const ICON_INFO="<svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 11v5M12 8h.01\"/></svg>";
+
+function openShowcaseDetails(){
+  document.getElementById('cmTitle').textContent = 'Showcase day plan';
+  document.getElementById('cmSub').textContent = 'Sun, Nov 15, 2026 · UC Irvine Bren Events Center';
+  document.getElementById('cmBody').innerHTML = "<div class=\"tt-label\">Shazam’s day</div><div class=\"tt-grid\"><span><span>Team meet time</span><span>11:45 AM</span></span><span class=\"\"><span>Photos</span><span>1:12 PM</span></span><span class=\"\"><span>Check-in</span><span>1:19 PM</span></span><span class=\"\"><span>First mat</span><span>1:33 PM</span></span><span class=\"\"><span>Floor 1</span><span>1:39 PM</span></span><span class=\"\"><span>Floor 2</span><span>1:46 PM</span></span><span class=\"me\"><span>Showtime</span><span>1:55 PM</span></span></div><div class=\"tt-label\">Athletes</div><span class=\"sk\"><span class=\"sk-r\"><span class=\"sk-i\">🚪</span><span class=\"sk-t\"><b>Lower entrance only</b> · by the stairs near the lower parking lot, in uniform or gear. No ticket needed. Meet your coach or team rep near the front.</span></span><span class=\"sk-r\"><span class=\"sk-i\">💄</span><span class=\"sk-t\"><b>Hair and makeup done</b> when you meet · program uniform · team shirt over it whenever you’re off stage</span></span></span><div class=\"tt-label\">At the venue</div><span class=\"sk\"><span class=\"sk-r\"><span class=\"sk-i\">🚪</span><span class=\"sk-t\"><b>Doors open 10:45 AM</b> · welcome message 10:55 AM</span></span><span class=\"sk-r\"><span class=\"sk-i\">🎟️</span><span class=\"sk-t\"><b>$26 online, $35 same day</b> · lines are long, so buy ahead · good all day · athletes don’t need one · <a href=\"https://ucirvinetickets.evenue.net/events/SPEC\" target=\"_blank\" rel=\"noopener\">Buy tickets →</a></span></span><span class=\"sk-r\"><span class=\"sk-i\">🅿️</span><span class=\"sk-t\"><b>Parking permit required</b> for every vehicle · <a href=\"https://apps.parking.uci.edu/parkbyplate/s/purchase.cfm\" target=\"_blank\" rel=\"noopener\">Buy a permit →</a> · code BREN@UCI, card only. If the Mesa structure fills you may be sent to another lot. Expect delays on University Dr and Mesa Rd.</span></span><span class=\"sk-r\"><span class=\"sk-i\">👜</span><span class=\"sk-t\"><b>Clear bag policy</b> for guests · no backpacks or large purses (small purse up to 5.5″ × 8.5″, medical and diaper bags are OK) · guests use the East Entrance (upstairs)</span></span><span class=\"sk-r\"><span class=\"sk-i\">📋</span><span class=\"sk-t\"><a href=\"https://docs.google.com/spreadsheets/d/1_MpWAbs6NeyRTwq9JyjikT3i5iQB1LpuvhHiUT9jFYM/edit?gid=498534653#gid=498534653\" target=\"_blank\" rel=\"noopener\">Full showcase schedule →</a></span></span></span><div class=\"tt-label\">Every team’s performance time</div><div class=\"tt-grid\"><span class=\"\"><span>Tiny Divas</span><span>11:07 AM</span></span><span class=\"\"><span>Mini Mints</span><span>11:21 AM</span></span><span class=\"\"><span>Bliss</span><span>11:42 AM</span></span><span class=\"\"><span>Junior Gold</span><span>12:31 PM</span></span><span class=\"\"><span>Surge</span><span>12:52 PM</span></span><span class=\"tt-break\">Break</span><span class=\"\"><span>Blush</span><span>1:41 PM</span></span><span class=\"me\"><span>Shazam</span><span>1:55 PM</span></span><span class=\"\"><span>White Gold</span><span>2:23 PM</span></span><span class=\"\"><span>Y2K</span><span>3:19 PM</span></span><span class=\"\"><span>Sugar</span><span>3:40 PM</span></span><span class=\"\"><span>Reign</span><span>3:54 PM</span></span><span class=\"tt-break\">Break</span><span class=\"\"><span>Rapture</span><span>4:22 PM</span></span><span class=\"\"><span>Spice</span><span>4:29 PM</span></span><span class=\"\"><span>J3</span><span>5:11 PM</span></span><span class=\"\"><span>C3</span><span>5:46 PM</span></span><span class=\"\"><span>Onyx</span><span>6:28 PM</span></span><span class=\"\"><span>Jslay</span><span>6:49 PM</span></span><span class=\"\"><span>Coed</span><span>7:17 PM</span></span><span class=\"\"><span>Glow</span><span>7:31 PM</span></span><span class=\"\"><span>Rangers</span><span>7:38 PM</span></span><span class=\"\"><span>Lady Bullets</span><span>7:45 PM</span></span></div><div class=\"tt-note\">Teams are listed in running order.</div>";
+  document.getElementById('cmBack').classList.add('open');
+  document.documentElement.style.overflow = 'hidden';
+  const b = document.getElementById('cmBody'); if(b) b.scrollTop = 0;
+}
+function openTsnDetails(){
+  document.getElementById('cmTitle').textContent = 'TSN day plan';
+  document.getElementById('cmSub').textContent = 'Sat, Nov 21, 2026 · SDSU Viejas Arena, San Diego';
+  document.getElementById('cmBody').innerHTML = "<div class=\"tt-label\">Shazam’s day</div><div class=\"tt-grid\"><span class=\"me\"><span>Shazam performs · Youth Level 1</span><span>3:10 PM</span></span><span><span>Level 1 awards</span><span>4:50 PM</span></span></div><div class=\"tt-label\">Competitors in your division</div><div class=\"tt-note\" style=\"margin-top:2px\">Youth Level 1</div><div class=\"tt-grid\"><span><span><b>Amethyst</b> · San Diego Show All Stars</span><span>3:15 PM</span></span><span><span><b>The Starlets</b> · Intensity Athletics<br><a class=\"vid\" href=\"https://tv.varsity.com/video/15292127-intensity-athletics-the-starlets-2026-l1-youth-small-day-2-2026-atc-grand-nationals\" target=\"_blank\" rel=\"noopener\">▶ Watch · ATC Grand Nationals 2026</a></span><span>3:20 PM</span></span></div><div class=\"tt-label\">At the venue</div><span class=\"sk\"><span class=\"sk-r\"><span class=\"sk-i\">🎟️</span><span class=\"sk-t\"><b>Ticket office opens 12:30 PM</b></span></span><span class=\"sk-r\"><span class=\"sk-i\">🚪</span><span class=\"sk-t\"><b>Doors open 1:00 PM</b></span></span><span class=\"sk-r\"><span class=\"sk-i\">📋</span><span class=\"sk-t\"><a href=\"https://apps.ideal-logic.com/embed_preview?id=il_93a91551fea394b9&url=https%3A%2F%2Fapps.ideal-logic.com\" target=\"_blank\" rel=\"noopener\">Full TSN schedule →</a> · <a href=\"https://www.thespiritnetwork.net/sd-tsc\" target=\"_blank\" rel=\"noopener\">Event page →</a></span></span><span class=\"sk-r\"><span class=\"sk-i\">⏳</span><span class=\"sk-t\">Arrival, check-in and what-to-wear details will be added here</span></span></span><div class=\"tt-label\">San Marcos teams · performance times</div><div class=\"tt-grid\"><span class=\"\"><span>Tiny Divas</span><span>2:00 PM</span></span><span class=\"\"><span>Mini Mints</span><span>2:05 PM</span></span><span class=\"\"><span>Bliss</span><span>2:15 PM</span></span><span class=\"\"><span>Blush</span><span>2:25 PM</span></span><span class=\"tt-break\">Break</span><span class=\"\"><span>Junior Gold</span><span>2:35 PM</span></span><span class=\"\"><span>Surge</span><span>2:45 PM</span></span><span class=\"tt-break\">Break</span><span class=\"\"><span>Spice</span><span>3:05 PM</span></span><span class=\"me\"><span>Shazam</span><span>3:10 PM</span></span><span><span><i>Novice & prep awards</i></span><span>3:25 PM</span></span><span class=\"\"><span>White Gold</span><span>4:00 PM</span></span><span class=\"\"><span>Y2K</span><span>4:10 PM</span></span><span class=\"\"><span>JSlay</span><span>4:25 PM</span></span><span class=\"tt-break\">Break</span><span class=\"\"><span>Sugar</span><span>4:35 PM</span></span><span class=\"\"><span>Reign</span><span>4:45 PM</span></span><span><span><i>Level 1 awards</i></span><span>4:50 PM</span></span><span class=\"\"><span>J3</span><span>5:00 PM</span></span><span class=\"\"><span>Onyx</span><span>5:05 PM</span></span><span class=\"tt-break\">Break</span><span class=\"\"><span>Rapture</span><span>5:15 PM</span></span><span class=\"\"><span>C3</span><span>5:20 PM</span></span><span class=\"\"><span>Glow</span><span>5:25 PM</span></span><span><span><i>Level 2, 3, 4, 5 & 6 awards</i></span><span>5:30 PM</span></span></div><div class=\"tt-note\">Teams are listed in running order. Awards ceremonies are shown in italics.</div>";
+  document.getElementById('cmBack').classList.add('open');
+  document.documentElement.style.overflow = 'hidden';
+  const b = document.getElementById('cmBody'); if(b) b.scrollTop = 0;
+}
+function closeShowcaseDetails(){
+  document.getElementById('cmBack').classList.remove('open');
+  document.documentElement.style.overflow = '';
+}
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeShowcaseDetails(); });
 
 function gcard(icon, label, sub, url, soon){
   const cls = 'compx-gcard' + (soon?' soon':'');
@@ -2399,32 +2490,14 @@ function renderComps(){
         </div>`;
       }
 
+      let hotelModule = null;
       if(c.bookingDate || (c.bookingLinks && c.bookingLinks.length)){
         const primary = c.bookingLinks && c.bookingLinks[0];
         const opensDate = c.bookingDate ? new Date(c.bookingDate+"T00:00:00") : null;
         const isOpen = !opensDate || now >= opensDate;
-        let row;
-        if(isOpen){
-          if(primary && primary.url){
-            row = `<div class="compx-row">
-              <div class="compx-row-main"><div class="compx-row-title">Book your team block hotel</div></div>
-              <a class="compx-row-cta" href="${primary.url}" target="_blank">Book Hotel</a>
-            </div>`;
-          } else {
-            row = `<div class="compx-row">
-              <div class="compx-row-main"><div class="compx-row-title">Booking link coming soon</div></div>
-            </div>`;
-          }
-        } else {
-          row = `<div class="compx-row">
-            <div class="compx-row-main">
-              <div class="compx-row-title">Opens ${fmtDate(c.bookingDate)}</div>
-              ${primary ? `<div class="compx-row-sub">${primary.label}</div>` : ''}
-            </div>
-            ${primary && primary.url ? `<a class="compx-row-cta soon" href="${primary.url}" target="_blank">View info</a>` : ''}
-          </div>`;
-        }
-        sectionsHtml += `<div class="compx-section"><div class="compx-section-label"><span class="cxl-ic">${ICON_BED}</span>Hotel Booking</div>${row}</div>`;
+        const hUrl = primary && primary.url;
+        if(isOpen) hotelModule = hUrl ? gcard(ICON_BED,'Book your hotel','Book now \u2192', hUrl) : gcard(ICON_BED,'Book your hotel','Link coming soon', null, true);
+        else hotelModule = hUrl ? gcard(ICON_BED,'Book your hotel','Opens '+fmtDate(c.bookingDate)+' \u2192', hUrl) : gcard(ICON_BED,'Book your hotel','Opens '+fmtDate(c.bookingDate), null, true);
       }
 
       const gcards = [];
@@ -2439,12 +2512,21 @@ function renderComps(){
         ? gcard(ICON_CAMERA,'Comp photos','View photos →', c.photosLink)
         : gcard(ICON_CAMERA,'Comp photos','Link coming soon', null, true));
       gcards.push(c.rosterLink
-        ? gcard(ICON_CAL,'Comp Schedule','View →', c.rosterLink)
-        : gcard(ICON_CAL,'Comp Schedule','Link coming soon', null, true));
+        ? gcard(ICON_CAL,'Event schedule','All teams →', c.rosterLink)
+        : gcard(ICON_CAL,'Event schedule','Link coming soon', null, true));
       if(c.ticketLink) gcards.push(gcard(ICON_LINK,'Showcase tickets','Buy →', c.ticketLink));
+      if(hotelModule) gcards.push(hotelModule);
       if(c.bookingLinks) c.bookingLinks.slice(1).forEach(bl=>{
         gcards.push(bl.url ? gcard(ICON_LINK, bl.label, 'View →', bl.url) : gcard(ICON_LINK, bl.label, 'Link coming soon', null, true));
       });
+      if(c.showoff){ gcards.splice(0, gcards.length, gcard(ICON_CAMERA,'Photos','View photos →', c.photosLink)); }
+      if(c.details){
+        const dFn = c.detailsFn||'openShowcaseDetails()', dLbl = c.detailsLabel||'Day plan';
+        const detailsCard = '<div class="compx-gcard gc-btn" role="button" tabindex="0" onclick="'+dFn+'" onkeydown="if(event.key===\'Enter\')'+dFn+'"><div class="gc-ic">'+ICON_INFO+'</div><div class="gc-lbl">'+dLbl+'</div><div class="gc-sub">View →</div></div>';
+        const pick = lbl => { const i = gcards.findIndex(h=>h.includes('<div class="gc-lbl">'+lbl+'</div>')); return i>=0 ? gcards.splice(i,1)[0] : null; };
+        const ordered = [pick('Directions'), detailsCard, pick('Event schedule'), pick('Comp photos'), pick('Showcase tickets'), pick('Hotels nearby')].filter(Boolean);
+        gcards.splice(0, gcards.length, ...ordered.concat(gcards));
+      }
       sectionsHtml += `<div class="compx-section">
         <div class="compx-section-label"><span class="cxl-ic">${ICON_LINK}</span>Resources</div>
         <div class="compx-grid">${gcards.join('')}</div>
@@ -2466,6 +2548,7 @@ function renderComps(){
       </div>`;
     }
 
+    if(c.showoff) calHtml = '';
     const isPastCard = new Date((c.end||c.start)+"T00:00:00") < now;
     return `
     <div class="comp-card ${openComps.has(i)?'open':''} ${!isAttending?'not-attending':''} ${isPastCard?'is-past':''}" id="comp-${i}">
@@ -2579,8 +2662,8 @@ function renderFundraisers(){
       <div class="fund-emoji">${(f.icon && customIcons[f.icon]) ? '<img class="fund-icon-img" src="'+customIcons[f.icon]+'" alt="">' : f.emoji}</div>
       <div>
         <div class="fund-title">${f.title}</div>
-        <div class="fund-meta">${f.meta}</div>
-        ${f.extra?`<div class="fund-meta" style="margin-top:6px;">${f.extra}</div>`:''}
+        <div class="fund-meta">${lkRows(f.meta)}</div>
+        ${f.extra?`<div class="fund-meta" style="margin-top:6px;">${lkRows(f.extra)}</div>`:''}
         ${f.pay?`<div class="fund-meta" style="margin-top:6px;"><b style="color:var(--text);">Ways to pay:</b> ${f.pay.join(' · ')}</div>`:''}
       </div>
     </div>
@@ -2653,13 +2736,16 @@ function renderContacts(){
 }
 
 function renderStandouts(){
+  const card = document.getElementById('standoutsCard');
   if(standouts.length===0){
-    document.getElementById('standoutsCard').innerHTML = `<p style="margin:0;font-size:13.5px;color:var(--text-muted);">No standouts announced yet — check back soon!</p>`;
+    const t = document.getElementById('standoutsTitle');
+    if(t){ t.style.display = 'none'; card.style.display = 'none'; return; }
+    card.innerHTML = `<p style="margin:0;font-size:13.5px;color:var(--text-muted);">No standouts announced yet — check back soon!</p>`;
     return;
   }
-  document.getElementById('standoutsCard').innerHTML = `<div class="linkrow">` + standouts.map(s=>`
-    <div class="linkbtn standout-pill"><span class="ico">🌟</span> ${s.month}: <b>${s.name}</b></div>
-  `).join('') + `</div>`;
+  const cur = standouts[0], past = standouts.slice(1);
+  card.innerHTML = `<div class="so-spot"><div class="so-star">🌟</div><div><div class="so-label">${cur.month} Student Standout</div><div class="so-name">${cur.name}</div></div></div>`
+    + (past.length ? `<div class="so-past"><details class="team-times"><summary>Past standouts</summary>${past.map(s=>`<div class="so-row"><span>${s.month}</span><b>${s.name}</b></div>`).join('')}</details></div>` : '');
 }
 
 function renderPhotos(){
@@ -2717,7 +2803,7 @@ function isoFromDate(d){
   return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
 }
 function loadPersonalEvents(){ try{ return JSON.parse(localStorage.getItem('y2k_personal_events')||'[]'); }catch(e){ return []; } }
-function savePersonalEvents(list){ try{ localStorage.setItem('y2k_personal_events', JSON.stringify(list)); }catch(e){} if(typeof renderBudget==='function') renderBudget(); }
+function savePersonalEvents(list){ try{ localStorage.setItem('y2k_personal_events', JSON.stringify(list)); }catch(e){} if(typeof renderBudget==='function') renderBudget(); if(typeof renderUpcomingEvents==='function') renderUpcomingEvents(); }
 
 // Pulls the first <a href="...">label</a> out of an HTML snippet so calendar
 // day-detail can show a real "take action" link instead of losing it when
@@ -2755,7 +2841,7 @@ function personalEventDates(p){
 function baseCalendarEvents(){
   const events = [];
   competitions.forEach(c=>{
-    if(c.attending===false) return;
+    if(c.attending===false||c.showoff) return;
     events.push({date:c.start, end:c.end, cat:'comp', title:c.name, detail:c.loc});
     if(c.bookingDate){
       const bl = c.bookingLinks && c.bookingLinks[0];
@@ -2876,8 +2962,8 @@ function renderPersonalList(){
   const REPEAT_LABEL = {weekly:'Weekly', biweekly:'Every 2 weeks', monthly:'Monthly'};
   el.innerHTML = list.slice().sort((a,b)=>new Date(a.date)-new Date(b.date)).map(p=>`
     <div class="cal-personal-row">
-      <div><b>${fmtDate(p.date)}</b>${p.recurrence?` <span style="color:var(--accent); font-weight:600;">(${REPEAT_LABEL[p.recurrence.freq]})</span>`:''} — ${p.title}${(p.private && budgetOn()) ? ` <span style="color:var(--accent); font-weight:600;">(${bMoney(privateCost(p.private.type,p.private.mins))})</span>` : ''}${p.note?` <span style="color:var(--text-muted);">(${p.note})</span>`:''}</div>
-      <button type="button" class="cal-del-btn" data-id="${p.id}">Remove</button>
+      <div><b>${fmtDate(p.date)}${(p.time && typeof hsTime12==='function')?' · '+hsTime12(p.time):''}</b>${p.recurrence?` <span style="color:var(--accent); font-weight:600;">(${REPEAT_LABEL[p.recurrence.freq]})</span>`:''}<span class="pe-t">${p.title}</span>${(p.private && budgetOn()) ? ` <span style="color:var(--accent); font-weight:600;">(${bMoney(privateCost(p.private.type,p.private.mins))})</span>` : ''}${p.note?` <span style="color:var(--text-muted);">(${p.note})</span>`:''}</div>
+      <span><button type="button" class="cal-add-btn" data-id="${p.id}">Add to calendar</button><button type="button" class="cal-edit-btn" data-id="${p.id}">Edit</button><button type="button" class="cal-del-btn" data-id="${p.id}">Remove</button></span>
     </div>
   `).join('');
 }
@@ -2914,6 +3000,7 @@ document.getElementById('calFormRepeat').addEventListener('change', (e)=>{
   document.getElementById('calFormUntilWrap').style.display = e.target.value ? 'block' : 'none';
 });
 document.getElementById('calFormSave').addEventListener('click', ()=>{
+  if(window.calEditId){ calSaveEdit(); return; }
   let title = document.getElementById('calFormTitle').value.trim();
   const date = document.getElementById('calFormDate').value;
   const priv = (typeof calPrivateSelection === 'function') ? calPrivateSelection() : null;
@@ -2924,10 +3011,13 @@ document.getElementById('calFormSave').addEventListener('click', ()=>{
   if(!title || !date) return;
   const list = loadPersonalEvents();
   const ev = {id:'p'+Date.now(), title, date, note};
+  { const tm = document.getElementById('calFormTime').value; if(tm) ev.time = tm; }
   if(priv) ev.private = priv;
   if(repeat){ ev.recurrence = {freq:repeat}; if(until) ev.recurrence.until = until; }
   list.push(ev);
   savePersonalEvents(list);
+  { const al = document.getElementById('calFormAlso'); if(al && al.checked) setTimeout(()=>openAddToCalendar(ev.id), 60); }
+  document.getElementById('calFormTime').value = '';
   document.getElementById('calFormTitle').value = '';
   document.getElementById('calFormDate').value = '';
   document.getElementById('calFormNote').value = '';
@@ -2943,6 +3033,9 @@ document.getElementById('calFormSave').addEventListener('click', ()=>{
 document.getElementById('calPersonalList').addEventListener('click', (e)=>{
   const btn = e.target.closest('.cal-del-btn');
   if(!btn) return;
+  { const tg = loadPersonalEvents().filter(p=>p.id===btn.dataset.id)[0];
+    if(tg && tg.recurrence && personalEventDates(tg).some(d=>d<=todayISO()) && (tg.private || personalEventDates(tg).some(d=>d<todayISO()))){ calRemoveSheet(tg); return; }
+    if(tg && (tg.recurrence||tg.private) && !confirm('Remove "'+tg.title+'"'+(tg.recurrence?' and every repeat of it':'')+'?'+(tg.private?' Past lessons will also come out of your budget totals.':'')+'\n\nTo change the day or time instead, tap Edit and choose "From a date on".')) return; }
   const list = loadPersonalEvents().filter(p=>p.id!==btn.dataset.id);
   savePersonalEvents(list);
   renderPersonalList();
@@ -3288,7 +3381,7 @@ function ehEstimateItems(b, plan, today){
   if(!plan.trips) return out;
   const inc = plan.inc || {}, h = plan.home || {}, rate = Number(b.mileage) || 0.725;
   competitions.forEach(c=>{
-    if(c.attending===false) return;
+    if(c.attending===false||c.showoff) return;
     const end = c.end||c.start; if(end < today) return;
     const slug = slugify(c.name), st = ehState(c, plan), r = ehRest(c, st, h, rate, b);
     if(inc.travel !== false && r.travel >= 1) out.push({key:'tq:'+slug, cat:'travel', label:c.name+' — travel estimate'+(r.travelAny ? ' (balance)' : ''), amt:Math.round(r.travel), date:c.start, status:'planned', src:'estimate', comp:slug});
@@ -3300,7 +3393,7 @@ function ehEstimateItems(b, plan, today){
   }
   return out;
 }
-function ehAttendingSlugs(){ return competitions.filter(c=>c.attending!==false).map(c=>slugify(c.name)); }
+function ehAttendingSlugs(){ return competitions.filter(c=>c.attending!==false&&!c.showoff).map(c=>slugify(c.name)); }
 function ehScheduleChanged(){
   const p = loadBudget().plan || {};
   if(!p.savedAt || !p.comps) return false;
@@ -3351,7 +3444,7 @@ function plAvg(types, mins){
 function lastDayOfMonth(ym){ const p = ym.split('-').map(Number); return isoFromDate(new Date(p[0], p[1], 0)); }
 function plSeasonEnd(){
   const t = isoFromDate(new Date());
-  return competitions.length ? competitions.filter(c=>c.attending!==false).reduce((m,c)=> (c.end||c.start) > m ? (c.end||c.start) : m, t) : addDaysISO(t, 120);
+  return competitions.length ? competitions.filter(c=>c.attending!==false&&!c.showoff).reduce((m,c)=> (c.end||c.start) > m ? (c.end||c.start) : m, t) : addDaysISO(t, 120);
 }
 /* month-by-month: how many lessons the plan expects, minus what is already scheduled or logged */
 function plSegments(p, existing){
@@ -3387,7 +3480,7 @@ function budgetItems(){
   const b = loadBudget(), items = [], today = isoFromDate(new Date());
   const allowNow = (PLAN_DRAFT && PLAN_DRAFT.allow != null) ? Number(PLAN_DRAFT.allow) : b.allowance;
   const st = d => d <= today ? 'paid' : 'planned';
-  const seasonEnd = competitions.length ? competitions.filter(c=>c.attending!==false).reduce((m,c)=> (c.end||c.start) > m ? (c.end||c.start) : m, today) : addDaysISO(today, 365);
+  const seasonEnd = competitions.length ? competitions.filter(c=>c.attending!==false&&!c.showoff).reduce((m,c)=> (c.end||c.start) > m ? (c.end||c.start) : m, today) : addDaysISO(today, 365);
   programFees.forEach((f,fi)=> items.push({key:'g:'+f.date+':'+fi, cat:'gym', label:f.label, amt:Number(f.amount)||0, date:f.date, status:st(f.date), src:'auto'}));
   loadPersonalEvents().forEach(p=>{
     if(!p.private) return;
@@ -3397,7 +3490,7 @@ function budgetItems(){
     personalEventDates(p).filter(d=>d<=seasonEnd).forEach(d=> items.push({key:'p:'+p.id+':'+d, series:p.id, cat:'privates', label:p.private.type+' · '+p.private.mins+' min'+who, amt, date:d, status:st(d), src:'calendar'}));
   });
   competitions.forEach(c=>{
-    if(c.attending===false) return;
+    if(c.attending===false||c.showoff) return;
     const slug = slugify(c.name), end = c.end||c.start;
     if(c.entryFee){
       const loggedEntry = b.expenses.filter(e=>e.comp===slug && e.type==='entry').reduce((a,e)=>a+(Number(e.amt)||0),0);
@@ -3422,7 +3515,7 @@ function budgetItems(){
   /* flight and hotel costs typed on the Comp Schedule tab (a cost you also logged here wins, so nothing counts twice) */
   const bkAll = loadBooking();
   competitions.forEach(c=>{
-    if(c.attending === false) return;
+    if(c.attending=== false||c.showoff) return;
     const slug = slugify(c.name), bk = bkAll[slug] || {};
     [['air','flight','travel'], ['hotel','hotel','hotels']].forEach(m=>{
       const amt = Number(bk[m[0]+'Cost']) || 0;
@@ -3498,7 +3591,7 @@ function syncBudgetUI(){
   const on = budgetOn();
   if(btn) btn.hidden = !on;
   const link = document.getElementById('budFooterWrap');
-  if(link) link.hidden = !(budgetOffered() && !on && !document.querySelector('#heroGrid .pay-card'));
+  if(link) link.hidden = true; /* budget is turned on from Settings only */
   if(!on){
     const panel = document.getElementById('panel-budget');
     if(panel && panel.classList.contains('active')) goTab('home');
@@ -3529,7 +3622,7 @@ function openExpenseSheet(pre){
   typeSel.value = pre.type || 'food';
   const compSel = document.getElementById('expComp');
   compSel.innerHTML = '<option value="">General (not tied to a comp)</option>' +
-    competitions.filter(c=>c.attending!==false).map(c=>'<option value="'+slugify(c.name)+'">'+bEsc(c.name)+'</option>').join('');
+    competitions.filter(c=>c.attending!==false&&!c.showoff).map(c=>'<option value="'+slugify(c.name)+'">'+bEsc(c.name)+'</option>').join('');
   compSel.value = pre.comp || '';
   document.getElementById('expDate').value = pre.date || ((pre.origin==='comp' && !pre.id && ['flight','hotel','rental'].indexOf(pre.type)>=0) ? '' : isoFromDate(new Date()));
   document.getElementById('expAmt').value = pre.amt!=null ? pre.amt : '';
@@ -3756,7 +3849,7 @@ function renderBudget(){
   html += '</div>';
 
   /* trips */
-  const comps = competitions.filter(c=>c.attending!==false).slice().sort((a,b2)=>a.start<b2.start?-1:1);
+  const comps = competitions.filter(c=>c.attending!==false&&!c.showoff).slice().sort((a,b2)=>a.start<b2.start?-1:1);
   html += '<div class="section-title">Trip by trip</div><div class="card bud-cats">';
   comps.forEach(c=>{
     const slug = slugify(c.name), key = 'trip:'+slug, its = tAll.items.filter(i=>i.comp===slug).slice().sort((x1,x2)=>x1.date<x2.date?-1:1);
@@ -3997,7 +4090,7 @@ function rcptApply(r){
   const note = document.getElementById('expNote');
   if(r.vendor && !note.value){ note.value = r.vendor.slice(0,80); got.push(r.vendor); }
   if(r.date && !document.getElementById('expComp').value){
-    const hit = competitions.filter(c=>c.attending!==false && r.date >= addDaysISO(c.travelStart||c.start, -2) && r.date <= addDaysISO(c.travelEnd||c.end||c.start, 2));
+    const hit = competitions.filter(c=>c.attending!==false&&!c.showoff && r.date >= addDaysISO(c.travelStart||c.start, -2) && r.date <= addDaysISO(c.travelEnd||c.end||c.start, 2));
     if(hit.length === 1) document.getElementById('expComp').value = slugify(hit[0].name);
   }
   if(!r.amt) rcptMsg('Could not find a total on that photo. Try a flatter, brighter shot, or type the amount.', false);
@@ -4157,7 +4250,7 @@ const ED_ORDER = ['priv','travel','hotels','other','total'];
 const ED_NEXT = {priv:'Travel', travel:'Hotels', hotels:'Everything else', other:'Total'};
 const ED_TITLE = {priv:'Private lessons plan', travel:'Travel plan', hotels:'Hotels plan', other:'Everything else', total:'Your season budget'};
 const r10up = n => Math.ceil((Number(n)||0)/10 - 0.05)*10;
-function edComps(){ return competitions.filter(c=>c.attending!==false); }
+function edComps(){ return competitions.filter(c=>c.attending!==false&&!c.showoff); }
 function edTrips(){ const t = isoFromDate(new Date()); return edComps().filter(c=>(c.end||c.start) >= t); }
 function edRate(){ return Number(loadBudget().mileage) || 0.725; }
 /* a cost the parent already entered, with a box to add one when they said they booked but left the price blank */
@@ -4583,5 +4676,260 @@ initDisclaimer({"show": true, "type": "independent", "entity": "the team’s gym
 </style>
 
 
+<div id="cmBack" class="cm-back" onclick="if(event.target===this)closeShowcaseDetails()"><div class="cm-sheet" role="dialog" aria-modal="true" aria-labelledby="cmTitle"><div class="cm-head"><div><div class="cm-title" id="cmTitle">Showcase day plan</div><div class="cm-sub" id="cmSub">Sun, Nov 15, 2026 · UC Irvine Bren Events Center</div></div><button type="button" class="cm-x" aria-label="Close" onclick="closeShowcaseDetails()">✕</button></div><div class="cm-body" id="cmBody"></div></div></div>
+<style>
+.team-bar{position:relative;}
+.set-gear{position:absolute;z-index:6;top:calc(env(safe-area-inset-top,0px) + 10px);right:12px;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(8,12,24,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;line-height:0;}
+.set-gear svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;}
+.set-gear:focus-visible{outline:2px solid #fff;outline-offset:2px;}
+.home-hide{display:none !important;}
+.badge.mine{background:var(--accent-soft);color:var(--accent);}
+.cm-body .set-h{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin:20px 0 6px;}
+.cm-body .set-note{font-size:13px;color:var(--text-muted);margin:0 0 10px;line-height:1.45;}
+.set-row,.set-sec{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--border);}
+.set-row:first-of-type,.set-list .set-sec:first-child{border-top:0;}
+.set-copy b{display:block;font-size:14.5px;}
+.set-copy small{display:block;font-size:12.5px;color:var(--text-muted);margin-top:2px;}
+.set-name{font-size:14.5px;font-weight:700;}
+.set-sec.off .set-name{color:var(--text-muted);font-weight:600;text-decoration:line-through;}
+.set-ctl{display:flex;align-items:center;gap:8px;flex:none;}
+.set-ctl button{width:34px;height:34px;border-radius:10px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);font-size:16px;line-height:1;cursor:pointer;padding:0;}
+.set-ctl button:disabled{opacity:.35;cursor:default;}
+.set-reset{display:block;margin:12px 0 0;background:none;border:0;color:var(--accent);font:inherit;font-size:13.5px;font-weight:700;text-decoration:underline;cursor:pointer;padding:0;}
+.cal-add-btn{background:none;border:0;color:var(--accent);font:inherit;font-size:13px;font-weight:700;text-decoration:underline;cursor:pointer;padding:0 8px 0 0;}
+.cal-also{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:600;}
+.cal-also input{width:18px;height:18px;}
+.cm-body .linkbtn.wide{display:flex;margin-top:10px;}
+.cal-personal-row{flex-direction:column; align-items:stretch; gap:6px; padding:12px 0;}
+.cal-personal-row>div{min-width:0; overflow-wrap:anywhere; line-height:1.35;}
+.cal-personal-row .pe-t{display:block; font-weight:600; font-size:14.5px; margin-top:2px;}
+.cal-personal-row>span{display:flex; align-items:center; gap:18px;}
+.cal-personal-row .cal-add-btn,.cal-personal-row .cal-del-btn{font-size:13px; padding:4px 0; margin:0; line-height:1.2;}
+.cal-personal-row .cal-add-btn{color:var(--accent); font-weight:700;}
+.cal-edit-btn{background:none;border:0;color:var(--accent);font:inherit;font-size:13px;font-weight:700;text-decoration:underline;cursor:pointer;padding:4px 0;margin:0;line-height:1.2;}
+.pay-card #feeToggleBtn{background:none !important; border:0 !important; box-shadow:none !important; border-radius:0 !important; color:var(--text) !important; font-size:13.5px !important; font-weight:700 !important; padding:2px 0 !important; line-height:1.3 !important; height:auto !important; min-height:0 !important; width:auto !important; text-decoration:underline; text-underline-offset:3px; cursor:pointer;}
+.pay-card #feeToggleBtn:hover{background:none !important; color:var(--accent) !important; filter:none !important;}
+</style>
+<script>
+/* ===== Settings, Home layout and personal events in Coming up ===== */
+var HS_KEY = CONFIG.storageKey + '_settings';
+var HS_GROUPS = [];
+function hsLoad(){ try{ return JSON.parse(localStorage.getItem(HS_KEY)||'{}') || {}; }catch(e){ return {}; } }
+function hsSave(s){ try{ localStorage.setItem(HS_KEY, JSON.stringify(s)); }catch(e){} }
+function hsOpen(title, sub, html){
+  var t=document.getElementById('cmTitle'), s=document.getElementById('cmSub'), b=document.getElementById('cmBody');
+  if(!t||!b) return;
+  t.textContent=title; if(s) s.textContent=sub||''; b.innerHTML=html;
+  document.getElementById('cmBack').classList.add('open');
+  document.documentElement.style.overflow='hidden';
+}
+function hsGroupHome(){
+  var panel=document.getElementById('panel-home'); if(!panel || panel.querySelector('.home-sec')) return;
+  var kids=Array.prototype.slice.call(panel.children), cur=null, mt='';
+  var firstNon = kids.filter(function(k){return k.classList.contains('section-title');})[1];
+  if(firstNon) mt = getComputedStyle(firstNon).marginTop;
+  function wrap(key,label,before){ var w=document.createElement('div'); w.className='home-sec'; w.dataset.sec=key; panel.insertBefore(w,before); HS_GROUPS.push({key:key,label:label,el:w}); return w; }
+  kids.forEach(function(el,i){
+    if(el.classList.contains('section-title')){
+      var label=el.textContent.trim();
+      cur=wrap('s'+i+'-'+label.toLowerCase().replace(/[^a-z0-9]+/g,'-'),label,el);
+      if(mt) cur.style.marginTop=mt; el.style.marginTop='0'; cur.appendChild(el);
+    } else if(el.id==='heroGrid'){ cur=null; wrap('hero','Next competition & payment',el).appendChild(el); }
+    else if(el.id==='wearSection'){ cur=null; wrap('wear','What to wear',el).appendChild(el); }
+    else if(cur){ cur.appendChild(el); }
+    else { wrap('misc'+i,'',el).appendChild(el); }
+  });
+  /* stable keys: strip the index so reordering code survives small layout edits */
+  HS_GROUPS.forEach(function(g){ g.key=g.key.replace(/^s\d+-/,'s-'); g.el.dataset.sec=g.key; });
+}
+function hsOrder(){
+  var s=hsLoad(), keys=HS_GROUPS.filter(function(g){return g.label;}).map(function(g){return g.key;});
+  var saved=(s.order||[]).filter(function(k){return keys.indexOf(k)>-1;});
+  keys.forEach(function(k){ if(saved.indexOf(k)<0) saved.push(k); });
+  return saved;
+}
+function hsApplyHome(){
+  var panel=document.getElementById('panel-home'); if(!panel) return;
+  var s=hsLoad(), hidden=s.hidden||[], order=hsOrder();
+  order.forEach(function(k){ var g=HS_GROUPS.filter(function(x){return x.key===k;})[0]; if(g) panel.appendChild(g.el); });
+  HS_GROUPS.filter(function(g){return !g.label;}).forEach(function(g){ panel.appendChild(g.el); });
+  HS_GROUPS.forEach(function(g){ g.el.classList.toggle('home-hide', hidden.indexOf(g.key)>-1); });
+}
+function hsRenderSettings(){
+  var s=hsLoad(), hidden=s.hidden||[], order=hsOrder(), html='';
+  html+='<div class="set-h">Features</div>';
+  if(typeof budgetOffered==='function' && budgetOffered()){
+    html+='<label class="set-row"><span class="set-copy"><b>Track my budget</b><small>Adds a private Budget tab. Saved only on this phone.</small></span><span class="bud-switch"><input type="checkbox" '+(loadBudget().enabled?'checked':'')+' onchange="hsBudget(this.checked)" aria-label="Track my budget"><span class="bud-slider"></span></span></label>';
+  }
+  html+='<div class="set-h">Home tab</div><p class="set-note">Choose what shows on Home and the order. This is just for you.</p><div class="set-list">';
+  order.forEach(function(k,i){
+    var g=HS_GROUPS.filter(function(x){return x.key===k;})[0]; if(!g) return;
+    var off=hidden.indexOf(k)>-1;
+    html+='<div class="set-sec'+(off?' off':'')+'"><span class="set-name">'+g.label+'</span><span class="set-ctl">'+
+      '<button type="button" onclick="hsMove(\''+k+'\',-1)" aria-label="Move up"'+(i===0?' disabled':'')+'>&uarr;</button>'+
+      '<button type="button" onclick="hsMove(\''+k+'\',1)" aria-label="Move down"'+(i===order.length-1?' disabled':'')+'>&darr;</button>'+
+      '<span class="bud-switch"><input type="checkbox" '+(off?'':'checked')+' onchange="hsToggle(\''+k+'\',this.checked)" aria-label="Show '+g.label+'"><span class="bud-slider"></span></span></span></div>';
+  });
+  html+='</div><button type="button" class="set-reset" onclick="hsReset()">Reset Home to default</button>';
+  html+='<div class="set-h">My events</div><p class="set-note">Your own events (a private lesson, a dentist visit) show in Coming up on Home. Only you see them, and they can also be added to your phone calendar.</p><a class="linkbtn wide" href="#" onclick="hsAddEvent();return false;">+ Add a personal event</a>';
+  var b=document.getElementById('cmBody'), y=b?b.scrollTop:0;
+  hsOpen('Settings','Saved only on this phone',html);
+  if(b) b.scrollTop=y;
+}
+function openSettings(){ var b=document.getElementById('cmBody'); if(b) b.scrollTop=0; hsRenderSettings(); }
+function hsMove(k,d){ var s=hsLoad(), o=hsOrder(), i=o.indexOf(k), j=i+d; if(i<0||j<0||j>=o.length) return; o.splice(i,1); o.splice(j,0,k); s.order=o; hsSave(s); hsApplyHome(); hsRenderSettings(); }
+function hsToggle(k,on){ var s=hsLoad(), h=(s.hidden||[]).filter(function(x){return x!==k;}); if(!on) h.push(k); s.hidden=h; hsSave(s); hsApplyHome(); hsRenderSettings(); }
+function hsReset(){ var s=hsLoad(); delete s.order; delete s.hidden; hsSave(s); hsApplyHome(); hsRenderSettings(); }
+function hsBudget(on){ closeShowcaseDetails(); setBudgetEnabled(on); }
+function hsAddEvent(){ closeShowcaseDetails(); goTab('calendar'); setTimeout(function(){ var b=document.getElementById('calAddBtn'); if(b) b.click(); },120); }
+
+/* ---- personal events: Coming up + "add to my calendar" ---- */
+function hsTime12(t){ var m=/^(\d{1,2}):(\d{2})/.exec(t||''); if(!m) return ''; var h=+m[1], ap=h>=12?'PM':'AM'; h=h%12||12; return h+':'+m[2]+' '+ap; }
+function personalComingUp(now, monday, sunday){
+  var out=[];
+  loadPersonalEvents().forEach(function(p){
+    personalEventDates(p).forEach(function(d){
+      var dt=new Date(d+'T00:00:00');
+      if(dt.getTime()===now.getTime()) out.push({emoji:'📌',title:p.title,date:d,end:d,when:hsTime12(p.time),meta:p.note||'',badgeType:'mine',badgeLabel:'Mine'});
+    });
+  });
+  return out;
+}
+function hsP(n){ return String(n).padStart(2,'0'); }
+function hsLocal(d){ return d.getFullYear()+hsP(d.getMonth()+1)+hsP(d.getDate())+'T'+hsP(d.getHours())+hsP(d.getMinutes())+'00'; }
+function hsEventCal(p){
+  var title=p.title, details=(p.note||''), timed=!!p.time, start, end, rr='';
+  if(timed){ var s=new Date(p.date+'T'+p.time+':00'), e=new Date(s.getTime()+3600000); start=hsLocal(s); end=hsLocal(e); }
+  else { start=p.date.replace(/-/g,''); end=addDaysISO(p.date,1).replace(/-/g,''); }
+  if(p.recurrence){
+    var f={weekly:'FREQ=WEEKLY',biweekly:'FREQ=WEEKLY;INTERVAL=2',monthly:'FREQ=MONTHLY'}[p.recurrence.freq]||'';
+    if(f){ rr=f; if(p.recurrence.until){ var u=p.recurrence.until.replace(/-/g,''); rr+=';UNTIL='+(timed?u+'T235959':u); } }
+  }
+  var esc=function(s){ return String(s||'').replace(/\\/g,'\\\\').replace(/;/g,'\;').replace(/,/g,'\\,').replace(/\n/g,'\\n'); };
+  var L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Team Hub//EN','BEGIN:VEVENT','UID:'+p.id+'@teamhub','DTSTAMP:'+hsLocal(new Date())+'Z',
+    timed?('DTSTART:'+start):('DTSTART;VALUE=DATE:'+start), timed?('DTEND:'+end):('DTEND;VALUE=DATE:'+end)];
+  if(rr) L.push('RRULE:'+rr);
+  L.push('SUMMARY:'+esc(title)); if(details) L.push('DESCRIPTION:'+esc(details)); L.push('END:VEVENT','END:VCALENDAR');
+  var g='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(title)+'&dates='+start+'/'+end+(details?'&details='+encodeURIComponent(details):'')+(rr?'&recur='+encodeURIComponent('RRULE:'+(rr.replace(/UNTIL=(\d{8})T235959/,'UNTIL=$1T235959Z'))):'');
+  return {google:g, ics:'data:text/calendar;charset=utf-8,'+encodeURIComponent(L.join('\r\n'))};
+}
+function openAddToCalendar(id){
+  var p=loadPersonalEvents().filter(function(x){return x.id===id;})[0]; if(!p) return;
+  var c=hsEventCal(p), when=fmtDate(p.date)+(p.time?' · '+hsTime12(p.time):'');
+  hsOpen('Add to your calendar', p.title+' · '+when,
+    '<a class="linkbtn wide" href="'+c.google+'" target="_blank" rel="noopener"><span class="ico">📅</span> Google Calendar</a>'+
+    '<a class="linkbtn wide" href="'+c.ics+'" download="event.ics"><span class="ico">🍎</span> Apple Calendar / Outlook</a>'+
+    '<p class="set-note" style="margin-top:14px">Opens your calendar app so you can tap Save. Nothing is sent to the team.</p>');
+}
+document.addEventListener('click', function(e){ var b=e.target.closest && e.target.closest('.cal-add-btn'); if(b){ e.preventDefault(); openAddToCalendar(b.dataset.id); } });
+
+/* ---- gear + init ---- */
+(function(){
+  var bar=document.querySelector('.team-bar');
+  if(bar){
+    var g=document.createElement('button'); g.type='button'; g.className='set-gear'; g.setAttribute('aria-label','Settings');
+    g.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 14.5a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.6 1.6 0 0 0-1-1.5 1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.6 1.6 0 0 0 1.5-1 1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3h0a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8v0a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>';
+    g.addEventListener('click', openSettings); bar.appendChild(g);
+  }
+  hsGroupHome(); hsApplyHome();
+  try{ renderUpcomingEvents(); renderPersonalList(); }catch(e){}
+})();
+</script>
+
+<script>
+/* ===== Edit a personal event (and change a repeating one from a date on) ===== */
+window.calEditId = null;
+function calEl(id){ return document.getElementById(id); }
+function calResetForm(){
+  window.calEditId = null;
+  ['calFormTitle','calFormDate','calFormTime','calFormNote','calFormUntil'].forEach(function(id){ var e=calEl(id); if(e) e.value=''; });
+  calEl('calFormRepeat').value=''; calEl('calFormUntilWrap').style.display='none';
+  if(typeof resetCalKind==='function') resetCalKind();
+  calEl('calEditScope').style.display='none'; calEl('calFormHead').style.display='none';
+  calEl('calDateLbl').textContent='Date (first occurrence)'; calEl('calFormSave').textContent='Save';
+  var al=calEl('calFormAlso'); if(al) al.checked=true;
+  var r=document.querySelector('input[name="calEditScope"][value="all"]'); if(r) r.checked=true;
+}
+function calStartEdit(id){
+  var p=loadPersonalEvents().filter(function(x){return x.id===id;})[0]; if(!p) return;
+  calResetForm(); window.calEditId=id;
+  calEl('calAddForm').style.display='block';
+  calEl('calFormHead').style.display='block'; calEl('calFormHead').textContent='Edit event';
+  calEl('calFormTitle').value = (p.private && /^Private lesson —/.test(p.title)) ? '' : p.title;
+  calEl('calFormDate').value=p.date; calEl('calFormTime').value=p.time||''; calEl('calFormNote').value=p.note||'';
+  calEl('calFormRepeat').value = p.recurrence ? p.recurrence.freq : '';
+  calEl('calFormUntilWrap').style.display = p.recurrence ? 'block' : 'none';
+  calEl('calFormUntil').value = (p.recurrence && p.recurrence.until) || '';
+  if(p.private && typeof calPrivateSelection==='function'){
+    var k=calEl('calFormKind'); k.value='private'; k.dispatchEvent(new Event('change'));
+    var t=calEl('calPrivType'); t.value=p.private.type; t.dispatchEvent(new Event('change'));
+    var m=calEl('calPrivMins'); m.value=String(p.private.mins); m.dispatchEvent(new Event('change'));
+  }
+  if(p.recurrence) calEl('calEditScope').style.display='flex';
+  calEl('calFormSave').textContent='Save changes';
+  var al=calEl('calFormAlso'); if(al) al.checked=false;
+  requestAnimationFrame(function(){ calEl('calAddForm').scrollIntoView({behavior:'smooth',block:'center'}); });
+}
+function calNextOccurrence(p){ var t=todayISO(), d=personalEventDates(p).filter(function(x){return x>=t;})[0]; return d || p.date; }
+document.addEventListener('change', function(e){
+  if(!e.target || e.target.name!=='calEditScope' || !window.calEditId) return;
+  var p=loadPersonalEvents().filter(function(x){return x.id===window.calEditId;})[0]; if(!p) return;
+  if(e.target.value==='from'){ calEl('calDateLbl').textContent='First lesson with the new schedule'; calEl('calFormDate').value=calNextOccurrence(p); }
+  else { calEl('calDateLbl').textContent='Date (first occurrence)'; calEl('calFormDate').value=p.date; }
+});
+function calSaveEdit(){
+  var list=loadPersonalEvents(), i=-1; list.forEach(function(x,n){ if(x.id===window.calEditId) i=n; });
+  if(i<0){ calResetForm(); return; }
+  var old=list[i];
+  var title=calEl('calFormTitle').value.trim(), date=calEl('calFormDate').value, note=calEl('calFormNote').value.trim(),
+      time=calEl('calFormTime').value, repeat=calEl('calFormRepeat').value, until=calEl('calFormUntil').value;
+  var priv=(typeof calPrivateSelection==='function') ? calPrivateSelection() : (old.private||null);
+  if(priv && !title) title='Private lesson — '+priv.type+' ('+priv.mins+' min)';
+  if(!title || !date) return;
+  var sc=document.querySelector('input[name="calEditScope"]:checked'), scope=(old.recurrence && sc) ? sc.value : 'all';
+  function build(id){ var ev={id:id,title:title,date:date,note:note}; if(time) ev.time=time; if(priv) ev.private=priv; if(repeat){ ev.recurrence={freq:repeat}; if(until) ev.recurrence.until=until; } return ev; }
+  var saved;
+  if(scope==='from' && date>old.date){
+    var last=addDaysISO(date,-1), ou=old.recurrence.until;
+    old.recurrence=Object.assign({},old.recurrence,{until:(ou && ou<last)?ou:last});
+    saved=build('p'+Date.now()); list.push(saved);
+  } else { saved=build(old.id); list[i]=saved; }
+  savePersonalEvents(list);
+  var also=calEl('calFormAlso') && calEl('calFormAlso').checked;
+  calResetForm(); calEl('calAddForm').style.display='none';
+  renderPersonalList(); renderCalendarGrid(); scrollCalendarTop();
+  if(also) setTimeout(function(){ openAddToCalendar(saved.id); },60);
+}
+document.addEventListener('click', function(e){
+  var b=e.target.closest && e.target.closest('.cal-edit-btn'); if(b){ e.preventDefault(); calStartEdit(b.dataset.id); }
+});
+calEl('calFormCancel').addEventListener('click', calResetForm);
+calEl('calAddBtn').addEventListener('click', function(){ if(window.calEditId) calResetForm(); });
+</script>
+
+<script>
+/* ===== Removing a repeating event keeps past (paid) occurrences by default ===== */
+function calRemoveSheet(p){
+  var past=personalEventDates(p).filter(function(d){return d<=todayISO();}).length;
+  var html='<p class="set-note">'+past+' of these '+(p.private?'lessons are':'are')+' already in the past'+(p.private?' and counted as paid in your budget':'')+'. Keep them?</p>'+
+    '<a class="linkbtn wide" href="#" onclick="calStopSeries(\''+p.id+'\');return false;"><span class="ico">✅</span> Stop it after today &middot; keep past ones</a>'+
+    '<a class="linkbtn wide" href="#" onclick="calDeleteAll(\''+p.id+'\');return false;"><span class="ico">🗑️</span> Delete everything, including past ones</a>'+
+    (p.private?'<p class="set-note" style="margin-top:14px">Deleting everything also removes the past lessons from your budget totals.</p>':'');
+  hsOpen('Remove “'+p.title.replace(/</g,'&lt;')+'”','Repeats '+({weekly:'weekly',biweekly:'every 2 weeks',monthly:'monthly'}[p.recurrence.freq]||''),html);
+}
+function calStopSeries(id){
+  var list=loadPersonalEvents(), t=todayISO();
+  list.forEach(function(p){ if(p.id===id){ var u=p.recurrence.until; p.recurrence=Object.assign({},p.recurrence,{until:(u && u<t)?u:t}); } });
+  savePersonalEvents(list); closeShowcaseDetails(); renderPersonalList(); renderCalendarGrid();
+}
+function calDeleteAll(id){
+  savePersonalEvents(loadPersonalEvents().filter(function(p){return p.id!==id;})); closeShowcaseDetails(); renderPersonalList(); renderCalendarGrid();
+}
+</script>
+<style>
+.lk-row{display:flex;flex-wrap:wrap;gap:6px 20px;margin-top:9px;}
+.lk-row a{white-space:nowrap;font-weight:700;}
+.fund-meta .lk-row,.coming-row-desc .lk-row{margin-top:8px;}
+</style>
 </body>
 </html>
