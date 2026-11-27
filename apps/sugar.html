@@ -1860,10 +1860,10 @@ const competitions = [
     housing:"optional", rosterLink:"https://www.thespiritnetwork.net/super-six-ca", rosterLabel:"Event page (roster posts closer to date)"},
   {name:"Spirit Sports", loc:"Palm Springs, CA · Palm Springs Convention Center", address:"Palm Springs Convention Center, Palm Springs, CA", start:"2027-01-29", end:"2027-01-31", travel:"local",
     housing:"optional", bookingDate:"2026-09-08",
-    bookingLinks:[{label:"General hotel block (book here)", url:"https://app.eventpipe.com/event/ec935e4d-c8c9-41cb-8d1e-c31199f4a746/search/G-00754836"}],
+    bookingLinks:[{label:"General hotel block (book here)", url:"https://presto.eventpipe.com/event/ec935e4d-c8c9-41cb-8d1e-c31199f4a746"}],
     rosterLink:"https://www.varsity.com/download-event-app/", rosterLabel:"Team roster via Varsity Spirit Event App"},
   {name:"Aloha PHX", loc:"Phoenix, AZ · Phoenix Convention Center", address:"Phoenix Convention Center, Phoenix, AZ", start:"2027-03-05", end:"2027-03-07", travel:"overnight",
-    housing:"required", note:"Travel and hotel booking details not posted yet — check with your coach."},
+    housing:"required", bookingLinks:[{label:"General hotel block (book here)", url:"https://presto.eventpipe.com/event/4a303993-ced1-4e01-b4f7-20b2559dc456"}], note:"Travel and hotel booking details not posted yet — check with your coach."},
   {name:"UCA Allstar Nationals", loc:"Orlando, FL · ESPN Wide World of Sports", address:"ESPN Wide World of Sports, Orlando, FL", start:"2027-03-13", end:"2027-03-14", travel:"required",
     housing:"required", note:"Travel and hotel booking details not posted yet — check with your coach."},
   {name:"USA", loc:"Anaheim, CA · Anaheim Convention Center", address:"Anaheim Convention Center, Anaheim, CA", start:"2027-03-13", end:"2027-03-14", attending:false, teams:"TBA"},
@@ -2379,7 +2379,7 @@ const HOTEL_SITES = [
 /* Where a hotel was booked, from its confirmation #: Team Travel Source uses R- numbers; Booking.com, Airbnb and Vrbo have their own formats. */
 function hotelSource(v){
   const t = String(v||'').trim();
-  if(/\bR-\d{6,}\b/i.test(t) || /teamtravelsource\.com|eventpipe\.com/i.test(t)) return {name:'Team Travel Source', url:'https://www.teamtravelsource.com/', note:'Booked through Team Travel Source. Change or cancel through them: use Manage Booking in your confirmation email, or call or text 502-354-9103.'};
+  if(/\bR-\d{6,}\b/i.test(t) || /teamtravelsource\.com|eventpipe\.com/i.test(t)) return {name:'Manage on Team Travel Source', url:'https://app.eventpipe.com/search/auth/new', note:'Booked through Team Travel Source. Look it up with your R- number and email to change or cancel, or call or text 502-354-9103.'};
   if(/\b\d{4}\.\d{3}\.\d{3}\b/.test(t) || /booking\.com/i.test(t)) return {name:'Booking.com', url:'https://www.booking.com/', note:'Booked through Booking.com. Sign in there to check or change your stay.'};
   if(/\bHM[A-Z0-9]{8}\b/.test(t) || /airbnb\./i.test(t)) return {name:'Airbnb', url:'https://www.airbnb.com/trips', note:'Booked through Airbnb. Your trip is under Trips.'};
   if(/\bHA-[A-Z0-9]{5,}\b/i.test(t) || /vrbo\.com/i.test(t)) return {name:'Vrbo', url:'https://www.vrbo.com/', note:'Booked through Vrbo. Sign in there to see your trip.'};
